@@ -87,6 +87,7 @@ public class Register extends javax.swing.JFrame {
 //            //login
 //            Statement t = conn.createStatement();
             String nam = name.getText();
+            String jj = name.getText();
             String pass = password.getText();
 
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:1528/Login");
