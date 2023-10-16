@@ -70,6 +70,11 @@ public class Register extends javax.swing.JFrame {
         login.setBounds(140, 250, 100, 30);
 
         jButton2.setText("Register");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(270, 250, 100, 30);
 
@@ -81,15 +86,15 @@ public class Register extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
-//            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1528/fos", "fos", "fos");
+//            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
 //            System.out.println("Connected to library DB");
 //
 //            //login
 //            Statement t = conn.createStatement();
             String nam = name.getText();
             String pass = password.getText();
-
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:1528/Login");
+            System.out.println(nam+pass);
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
             String result = dbi.Login(nam,pass);
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -101,7 +106,15 @@ public class Register extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginActionPerformed
 
- 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
+        RegistrationForm Info = new RegistrationForm();
+        Info.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
   
         java.awt.EventQueue.invokeLater(new Runnable() {
