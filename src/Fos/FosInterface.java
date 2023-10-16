@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package Fos;
 
+import java.rmi.*;
+import java.net.*;
 /**
  *
  * @author User
  */
-public class Interface {
-    
+public interface FosInterface extends Remote{
+    public String Login(String nam, String pass)throws RemoteException;
 }
