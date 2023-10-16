@@ -12,9 +12,9 @@ import java.rmi.registry.LocateRegistry;
  *
  * @author User
  */
-public class Registry {
-    public static void main(String[] args) throws RemoteException{
-        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(1528);
+public class Register {
+        public static void main(String[] args) throws RemoteException{
+        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2000);
         reg.rebind("Login", new Server());
     }
 }

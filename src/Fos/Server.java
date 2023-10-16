@@ -27,20 +27,23 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     public String Login(String nam, String pass)throws RemoteException{
         try{
             System.out.println("1");
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1528/fos", "fos", "fos");
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
             System.out.println("Connected to library DB");
 
             //login
             Statement t = conn.createStatement();
-            String script = "SELECT USERNAME, PASSWORD from ACCOUNT where USERNAME = '" + nam+"' and PASSWORD = "+pass +"";
+            String script = "SELECT * from ACCOUNT where USERNAME = '" + nam + "' and PASSWORD = '" + pass + "'";
+            
             System.out.println("Script: "+ script);
 
             ResultSet rs = t.executeQuery(script);
-            boolean found = rs.next(); //Find if got the data
+            boolean found = rs.next(); 
 
             if(found){
+                System.out.println("Found: ");
                 return "Login Successfull!";
             }else{
+                System.out.println("No Found: ");
                 return "No";
             }
         }catch(Exception e){
