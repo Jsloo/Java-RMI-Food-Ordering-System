@@ -31,12 +31,11 @@ public class Register extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Pizza Ordering System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 50, 411, 44);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
 
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         name.addActionListener(new java.awt.event.ActionListener() {
@@ -44,21 +43,17 @@ public class Register extends javax.swing.JFrame {
                 nameActionPerformed(evt);
             }
         });
-        getContentPane().add(name);
-        name.setBounds(240, 150, 150, 30);
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 150, 30));
 
         jLabel2.setText("UserName: ");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(140, 150, 70, 20);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 70, 20));
 
         jLabel3.setText("Password : ");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(140, 190, 80, 30);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 80, 30));
 
         password.setText("jPasswordField1");
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        getContentPane().add(password);
-        password.setBounds(240, 190, 150, 30);
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 150, 30));
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -66,8 +61,7 @@ public class Register extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login);
-        login.setBounds(140, 250, 100, 30);
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 100, 30));
 
         jButton2.setText("Register");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +69,7 @@ public class Register extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(270, 250, 100, 30);
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 100, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
