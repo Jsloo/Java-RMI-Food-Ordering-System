@@ -43,9 +43,36 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 System.out.println("Found: ");
                 return "Login Successfull!";
             }else{
-                System.out.println("No Found: ");
+                System.out.println("User Name or Pasword Incorrect!: ");
                 return "No";
             }
+        }catch(Exception e){
+            return (e.toString());
+        }      
+    }  
+    @Override
+    public String Register(String nam, String pass)throws RemoteException{
+        try{
+            System.out.println("1");
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            System.out.println("Connected to library DB");
+
+            //login
+            Statement statement  = conn.createStatement();
+            String selectQuery = "SELECT USERNAME FROM ACCOUNT WHERE USERNAME = '" + nam + "'";
+            String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD) VALUES ('" + nam + "', '" + pass + "')";
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+            
+            if (resultSet.next()) {
+                return "Username already exists!";
+            } else {
+                System.out.println("Script: "+ script);
+                statement.executeUpdate(script);
+                return "Register Succesful!";
+            }
+            
+
+            
         }catch(Exception e){
             return (e.toString());
         }      
