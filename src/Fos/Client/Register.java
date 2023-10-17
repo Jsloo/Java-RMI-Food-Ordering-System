@@ -81,21 +81,18 @@ public class Register extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
-//            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1528/fos", "fos", "fos");
-//            System.out.println("Connected to library DB");
-//
-//            //login
-//            Statement t = conn.createStatement();
+      
             String nam = name.getText();
             String pass = password.getText();
 
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:1528/Login");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
             String result = dbi.Login(nam,pass);
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
-
+            
             
             
         }catch(Exception ex){
+            System.out.println("Error");
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
 
