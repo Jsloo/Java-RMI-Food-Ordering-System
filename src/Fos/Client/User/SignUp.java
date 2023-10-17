@@ -6,7 +6,11 @@
 package Fos.Client.User;
 
 import Fos.FosInterface;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.rmi.Naming;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,7 +52,7 @@ public class SignUp extends javax.swing.JFrame {
         txtpassword = new javax.swing.JPasswordField();
         btnregister = new javax.swing.JButton();
         btnclear = new javax.swing.JButton();
-        btnexit = new javax.swing.JButton();
+        btnback = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -56,6 +60,8 @@ public class SignUp extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(920, 500));
+        setPreferredSize(new java.awt.Dimension(920, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
@@ -71,7 +77,7 @@ public class SignUp extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 460));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(153, 255, 153));
         jPanel2.setMinimumSize(new java.awt.Dimension(420, 424));
         jPanel2.setName(""); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -162,15 +168,15 @@ public class SignUp extends javax.swing.JFrame {
         });
         jPanel2.add(btnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, -1, -1));
 
-        btnexit.setBackground(new java.awt.Color(0, 102, 102));
-        btnexit.setForeground(new java.awt.Color(255, 255, 255));
-        btnexit.setText("Exit");
-        btnexit.addActionListener(new java.awt.event.ActionListener() {
+        btnback.setBackground(new java.awt.Color(0, 102, 102));
+        btnback.setForeground(new java.awt.Color(255, 255, 255));
+        btnback.setText("Back");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnexitActionPerformed(evt);
+                btnbackActionPerformed(evt);
             }
         });
-        jPanel2.add(btnexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
+        jPanel2.add(btnback, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("User Name");
@@ -255,12 +261,15 @@ public class SignUp extends javax.swing.JFrame {
         btnregister.setEnabled(false);
     }//GEN-LAST:event_btnclearActionPerformed
 
-    private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
-        int a = JOptionPane.showConfirmDialog(null,"Do you want to close application","Select",JOptionPane.YES_NO_OPTION);
-        if (a==0)
-        System.exit(0);
-    }//GEN-LAST:event_btnexitActionPerformed
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        setVisible(false);
+        Login info = new Login();
+        info.setVisible(true);
+        info.pack();
+        info.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnbackActionPerformed
 
+    
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
         try{
             String name = txtusername.getText();
@@ -270,10 +279,14 @@ public class SignUp extends javax.swing.JFrame {
             String phonenum = txtphonenum.getText();
             String gender = genderbox.getSelectedItem().toString();
 
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/Register");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Register");
             String result = dbi.Register(name,password,age,email,phonenum,gender);
-
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
+            setVisible(false);
+            Login info = new Login();
+            info.setVisible(true);
+            info.pack();
+            info.setLocationRelativeTo(null);
 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -317,8 +330,8 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnback;
     private javax.swing.JButton btnclear;
-    private javax.swing.JButton btnexit;
     private javax.swing.JButton btnregister;
     private javax.swing.JComboBox<String> genderbox;
     private javax.swing.JLabel jLabel1;

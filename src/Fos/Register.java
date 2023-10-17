@@ -14,10 +14,10 @@ import java.rmi.registry.LocateRegistry;
  */
 public class Register {
     public static void main(String[] args) throws RemoteException{
-        java.rmi.registry.Registry login = LocateRegistry.createRegistry(2000);
-        login.rebind("Login", new Server());
+        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2000);
+        reg.rebind("Login", new Server());
         
-        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2001);
+//        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2001);
         reg.rebind("Register", new Server());
     }
 }

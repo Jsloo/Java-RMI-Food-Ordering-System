@@ -48,7 +48,8 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setMinimumSize(new java.awt.Dimension(920, 500));
+        setPreferredSize(new java.awt.Dimension(920, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
@@ -114,7 +115,7 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setText("Login");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 550, 460));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 700, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,11 +137,15 @@ public class Login extends javax.swing.JFrame {
                     setVisible(false);
                     SignUp User = new SignUp();
                     User.setVisible(true);
+                    User.pack();
+                    User.setLocationRelativeTo(null);
                     break;
                 case "adminLogin":
                     setVisible(false);
                     Admin_Home Admin = new Admin_Home();
                     Admin.setVisible(true);
+                    Admin.pack();
+                    Admin.setLocationRelativeTo(null);
                     break;
                 case "incorrect":
                     JOptionPane.showMessageDialog(null, "UserName or Password Incorrect! ", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -157,6 +162,8 @@ public class Login extends javax.swing.JFrame {
         setVisible(false);
         SignUp Info = new SignUp();
         Info.setVisible(true);
+        Info.pack();
+        Info.setLocationRelativeTo(null);
     }//GEN-LAST:event_SignUpActionPerformed
 
     /**
