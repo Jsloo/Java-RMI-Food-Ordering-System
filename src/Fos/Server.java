@@ -64,25 +64,11 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 }
             } 
 
-            
-            String checkLast = "SELECT USERID FROM ACCOUNT ORDER BY USERID DESC FETCH FIRST 1 ROW ONLY";
+
             try (Statement statement = conn.createStatement()) {
-                ResultSet cl = statement.executeQuery(checkLast);
-
-                String userId = "UUID0";
-                if (cl.next()) {
-                    userId = cl.getString("USERID");
-                    System.out.println("Last User ID: " + userId);
-                } 
-
-                int numericPart = Integer.parseInt(userId.replaceAll("\\D", ""));
-                String newUserId = "UUID" + (numericPart + 1);
-                System.out.println("New User ID: " + newUserId);
-
-                
-                String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER, USERID) " +
+                String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) " +
                                 "VALUES ('" + nam + "', '" + pass + "', 'user', '" + age + "', '" + email + "', '" +
-                                phonenum + "', '" + gender + "', '" + newUserId + "')";
+                                phonenum + "', '" + gender + "')";
                 statement.executeUpdate(script);
 
                 conn.commit();
@@ -90,7 +76,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             } 
 
         } catch (Exception e) {
-            e.printStackTrace();
             return "Error occurred: " + e.toString();
         }    
     }  

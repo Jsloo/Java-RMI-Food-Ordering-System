@@ -27,6 +27,8 @@ public class SignUp extends javax.swing.JFrame {
     public SignUp() {
         initComponents();
         btnregister.setEnabled(false); 
+        pack();
+        setLocationRelativeTo(null);
     }
 
     /**

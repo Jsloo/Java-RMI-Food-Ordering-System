@@ -23,6 +23,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -137,15 +139,11 @@ public class Login extends javax.swing.JFrame {
                     setVisible(false);
                     SignUp User = new SignUp();
                     User.setVisible(true);
-                    User.pack();
-                    User.setLocationRelativeTo(null);
                     break;
                 case "adminLogin":
                     setVisible(false);
                     Admin_Home Admin = new Admin_Home();
                     Admin.setVisible(true);
-                    Admin.pack();
-                    Admin.setLocationRelativeTo(null);
                     break;
                 case "incorrect":
                     JOptionPane.showMessageDialog(null, "UserName or Password Incorrect! ", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -162,8 +160,6 @@ public class Login extends javax.swing.JFrame {
         setVisible(false);
         SignUp Info = new SignUp();
         Info.setVisible(true);
-        Info.pack();
-        Info.setLocationRelativeTo(null);
     }//GEN-LAST:event_SignUpActionPerformed
 
     /**
@@ -197,8 +193,6 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
-                new Login().pack();
-                new Login().setLocationRelativeTo(null);
             }
         });
     }
