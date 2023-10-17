@@ -6,8 +6,6 @@
 package Fos.Client.User;
 
 import Fos.FosInterface;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.rmi.Naming;
 import javax.swing.JOptionPane;
 
@@ -144,6 +142,8 @@ public class SignUp extends javax.swing.JFrame {
         });
         jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 320, 30));
 
+        btnregister.setBackground(new java.awt.Color(0, 102, 102));
+        btnregister.setForeground(new java.awt.Color(255, 255, 255));
         btnregister.setText("Register");
         btnregister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +152,8 @@ public class SignUp extends javax.swing.JFrame {
         });
         jPanel2.add(btnregister, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, -1, -1));
 
+        btnclear.setBackground(new java.awt.Color(0, 102, 102));
+        btnclear.setForeground(new java.awt.Color(255, 255, 255));
         btnclear.setText("Clear");
         btnclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +162,8 @@ public class SignUp extends javax.swing.JFrame {
         });
         jPanel2.add(btnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, -1, -1));
 
+        btnexit.setBackground(new java.awt.Color(0, 102, 102));
+        btnexit.setForeground(new java.awt.Color(255, 255, 255));
         btnexit.setText("Exit");
         btnexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,105 +263,25 @@ public class SignUp extends javax.swing.JFrame {
 
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
         try{
-            //            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            //            System.out.println("Connected to library DB");
-            //
-            //            //login
-            //            Statement t = conn.createStatement();
-            String currentname;
-            String dataname[];
             String name = txtusername.getText();
             String password = txtpassword.getText();
             String age = txtage.getText();
             String email = txtemail.getText();
             String phonenum = txtphonenum.getText();
             String gender = genderbox.getSelectedItem().toString();
-            boolean usernameExists = checkUsernameExists(name);
-            System.out.println(name+ password);
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/Register");
 
-            String result = dbi.Register(name,password);
-            System.out.println(name+ password);
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/Register");
+            String result = dbi.Register(name,password,age,email,phonenum,gender);
+
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
 
         }catch(Exception ex){
-            System.out.println("www");
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         
-//        String filepath = "customerdata1.txt";
-//        String filepath1 = "customerdataapprove.txt";
-//        int position = 0;
-//        Boolean checkuser = true;
-//        
-//        try{
-//            FileReader frname = new FileReader(filepath);
-//            BufferedReader brname = new BufferedReader(frname);
-//
-//            while((currentname = brname.readLine()) != null){
-//                dataname = currentname.split(",");
-//                if(true) {
-//                    checkuser = false;
-//                    JOptionPane.showMessageDialog(null,"The user is exist !!!");
-//                    break;
-//                }
-//            }
-//            brname.close();
-//            frname.close();
-//        }
-//        catch(Exception ex){
-//            JOptionPane.showMessageDialog(null,"Fail to read file !!!");
-//        }
-//        try{
-//            FileReader frname1 = new FileReader(filepath1);
-//            BufferedReader brname1 = new BufferedReader(frname1);
-//
-//            while((currentname = brname1.readLine()) != null){
-//                dataname = currentname.split(",");
-//                if(true) {
-//                    checkuser = false;
-//                    JOptionPane.showMessageDialog(null,"The user is exist !!!");
-//                    break;
-//                }
-//            }
-//            brname1.close();
-//            frname1.close();
-//        }
-//        catch(Exception ex){
-//            JOptionPane.showMessageDialog(null,"Fail to read file !!!");
-//        }
-//        try{
-//            if ((Integer.parseInt(age) > 100)){
-//                checkuser = false;
-//                JOptionPane.showMessageDialog(null,"Please Enter a Valid Age !!!");
-//            }
-//        }
-//        catch(Exception e){
-//            checkuser = false;
-//            JOptionPane.showMessageDialog(null,"Please Enter a Valid Age !!!");
-//        }
-//        if(checkuser == true){
-//            try{
-//                //do add to db
-//                JOptionPane.showMessageDialog(null,"Account added sucessfully !!!");
-//
-//            }
-//            catch(Exception ex){
-//                JOptionPane.showMessageDialog(null,"Fail record !!!");
-//            }
-//        }
+
     }//GEN-LAST:event_btnregisterActionPerformed
 
-    private boolean checkUsernameExists(String username) {
-        // Implement your database query to check if the username exists
-        // Return true if username exists, false otherwise
-        // Example query: SELECT * FROM USERS WHERE USERNAME = 'username'
-        return false; // Placeholder, replace with actual database logic
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

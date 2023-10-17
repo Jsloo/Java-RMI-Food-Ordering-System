@@ -7,6 +7,7 @@ package Fos.Client.User;
 
 
 
+import Fos.Client.Admin_Home;
 import Fos.FosInterface;
 import java.rmi.Naming;
 import javax.swing.JOptionPane;
@@ -76,7 +77,7 @@ public class Login extends javax.swing.JFrame {
 
         login.setBackground(new java.awt.Color(0, 102, 102));
         login.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        login.setForeground(new java.awt.Color(0, 102, 102));
+        login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,22 +125,30 @@ public class Login extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
-            //            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            //            System.out.println("Connected to library DB");
-            //
-            //            //login
-            //            Statement t = conn.createStatement();
             String nam = name.getText();
             String pass = password.getText();
             System.out.println(nam+ pass);
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
 
             String result = dbi.Login(nam,pass);
-            System.out.println(nam+ pass);
-            JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
-
+            if (null != result)switch (result) {
+                case "userLogin":
+                    setVisible(false);
+                    SignUp User = new SignUp();
+                    User.setVisible(true);
+                    break;
+                case "adminLogin":
+                    setVisible(false);
+                    Admin_Home Admin = new Admin_Home();
+                    Admin.setVisible(true);
+                    break;
+                case "incorrect":
+                    JOptionPane.showMessageDialog(null, "UserName or Password Incorrect! ", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                default:
+                    break;
+            }  
         }catch(Exception ex){
-            System.out.println("www");
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_loginActionPerformed

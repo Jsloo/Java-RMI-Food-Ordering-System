@@ -22,57 +22,54 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     }
     
     
-    
     @Override
     public String Login(String nam, String pass)throws RemoteException{
         try{
-            System.out.println("1");
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            System.out.println("Connected to library DB");
-
-            //login
             Statement t = conn.createStatement();
             String script = "SELECT * from ACCOUNT where USERNAME = '" + nam + "' and PASSWORD = '" + pass + "'";
-            
-            System.out.println("Script: "+ script);
 
             ResultSet rs = t.executeQuery(script);
             boolean found = rs.next(); 
 
             if(found){
-                System.out.println("Found: ");
+                String userType = rs.getString("TYPE");
+                if ("user".equals(userType)) {
+                    return "userLogin";
+                } 
+                else if ("admin".equals(userType)) {
+                    return "adminLogin";
+                } 
                 return "Login Successfull!";
             }else{
-                System.out.println("User Name or Pasword Incorrect!: ");
-                return "No";
+                return "incorrect";
             }
         }catch(Exception e){
             return (e.toString());
         }      
     }  
+    
     @Override
-    public String Register(String nam, String pass)throws RemoteException{
+    public String Register(String nam, String pass, String age, String email, String phonenum, String gender)throws RemoteException{
         try{
-            System.out.println("1");
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            System.out.println("Connected to library DB");
 
-            //login
             Statement statement  = conn.createStatement();
-            String selectQuery = "SELECT USERNAME FROM ACCOUNT WHERE USERNAME = '" + nam + "'";
-            String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD) VALUES ('" + nam + "', '" + pass + "')";
-            ResultSet resultSet = statement.executeQuery(selectQuery);
-            
+            String checkExist = "SELECT USERNAME FROM ACCOUNT WHERE USERNAME = '" + nam + "'";
+            String script = 
+                    "INSERT INTO ACCOUNT "
+                    + "(USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) "
+                    + "VALUES ('" + nam + "', '" + pass + "', '"+"user"+"', '" + age + "', '" + email + "', '" + phonenum + "', '" + gender + "')";
+            ResultSet resultSet = statement.executeQuery(checkExist);
+
+            System.out.println(script);
             if (resultSet.next()) {
                 return "Username already exists!";
             } else {
-                System.out.println("Script: "+ script);
                 statement.executeUpdate(script);
                 return "Register Succesful!";
             }
-            
-
-            
+   
         }catch(Exception e){
             return (e.toString());
         }      
