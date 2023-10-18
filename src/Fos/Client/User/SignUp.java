@@ -6,11 +6,7 @@
 package Fos.Client.User;
 
 import Fos.FosInterface;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.rmi.Naming;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
