@@ -10,6 +10,11 @@ import java.rmi.Naming;
 import java.util.Arrays;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -19,6 +24,10 @@ public class Report extends javax.swing.JFrame {
     /**
      * Creates new form Report
      */
+//    private DefaultPieDataset pieDataset;
+//    private JFreeChart pieChart;
+//    private PiePlot piePlot;
+//    private ChartPanel chartPanel;
     public Report() {
         initComponents();
         pack();
@@ -54,7 +63,7 @@ public class Report extends javax.swing.JFrame {
             
             //revenue
             DefaultTableModel modelRevenue = (DefaultTableModel) revenueTable.getModel();
-            String[][] revenueRows = {result[7], result[8]};
+            String[][] revenueRows = {result[7], result[8], result[9]};
 
             for (String[] row : revenueRows) {
                 Object[] rowData2 = new Object[]{row[0], row[1]}; 
@@ -63,7 +72,7 @@ public class Report extends javax.swing.JFrame {
             
             //order
             DefaultTableModel modelOrder = (DefaultTableModel) orderTable.getModel();
-            String[][] orderRows = {result[7], result[8]};
+            String[][] orderRows = {result[11], result[12], result[13]};
 
             for (String[] row : orderRows) {
                 Object[] rowData3 = new Object[]{row[0], row[1]}; 
@@ -146,7 +155,7 @@ public class Report extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Top 3 Income Order:");
+        jLabel8.setText("Top 3 Income Category:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
@@ -345,7 +354,26 @@ public class Report extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgePieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgePieActionPerformed
-       
+//        pieDataset = new DefaultPieDataset();
+//        pieDataset.setValue('sw',new Double(9.1));
+//        pieDataset.setValue('sww',new Double(9.1));
+//        System.out.println("11");
+//        pieDataset = new DefaultPieDataset();
+//        pieDataset.setValue("One", new Integer(10));
+//        pieDataset.setValue("Two", new Integer(20));
+//        pieDataset.setValue("Three", new Integer(30));
+//        pieDataset.setValue("Four", new Integer(10));
+//        pieDataset.setValue("Five", new Integer(20));
+//        pieDataset.setValue("Six", new Integer(10));
+//        JFreeChart chart = ChartFactory.createPieChart3D("3D Pie Chart", pieDataset, true, true, false);
+//
+//        piePlot = (PiePlot) chart.getPlot();
+//        chartPanel = new ChartPanel(chart);
+//        jPanel1.removeAll();
+//        jPanel1.add(chartPanel);
+//        chartPanel.validate();
+
+
     }//GEN-LAST:event_btnAgePieActionPerformed
 
     /**
