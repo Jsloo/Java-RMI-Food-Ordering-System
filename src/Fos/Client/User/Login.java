@@ -26,6 +26,8 @@ public class Login extends javax.swing.JFrame {
         
         pack();
         setLocationRelativeTo(null);
+        login.setEnabled(false); 
+        
     }
 
     /**
@@ -90,14 +92,23 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel3.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 80, 30));
 
-        password.setText("jPasswordField1");
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                passwordKeyReleased(evt);
+            }
+        });
         jPanel3.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 320, 40));
 
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameActionPerformed(evt);
+            }
+        });
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameKeyReleased(evt);
             }
         });
         jPanel3.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 320, 40));
@@ -127,6 +138,16 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nameActionPerformed
 
+    public void validateFields(){
+        String nam = name.getText();
+        String pass = password.getText();
+        
+        if (!nam.equals("") && !pass.equals(""))
+            login.setEnabled(true);    
+        else
+            login.setEnabled(false);           
+    }
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
             String nam = name.getText();
@@ -162,6 +183,14 @@ public class Login extends javax.swing.JFrame {
         SignUp Info = new SignUp();
         Info.setVisible(true);
     }//GEN-LAST:event_SignUpActionPerformed
+
+    private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
+        validateFields();
+    }//GEN-LAST:event_nameKeyReleased
+
+    private void passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyReleased
+        validateFields();
+    }//GEN-LAST:event_passwordKeyReleased
 
     /**
      * @param args the command line arguments
