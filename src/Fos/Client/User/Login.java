@@ -152,17 +152,18 @@ public class Login extends javax.swing.JFrame {
         try{
             String nam = name.getText();
             String pass = password.getText();
-            System.out.println(nam+ pass);
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
 
             String result = dbi.Login(nam,pass);
             if (null != result)switch (result) {
                 case "userLogin":
+                    JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     SignUp User = new SignUp();
                     User.setVisible(true);
                     break;
-                case "adminLogin":
+                case "adminLogin":JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    
                     setVisible(false);
                     Admin_Home Admin = new Admin_Home();
                     Admin.setVisible(true);

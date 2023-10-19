@@ -21,7 +21,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
         super();
     }
-    
+    public Integer UserId = 0;
     //user
     @Override
     public String Login(String nam, String pass)throws RemoteException{
@@ -35,6 +35,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
             if(found){
                 String userType = rs.getString("TYPE");
+                UserId = rs.getInt("ID");
                 if ("user".equals(userType)) {
                     return "userLogin";
                 } 
@@ -51,7 +52,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     }  
     
     @Override
-    public String Register(String nam, String pass, String age, String email, String phonenum, String gender)throws RemoteException{
+    public String Register(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException{
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
             conn.setAutoCommit(false); 
 
@@ -68,7 +69,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
             try (Statement statement = conn.createStatement()) {
                 String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) " +
-                                "VALUES ('" + nam + "', '" + pass + "', 'user', '" + age + "', '" + email + "', '" +
+                                "VALUES ('" + nam + "', '" + pass + "', 'user', " + age + ", '" + email + "', '" +
                                 phonenum + "', '" + gender + "')";
                 statement.executeUpdate(script);
 

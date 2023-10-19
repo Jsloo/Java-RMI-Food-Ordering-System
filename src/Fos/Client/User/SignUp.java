@@ -263,8 +263,6 @@ public class SignUp extends javax.swing.JFrame {
         setVisible(false);
         Login info = new Login();
         info.setVisible(true);
-        info.pack();
-        info.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnbackActionPerformed
 
     
@@ -272,7 +270,7 @@ public class SignUp extends javax.swing.JFrame {
         try{
             String name = txtusername.getText();
             String password = txtpassword.getText();
-            String age = txtage.getText();
+            Integer age = Integer.parseInt(txtage.getText());
             String email = txtemail.getText();
             String phonenum = txtphonenum.getText();
             String gender = genderbox.getSelectedItem().toString();

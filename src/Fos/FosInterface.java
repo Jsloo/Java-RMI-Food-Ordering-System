@@ -14,7 +14,7 @@ import java.net.*;
 public interface FosInterface extends Remote{
     //User
     public String Login(String nam, String pass)throws RemoteException;
-    public String Register(String nam, String pass, String age, String email, String phonenum, String gender)throws RemoteException;
+    public String Register(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException;
     
     
     //Admin
