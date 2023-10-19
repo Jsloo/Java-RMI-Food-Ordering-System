@@ -53,8 +53,6 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Year 3 Sem 1\\Distributed Computer Systems\\Ass\\FosRmi\\src\\icon\\icon1.png")); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 130, 140));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -124,11 +122,7 @@ public class Login extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
-            //            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            //            System.out.println("Connected to library DB");
-            //
-            //            //login
-            //            Statement t = conn.createStatement();
+            
             String nam = name.getText();
             String pass = password.getText();
             System.out.println(nam+ pass);
@@ -137,9 +131,9 @@ public class Login extends javax.swing.JFrame {
             String result = dbi.Login(nam,pass);
             System.out.println(nam+ pass);
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
+            
 
         }catch(Exception ex){
-            System.out.println("www");
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_loginActionPerformed
