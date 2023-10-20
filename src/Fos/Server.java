@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -87,6 +88,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public String[][] Report() throws RemoteException {
         String[][] result = new String[14][2]; 
+        ArrayList<Object> result2 = new ArrayList<>();
         for (String[] row : result) {
             Arrays.fill(row, "");
         }

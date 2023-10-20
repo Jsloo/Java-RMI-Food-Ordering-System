@@ -7,6 +7,7 @@ package Fos.Client.User;
 
 import Fos.FosInterface;
 import java.rmi.Naming;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class SignUp extends javax.swing.JFrame {
         btnregister.setEnabled(false); 
         pack();
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -281,8 +283,6 @@ public class SignUp extends javax.swing.JFrame {
             setVisible(false);
             Login info = new Login();
             info.setVisible(true);
-            info.pack();
-            info.setLocationRelativeTo(null);
 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -319,8 +319,6 @@ public class SignUp extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SignUp().setVisible(true);
-                new SignUp().pack();
-                new SignUp().setLocationRelativeTo(null);
             }
         });
     }
