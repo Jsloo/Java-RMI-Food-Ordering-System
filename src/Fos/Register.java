@@ -23,6 +23,10 @@ public class Register {
         
         //admin
         reg.rebind("Report", new Server());
-        
+        login.rebind("SaveMenu", new Server());
+        login.rebind("ViewMenu", new Server());
+        login.rebind("DeleteMenu", new Server());
+        login.rebind("UpdateMenu", new Server());
+
     }
 }
