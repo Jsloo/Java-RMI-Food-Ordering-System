@@ -25,7 +25,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
         super();
     }
-    public Integer UserId = 0;
+    public Integer UserId;
     //user
     @Override
     public String Login(String nam, String pass)throws RemoteException{
@@ -40,6 +40,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             if(found){
                 String userType = rs.getString("TYPE");
                 UserId = rs.getInt("ID");
+                System.out.println(UserId);
                 if ("user".equals(userType)) {
                     return "userLogin";
                 } 
@@ -99,7 +100,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         for (String[] row : result) {
             Arrays.fill(row, "");
         }
-        System.out.println(Arrays.deepToString(result));
+
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
             // total users
             try (Statement t = conn.createStatement()) {

@@ -21,13 +21,23 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    public static Boolean saveDetails = false;
+    public static String[] credentials = new String[2];
+
     public Login() {
         initComponents();
-        
         pack();
         setLocationRelativeTo(null);
-        login.setEnabled(false); 
         
+        name.setText(credentials[0]);
+        password.setText(credentials[1]);
+        validateFields();
+        
+        if (saveDetails == true){
+           crudentialCheck.setSelected(true);
+        }else{
+            crudentialCheck.setSelected(false);
+        }
     }
 
     /**
@@ -51,6 +61,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        crudentialCheck = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(920, 500));
@@ -90,7 +101,7 @@ public class Login extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        jPanel3.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 80, 30));
+        jPanel3.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 80, 30));
 
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         password.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -129,6 +140,15 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setText("Login");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
+        crudentialCheck.setBackground(new java.awt.Color(255, 255, 204));
+        crudentialCheck.setText("Save UserName");
+        crudentialCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudentialCheckActionPerformed(evt);
+            }
+        });
+        jPanel3.add(crudentialCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 700, 460));
 
         pack();
@@ -157,13 +177,28 @@ public class Login extends javax.swing.JFrame {
             String result = dbi.Login(nam,pass);
             if (null != result)switch (result) {
                 case "userLogin":
+                    if (saveDetails == true){
+                        credentials[0] = nam;
+                        credentials[1] = pass;
+                        
+                    }else{
+                        credentials[0] = null;
+                        credentials[1] = null;
+                    }
                     JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     SignUp User = new SignUp();
                     User.setVisible(true);
                     break;
-                case "adminLogin":JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    
+                case "adminLogin":
+                    if (saveDetails == true){
+                        credentials[0] = nam;
+                        credentials[1] = pass;
+                    }else{
+                        credentials[0] = null;
+                        credentials[1] = null;
+                    }
+                    JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     Manage_Menu Admin = new Manage_Menu();
                     Admin.setVisible(true);
@@ -192,6 +227,14 @@ public class Login extends javax.swing.JFrame {
     private void passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyReleased
         validateFields();
     }//GEN-LAST:event_passwordKeyReleased
+
+    private void crudentialCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudentialCheckActionPerformed
+        if (saveDetails == false){
+            saveDetails = true;
+        }else{
+            saveDetails = false;
+        }
+    }//GEN-LAST:event_crudentialCheckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,6 +273,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SignUp;
+    private javax.swing.JCheckBox crudentialCheck;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
