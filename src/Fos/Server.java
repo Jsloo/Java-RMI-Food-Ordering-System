@@ -193,6 +193,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                }
             }
             
+            //order
             try (Statement t = conn.createStatement()) {
                 String totalOrderItemsScript = "SELECT COUNT(*) as total_order_items " +
                                               "FROM order_history_item";
@@ -202,27 +203,26 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 if (totalOrderItemsResult.next()) {
                     int totalOrderItems = totalOrderItemsResult.getInt("total_order_items");
 
-                    // Store total number of order items in the result array
                     result[10][0] = "Total Order Items";
                     result[10][1] = String.valueOf(totalOrderItems);
                 }
 
-                // Query to get the top three highest number of order items along with their names
-                String topOrderItemsScript = "SELECT m.name, COUNT(o.MenuID) as order_item_count " +
-                                             "FROM order_history_item o " +
-                                             "JOIN menu m ON o.MenuID = m.id " +
-                                             "GROUP BY m.name " +
-                                             "ORDER BY order_item_count DESC " +
-                                             "FETCH FIRST 3 ROWS ONLY";
+                // top 3 order
+                String topOrderItemsScript = "SELECT m.name, SUM(o.quantity) as total_quantity " +
+                                                "FROM order_history_item o " +
+                                                "JOIN menu m ON o.MenuID = m.id " +
+                                                "GROUP BY m.name " +
+                                                "ORDER BY total_quantity DESC " +
+                                                "FETCH FIRST 3 ROWS ONLY";
 
                 ResultSet topOrderItemsResult = t.executeQuery(topOrderItemsScript);
 
                 int index = 11;
                 while (topOrderItemsResult.next()) {
                     String itemName = topOrderItemsResult.getString("name");
-                    int itemCount = topOrderItemsResult.getInt("order_item_count");
+                    int itemCount = topOrderItemsResult.getInt("total_quantity");
 
-                    // Store item name and item count in the result array
+
                     result[index][0] = itemName;
                     result[index][1] = String.valueOf(itemCount);
                     index++;
