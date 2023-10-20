@@ -19,5 +19,11 @@ public class Register {
         
         java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2001);
         reg.rebind("Register", new Server());
+        
+        login.rebind("SaveMenu", new Server());
+        login.rebind("ViewMenu", new Server());
+        login.rebind("DeleteMenu", new Server());
+        login.rebind("UpdateMenu", new Server());
+
     }
 }
