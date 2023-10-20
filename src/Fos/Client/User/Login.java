@@ -7,7 +7,7 @@ package Fos.Client.User;
 
 
 
-import Fos.Client.Admin_Home;
+import Fos.Client.Admin.Admin_Home;
 import Fos.FosInterface;
 import java.rmi.Naming;
 import javax.swing.JOptionPane;
