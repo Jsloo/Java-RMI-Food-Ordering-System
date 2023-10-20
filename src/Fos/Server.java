@@ -86,7 +86,11 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         }    
     }  
     
-    
+    @Override
+    public String LogOut()throws RemoteException{
+        UserId = 0;
+        return "LogOut Success!";
+    }
     //admin
     @Override
     public String[][] Report() throws RemoteException {

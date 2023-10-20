@@ -7,7 +7,7 @@ package Fos.Client.User;
 
 
 
-import Fos.Client.Admin.Admin_Home;
+import Fos.Client.Admin.Manage_Menu;
 import Fos.FosInterface;
 import java.rmi.Naming;
 import javax.swing.JOptionPane;
@@ -165,7 +165,7 @@ public class Login extends javax.swing.JFrame {
                 case "adminLogin":JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     
                     setVisible(false);
-                    Admin_Home Admin = new Admin_Home();
+                    Manage_Menu Admin = new Manage_Menu();
                     Admin.setVisible(true);
                     break;
                 case "incorrect":

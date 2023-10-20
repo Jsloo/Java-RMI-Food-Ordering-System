@@ -6,7 +6,6 @@
 package Fos;
 
 import java.rmi.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 /**
  *
@@ -16,7 +15,7 @@ public interface FosInterface extends Remote{
     //User
     public String Login(String nam, String pass)throws RemoteException;
     public String Register(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException;
-    
+    public String LogOut()throws RemoteException;
     
     //Admin
     public String[][] Report()throws RemoteException;

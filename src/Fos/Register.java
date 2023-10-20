@@ -19,7 +19,7 @@ public class Register {
         //user
         reg.rebind("Login", new Server());
         reg.rebind("Register", new Server());
-        
+        reg.rebind("LogOut", new Server());
         
         //admin
         reg.rebind("Report", new Server());
