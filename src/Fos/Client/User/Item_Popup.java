@@ -1,5 +1,5 @@
 
-package Fos.Client;
+package Fos.Client.User;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
@@ -17,6 +17,8 @@ public class Item_Popup extends javax.swing.JFrame {
     public Item_Popup(String[] menu) {
         try{
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
         cart(menu);
         System.out.println(menu);
         }
@@ -40,7 +42,6 @@ public class Item_Popup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(1250, 500));
-        setPreferredSize(new java.awt.Dimension(600, 750));
 
         item_details.setBackground(new java.awt.Color(255, 255, 255));
         item_details.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -170,7 +171,7 @@ public class Item_Popup extends javax.swing.JFrame {
     }
     
     public void cart(String[] menu){
-        image.setIcon(new ImageIcon(menu[3]));
+        image.setIcon(new ImageIcon(menu[4]));
 //                image.setText(imagePath);
             name.setText(menu[1]);
             price.setText("Price: RM " +menu[2]);

@@ -1,5 +1,5 @@
 
-package Fos.Client;
+package Fos.Client.User;
 
 import Fos.FosInterface;
 import java.awt.Dimension;
@@ -19,6 +19,8 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
         showMenu();
     }
 
@@ -39,8 +41,6 @@ public class Menu extends javax.swing.JFrame {
         menu_panel = new javax.swing.JScrollPane();
         menu_panel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\tayquanjun\\Downloads\\wonton-noodles-thumb-2.jpg")); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(1000, 300));
@@ -104,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jLabel5.setText("Cart");
@@ -204,9 +204,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_goFoodMenu
 
     private void goBeverageMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBeverageMenu
-        
-        Menu_Beverage beverage = new Menu_Beverage();
-        beverage.setVisible(true);
+//        
+//        Menu_Beverage beverage = new Menu_Beverage();
+//        beverage.setVisible(true);
         
     }//GEN-LAST:event_goBeverageMenu
 
@@ -239,7 +239,7 @@ public void showMenu(){
         for (String[] menuData : result) {
             
             // Create a JLabel for the image
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(menuData[3]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(menuData[4]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
             JLabel imageLabel = new JLabel(imageIcon);
             imageLabel.setBounds(xPosition, yPosition, 250, 250);
 

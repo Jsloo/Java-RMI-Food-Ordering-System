@@ -341,10 +341,9 @@ public class Manage_Menu extends javax.swing.JFrame {
     public void ViewMenuTable(){
 
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/ViewMenu");
-            ArrayList<String[]>  result = dbi.ViewMenu();
-            for (String[] menuData : result) {
-            }
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/displayMenu");
+            ArrayList<String[]>  result = dbi.displayMenu();
+
             DefaultTableModel menuTable = (DefaultTableModel) Menu_Table.getModel();
             menuTable.setRowCount(0);
 

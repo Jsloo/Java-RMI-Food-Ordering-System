@@ -25,7 +25,7 @@ public class Register {
         //admin
         reg.rebind("Report", new Server());
         reg.rebind("SaveMenu", new Server());
-        reg.rebind("ViewMenu", new Server());
+//        reg.rebind("ViewMenu", new Server());
         reg.rebind("DeleteMenu", new Server());
         reg.rebind("UpdateMenu", new Server());
 

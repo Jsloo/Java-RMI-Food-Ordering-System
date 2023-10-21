@@ -5,7 +5,7 @@
  */
 package Fos;
 
-import Fos.Client.Item_Popup;
+import Fos.Client.User.Item_Popup;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -320,36 +320,36 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         }
     }
     
-    @Override
-    public ArrayList<String[]> ViewMenu()throws RemoteException{
-
-        try{
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            try (Statement t = conn.createStatement()) {
-                String sql = "SELECT* FROM MENU";
-                ResultSet rs = t.executeQuery(sql);
-
-                ArrayList<String[]> menuDataList = new ArrayList<>();
-
-                while (rs.next()) {
-                    String ID = rs.getString("ID");
-                    String Name = rs.getString("NAME");
-                    double Price = rs.getDouble("PRICE");
-                    String Category = rs.getString("CATEGORY");
-                    String[] menuData = {ID,Name, String.valueOf(Price), Category};
-                    menuDataList.add(menuData);
-                }   
-                return menuDataList;
-
-            }catch(Exception e){
-                System.out.println(e.toString());
-            }
-        }catch(Exception e){
-            System.out.println(e.toString());
-        }
-        return null;
-
-    }                            
+//    @Override
+//    public ArrayList<String[]> ViewMenu()throws RemoteException{
+//
+//        try{
+//            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+//            try (Statement t = conn.createStatement()) {
+//                String sql = "SELECT* FROM MENU";
+//                ResultSet rs = t.executeQuery(sql);
+//
+//                ArrayList<String[]> menuDataList = new ArrayList<>();
+//
+//                while (rs.next()) {
+//                    String ID = rs.getString("ID");
+//                    String Name = rs.getString("NAME");
+//                    double Price = rs.getDouble("PRICE");
+//                    String Category = rs.getString("CATEGORY");
+//                    String[] menuData = {ID,Name, String.valueOf(Price), Category};
+//                    menuDataList.add(menuData);
+//                }   
+//                return menuDataList;
+//
+//            }catch(Exception e){
+//                System.out.println(e.toString());
+//            }
+//        }catch(Exception e){
+//            System.out.println(e.toString());
+//        }
+//        return null;
+//
+//    }                            
     
     @Override
     public ArrayList<String[]> displayMenu() throws RemoteException {
@@ -363,9 +363,10 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         while (rs.next()) {
             String food_name = rs.getString("NAME");
             String price = rs.getString("PRICE");
+            String Category = rs.getString("CATEGORY");
             String imagePath = rs.getString("IMAGE");
             int menuID = rs.getInt("ID"); // Assuming "ID" is the column name for menu ID
-            String[] menuData = {String.valueOf(menuID),food_name, String.valueOf(price), imagePath};
+            String[] menuData = {String.valueOf(menuID),food_name, String.valueOf(price),Category, imagePath};
             menuList.add(menuData);
         }
     return menuList;

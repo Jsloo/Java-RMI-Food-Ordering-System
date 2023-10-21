@@ -187,7 +187,7 @@ public class Login extends javax.swing.JFrame {
                     }
                     JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
-                    SignUp User = new SignUp();
+                    Menu User = new Menu();
                     User.setVisible(true);
                     break;
                 case "adminLogin":
