@@ -20,6 +20,7 @@ public class Register {
         reg.rebind("Login", new Server());
         reg.rebind("Register", new Server());
         reg.rebind("LogOut", new Server());
+        reg.rebind("displayMenu", new Server());
         
         //admin
         reg.rebind("Report", new Server());

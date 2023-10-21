@@ -14,11 +14,11 @@ public class Item_Popup extends javax.swing.JFrame {
     public Integer id;
     public Integer value;
     
-    public Item_Popup(Integer menuID) {
+    public Item_Popup(String[] menu) {
         try{
         initComponents();
-        displayPopup(menuID);
-        System.out.println(menuID);
+        cart(menu);
+        System.out.println(menu);
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -164,38 +164,16 @@ public class Item_Popup extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new Item_Popup(0).setVisible(true);
+                new Item_Popup(null).setVisible(true);
             }
         });
     }
     
-    public void displayPopup(Integer menuID) throws RemoteException {
-        id = menuID;
-        try {
-        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-        Statement stmt = conn.createStatement();
-        String sql = "SELECT * from MENU where ID = " + id + " " ;
-        ResultSet rs = stmt.executeQuery(sql);
-        
-        boolean found = rs.next();
-        if(found){
-            String food_name = rs.getString("NAME");
-            String food_price = rs.getString("PRICE");
-            String imagePath = rs.getString("IMAGE");
-//            ImageIcon icon = new ImageIcon(image);
-            image.setIcon(new ImageIcon(imagePath));
+    public void cart(String[] menu){
+        image.setIcon(new ImageIcon(menu[3]));
 //                image.setText(imagePath);
-            name.setText(food_name);
-            price.setText("Price: RM " +food_price);
-                
-            }
-        
-//        Cart cart = new Cart(menuID);
-//        cart.setVisible(true);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-       
+            name.setText(menu[1]);
+            price.setText("Price: RM " +menu[2]);
     }
     
     public void addToCart(int id,int q) throws RemoteException{

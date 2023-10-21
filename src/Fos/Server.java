@@ -5,6 +5,12 @@
  */
 package Fos;
 
+import Fos.Client.Item_Popup;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
@@ -15,6 +21,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 
 /**
@@ -342,4 +351,28 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
     }                            
     
+    @Override
+    public ArrayList<String[]> displayMenu() throws RemoteException {
+    try {
+        ArrayList<String[]> menuList = new ArrayList<>();
+        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+        Statement stmt = conn.createStatement();
+        String sql = "SELECT * from MENU";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        while (rs.next()) {
+            String food_name = rs.getString("NAME");
+            String price = rs.getString("PRICE");
+            String imagePath = rs.getString("IMAGE");
+            int menuID = rs.getInt("ID"); // Assuming "ID" is the column name for menu ID
+            String[] menuData = {String.valueOf(menuID),food_name, String.valueOf(price), imagePath};
+            menuList.add(menuData);
+        }
+    return menuList;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+   
 }

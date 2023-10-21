@@ -1,6 +1,7 @@
 
 package Fos.Client;
 
+import Fos.FosInterface;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -9,24 +10,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 import java.rmi.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
-        try{
         initComponents();
-        displayMenu();
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        showMenu();
     }
 
 
@@ -231,74 +224,49 @@ public class Menu extends javax.swing.JFrame {
         });
     }
     
-public void displayMenu() throws RemoteException {
+public void showMenu(){
+    int xPosition = 50; // Initial horizontal position
+    int yPosition = 50; // Vertical position for labels
+    int maxItemsPerRow = 3; // Maximum items per row
+    int itemCounter = 0; // Counter to track items in the current row
+
+    Font nameFont = new Font("Tahoma", Font.PLAIN, 30); // Adjust the font size here
+    Font priceFont = new Font("SansSerif", Font.PLAIN, 26);
+        
     try {
-        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-        Statement stmt = conn.createStatement();
-        String sql = "SELECT * from MENU";
-        ResultSet rs = stmt.executeQuery(sql);
-
-        int xPosition = 50; // Initial horizontal position
-        int yPosition = 50; // Vertical position for labels
-        int maxItemsPerRow = 3; // Maximum items per row
-        int itemCounter = 0; // Counter to track items in the current row
-
- 
-
-        Font nameFont = new Font("Tahoma", Font.PLAIN, 30); // Adjust the font size here
-        Font priceFont = new Font("SansSerif", Font.PLAIN, 26);
-
- 
-
-        // Create a new panel to hold the menu items
-        
-        
-
- 
-
-        while (rs.next()) {
-            String food_name = rs.getString("NAME");
-            String price = rs.getString("PRICE");
-            String imagePath = rs.getString("IMAGE");
-            int menuID = rs.getInt("ID"); // Assuming "ID" is the column name for menu ID
-
- 
-
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/displayMenu");
+        ArrayList<String[]>  result = dbi.displayMenu();
+        for (String[] menuData : result) {
+            
             // Create a JLabel for the image
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(menuData[3]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
             JLabel imageLabel = new JLabel(imageIcon);
             imageLabel.setBounds(xPosition, yPosition, 250, 250);
 
- 
-
             // Create a JLabel for the name
-            JLabel nameLabel = new JLabel(food_name);
+            JLabel nameLabel = new JLabel(menuData[1]);
             nameLabel.setBounds(xPosition, yPosition + 265, 250, 30);
             nameLabel.setFont(nameFont); // Set the font for the name label
 
- 
-
             // Create a JLabel for the price
-            JLabel priceLabel = new JLabel("Price: RM " + price);
+            JLabel priceLabel = new JLabel("Price: RM " + menuData[2]);
             priceLabel.setBounds(xPosition, yPosition + 300, 250, 30);
             priceLabel.setFont(priceFont); // Set the font for the price label
-
- 
 
             // Add labels to the menu_panel
             menu_panel1.add(imageLabel);
             menu_panel1.add(nameLabel);
             menu_panel1.add(priceLabel);
 
- 
-
             // Add a MouseListener to the image label
             imageLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // Handle the click event
-                    System.out.println("Clicked on menu with ID: " + menuID);
-                    Item_Popup item = new Item_Popup(menuID);
+                    System.out.println("Clicked on menu with ID: " + menuData[0]);
+                    Item_Popup item = new Item_Popup(menuData);
+//                    System.out.println(Arrays.deepToString(menuData));
+
                     item.setVisible(true);
                     // You can perform actions based on the menuID
                 }
@@ -316,15 +284,12 @@ public void displayMenu() throws RemoteException {
                 // Adjust horizontal position for the next menu item in the same row
                 xPosition += 300; // Increase as needed to create a gap between menu items in the same row
             }
+            menu_panel.setPreferredSize(new Dimension(50, 200));
+            menu_panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         }
-        
-        // Set the preferred size of the menu_panel
-        menu_panel.setPreferredSize(new Dimension(50, 200));
-        menu_panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+    }catch(Exception e) {
+            e.printStackTrace();
+        }
 }
 
     

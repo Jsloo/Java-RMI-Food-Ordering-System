@@ -16,6 +16,7 @@ public interface FosInterface extends Remote{
     public String Login(String nam, String pass)throws RemoteException;
     public String Register(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException;
     public String LogOut()throws RemoteException;
+    public ArrayList<String[]> displayMenu()throws RemoteException;
     
     //Admin
     public String[][] Report()throws RemoteException;
