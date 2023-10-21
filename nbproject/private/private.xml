@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
 
 
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/FOD%20System/src/Fos/Server.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/FOD%20System/src/Fos/Client/Admin/Admin_Home.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/FOD%20System/src/Fos/Client/User/Login.java</file>
 
+=======
+            <file>file:/C:/Users/tayquanjun/DCOMS/src/Fos/FosInterface.java</file>
+            <file>file:/C:/Users/tayquanjun/DCOMS/src/Fos/Server.java</file>
+            <file>file:/C:/Users/tayquanjun/DCOMS/src/Fos/Client/Item_Popup.java</file>
+            <file>file:/C:/Users/tayquanjun/DCOMS/src/Fos/Client/Menu.java</file>
+>>>>>>> feature/pop-up_menu
         </group>
     </open-files>
 </project-private>

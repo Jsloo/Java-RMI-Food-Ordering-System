@@ -23,7 +23,7 @@ public class Menu extends javax.swing.JFrame {
         try{
         initComponents();
         displayMenu();
-//        getMenuData();
+
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -238,8 +238,6 @@ public void displayMenu() throws RemoteException {
         String sql = "SELECT * from MENU";
         ResultSet rs = stmt.executeQuery(sql);
 
- 
-
         int xPosition = 50; // Initial horizontal position
         int yPosition = 50; // Vertical position for labels
         int maxItemsPerRow = 3; // Maximum items per row
@@ -300,16 +298,14 @@ public void displayMenu() throws RemoteException {
                 public void mouseClicked(MouseEvent e) {
                     // Handle the click event
                     System.out.println("Clicked on menu with ID: " + menuID);
+                    Item_Popup item = new Item_Popup(menuID);
+                    item.setVisible(true);
                     // You can perform actions based on the menuID
                 }
             });
 
- 
-
             // Increment the item counter
             itemCounter++;
-
- 
 
             // If the maximum items per row is reached, move to the next row
             if (itemCounter >= maxItemsPerRow) {
@@ -324,10 +320,7 @@ public void displayMenu() throws RemoteException {
         
         // Set the preferred size of the menu_panel
         menu_panel.setPreferredSize(new Dimension(50, 200));
-      menu_panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-
- 
+        menu_panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
     } catch (Exception e) {
         e.printStackTrace();
