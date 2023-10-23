@@ -9,6 +9,13 @@ package Fos.Client.User;
 
 import Fos.Client.Admin.Manage_Menu;
 import Fos.FosInterface;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.rmi.Naming;
 import javax.swing.JOptionPane;
 
@@ -22,23 +29,58 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public static Boolean saveDetails = false;
-    public static String[] credentials = new String[2];
 
     public Login() {
         initComponents();
         pack();
         setLocationRelativeTo(null);
         
-        name.setText(credentials[0]);
-        password.setText(credentials[1]);
-        validateFields();
+//        if (saveDetails){
+//           crudentialCheck.setSelected(true);
+//        }else{
+//            crudentialCheck.setSelected(false);
+//        }
         
-        if (saveDetails == true){
-           crudentialCheck.setSelected(true);
-        }else{
-            crudentialCheck.setSelected(false);
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("userCredentials.ser"))) {
+            User storedUser = (User) inputStream.readObject();
+            name.setText(storedUser.getUsername());
+            password.setText(storedUser.getPassword());
+            crudentialCheck.setSelected(true);
+            saveDetails = true;
+        } catch (Exception e) {
+            System.out.println("Stored credentials not found. Proceed with regular login.");
+        }
+        validateFields();
+
+    }
+    
+    public class User implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        private String username;
+        private String password; // Password should be securely hashed
+        // Other user attributes and methods as needed
+
+        // Constructors, getters, setters, and other methods
+        // ...
+
+        // Example constructor
+        public User(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        // Getter for username (you can add more getters for other attributes)
+        public String getUsername() {
+            return username;
+        }
+
+        // Getter for password (you can add more getters for other attributes)
+        public String getPassword() {
+            return password;
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,36 +210,51 @@ public class Login extends javax.swing.JFrame {
             login.setEnabled(false);           
     }
     
+    public void saveCrudentials(String nam, String pass){
+        if (saveDetails){
+            User user = new User(nam, pass);
+            System.out.println(nam);
+            try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("userCredentials.ser")))  {
+
+                outputStream.writeObject(user);     
+
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+        }else{
+            File file = new File("userCredentials.ser");
+            if (file.exists()) {
+                if (file.delete()) {
+                    System.out.println("Stored credentials deleted.");
+                } else {
+                    System.out.println("Failed to delete stored credentials.");
+                }
+            } else {
+                System.out.println("Stored credentials file not found.");
+            }
+        }
+        
+        
+    }
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
             String nam = name.getText();
             String pass = password.getText();
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
-
+            
             String result = dbi.Login(nam,pass);
+            System.out.println(result);
             if (null != result)switch (result) {
                 case "userLogin":
-                    if (saveDetails == true){
-                        credentials[0] = nam;
-                        credentials[1] = pass;
-                        
-                    }else{
-                        credentials[0] = null;
-                        credentials[1] = null;
-                    }
+                    saveCrudentials(nam,pass);
                     JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     Menu User = new Menu();
                     User.setVisible(true);
                     break;
                 case "adminLogin":
-                    if (saveDetails == true){
-                        credentials[0] = nam;
-                        credentials[1] = pass;
-                    }else{
-                        credentials[0] = null;
-                        credentials[1] = null;
-                    }
+                    saveCrudentials(nam,pass);
                     JOptionPane.showMessageDialog(null, "Login Successful! ", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     Manage_Menu Admin = new Manage_Menu();
