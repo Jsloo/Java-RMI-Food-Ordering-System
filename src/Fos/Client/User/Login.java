@@ -35,12 +35,6 @@ public class Login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
         
-//        if (saveDetails){
-//           crudentialCheck.setSelected(true);
-//        }else{
-//            crudentialCheck.setSelected(false);
-//        }
-        
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("userCredentials.ser"))) {
             User storedUser = (User) inputStream.readObject();
             name.setText(storedUser.getUsername());
@@ -58,24 +52,17 @@ public class Login extends javax.swing.JFrame {
         private static final long serialVersionUID = 1L;
 
         private String username;
-        private String password; // Password should be securely hashed
-        // Other user attributes and methods as needed
+        private String password; 
 
-        // Constructors, getters, setters, and other methods
-        // ...
-
-        // Example constructor
         public User(String username, String password) {
             this.username = username;
             this.password = password;
         }
 
-        // Getter for username (you can add more getters for other attributes)
         public String getUsername() {
             return username;
         }
 
-        // Getter for password (you can add more getters for other attributes)
         public String getPassword() {
             return password;
         }
