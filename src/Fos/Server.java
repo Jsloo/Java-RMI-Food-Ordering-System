@@ -95,7 +95,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public String[][] Report() throws RemoteException {
         String[][] result = new String[14][2]; 
-        ArrayList<Object> result2 = new ArrayList<>();
+
         for (String[] row : result) {
             Arrays.fill(row, "");
         }
@@ -158,7 +158,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             try (Statement t = conn.createStatement()) {
                 String totalRevenueScript = "SELECT SUM(m.price) as total_revenue " +
                                             "FROM order_history_item o " +
-                                            "JOIN menu m ON o.MenuID = m.id";
+                                            "JOIN menu m ON o.Menu_ID = m.id";
 
                 ResultSet totalRevenueResult = t.executeQuery(totalRevenueScript);
 
@@ -174,7 +174,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             try (Statement t = conn.createStatement()) {
                String revenueScript = "SELECT m.category, SUM(m.price) as total_revenue " +
                                       "FROM order_history_item o " +
-                                      "JOIN menu m ON o.MenuID = m.id " +
+                                      "JOIN menu m ON o.Menu_ID = m.id " +
                                       "GROUP BY m.category " +
                                       "ORDER BY total_revenue DESC " +
                                       "FETCH FIRST 3 ROWS ONLY";
@@ -209,7 +209,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 // top 3 order
                 String topOrderItemsScript = "SELECT m.name, SUM(o.quantity) as total_quantity " +
                                                 "FROM order_history_item o " +
-                                                "JOIN menu m ON o.MenuID = m.id " +
+                                                "JOIN menu m ON o.Menu_ID = m.id " +
                                                 "GROUP BY m.name " +
                                                 "ORDER BY total_quantity DESC " +
                                                 "FETCH FIRST 3 ROWS ONLY";
@@ -342,10 +342,12 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
                 while (rs.next()) {
                     String ID = rs.getString("ID");
+                    
                     String[] orderData = {ID};
                     orderIdList.add(orderData);
+                    System.out.println(ID);
                 }
-
+                
                 return orderIdList;
 
             } catch (Exception e) {
