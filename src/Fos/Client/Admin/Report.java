@@ -165,7 +165,7 @@ public class Report extends javax.swing.JFrame {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
-        revenueTable.setBackground(new java.awt.Color(153, 255, 153));
+        revenueTable.setBackground(new java.awt.Color(204, 255, 204));
         revenueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -222,7 +222,7 @@ public class Report extends javax.swing.JFrame {
         jLabel11.setText("Top 3 Age Group:");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        ageTable.setBackground(new java.awt.Color(153, 255, 153));
+        ageTable.setBackground(new java.awt.Color(204, 255, 204));
         ageTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -239,6 +239,7 @@ public class Report extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        ageTable.setColumnSelectionAllowed(true);
         jScrollPane3.setViewportView(ageTable);
         if (ageTable.getColumnModel().getColumnCount() > 0) {
             ageTable.getColumnModel().getColumn(0).setResizable(false);
@@ -258,7 +259,7 @@ public class Report extends javax.swing.JFrame {
         jLabel12.setText("Gender:");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
-        genderTable.setBackground(new java.awt.Color(153, 255, 153));
+        genderTable.setBackground(new java.awt.Color(204, 255, 204));
         genderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -310,7 +311,7 @@ public class Report extends javax.swing.JFrame {
         jLabel9.setText("Top 3 Total Order:");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
-        orderTable.setBackground(new java.awt.Color(153, 255, 153));
+        orderTable.setBackground(new java.awt.Color(204, 255, 204));
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -399,7 +400,8 @@ public class Report extends javax.swing.JFrame {
         jLabel16.setText("  BB BreakFast");
         jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 230, 40));
 
-        LouOut.setText("LogOut");
+        LouOut.setBackground(new java.awt.Color(255, 255, 204));
+        LouOut.setText("Log Out");
         LouOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LouOutActionPerformed(evt);

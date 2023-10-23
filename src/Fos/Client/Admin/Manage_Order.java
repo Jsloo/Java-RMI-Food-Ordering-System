@@ -39,7 +39,7 @@ public class Manage_Order extends javax.swing.JFrame {
                 combo_box_id.addItem(row[0]);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -64,10 +64,10 @@ public class Manage_Order extends javax.swing.JFrame {
                 ArrayList<String> orderDetails = result.get(0);
                 Label_Status.setText(orderDetails.get(2));    // Status
                 Label_Payment.setText(orderDetails.get(1));   // Payment Method
-                Label_Amount.setText(orderDetails.get(0));    // Total Amount
+                Label_Amount.setText("RM "+orderDetails.get(0));    // Total Amount
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
     @SuppressWarnings("unchecked")
@@ -85,18 +85,19 @@ public class Manage_Order extends javax.swing.JFrame {
         LouOut = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        combo_box_id = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Order_Table = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
         Label_Number_Item = new javax.swing.JLabel();
-        Label_Status = new javax.swing.JLabel();
-        Label_Payment = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Label_Amount = new javax.swing.JLabel();
+        Label_Payment = new javax.swing.JLabel();
+        Label_Status = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        combo_box_id = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1190, 571));
@@ -156,7 +157,8 @@ public class Manage_Order extends javax.swing.JFrame {
         jLabel12.setText("  BB BreakFast");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 230, 40));
 
-        LouOut.setText("LogOut");
+        LouOut.setBackground(new java.awt.Color(255, 255, 204));
+        LouOut.setText("Log Out");
         LouOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LouOutActionPerformed(evt);
@@ -174,29 +176,9 @@ public class Manage_Order extends javax.swing.JFrame {
         jLabel13.setText("Order Management");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel2.add(combo_box_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 150, 30));
-
-        jLabel1.setText("Total Amount (RM) :");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
-
-        jLabel2.setText("Order ID :");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
-
-        jLabel3.setText("Number of Item :");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-
-        jLabel4.setText("Payment Method :");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
-
-        jLabel5.setText("Status : ");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, -1, -1));
-
         Order_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Name", "Price", "Quantity"
@@ -209,21 +191,61 @@ public class Manage_Order extends javax.swing.JFrame {
             Order_Table.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 690, 330));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 430, 400));
 
-        Label_Number_Item.setText("Label_Number_Item");
-        jPanel2.add(Label_Number_Item, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Label_Status.setText("Label_Status");
-        jPanel2.add(Label_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
+        Label_Number_Item.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Label_Number_Item.setForeground(new java.awt.Color(255, 255, 255));
+        Label_Number_Item.setText("1");
+        jPanel6.add(Label_Number_Item, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, 20));
 
-        Label_Payment.setText("Label_Payment");
-        jPanel2.add(Label_Payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Status : ");
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 20));
 
-        Label_Amount.setText("Label_Amount");
-        jPanel2.add(Label_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+        Label_Amount.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Label_Amount.setForeground(new java.awt.Color(255, 255, 255));
+        Label_Amount.setText("123");
+        jPanel6.add(Label_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, 20));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 950, 540));
+        Label_Payment.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Label_Payment.setForeground(new java.awt.Color(255, 255, 255));
+        Label_Payment.setText("cash");
+        jPanel6.add(Label_Payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, 20));
+
+        Label_Status.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Label_Status.setForeground(new java.awt.Color(255, 255, 255));
+        Label_Status.setText("Paid");
+        jPanel6.add(Label_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, 20));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Number of Item :");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 20));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Total Amount (RM) :");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Payment Method :");
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 20));
+
+        jPanel6.add(combo_box_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 150, 30));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Order ID :");
+        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 370, 400));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 930, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -277,21 +299,22 @@ public class Manage_Order extends javax.swing.JFrame {
     private javax.swing.JButton LouOut;
     private javax.swing.JTable Order_Table;
     private javax.swing.JComboBox<String> combo_box_id;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
