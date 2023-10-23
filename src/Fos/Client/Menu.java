@@ -238,25 +238,13 @@ public void displayMenu() throws RemoteException {
         String sql = "SELECT * from MENU";
         ResultSet rs = stmt.executeQuery(sql);
 
- 
-
         int xPosition = 50; // Initial horizontal position
         int yPosition = 50; // Vertical position for labels
         int maxItemsPerRow = 3; // Maximum items per row
         int itemCounter = 0; // Counter to track items in the current row
 
- 
-
         Font nameFont = new Font("Tahoma", Font.PLAIN, 30); // Adjust the font size here
         Font priceFont = new Font("SansSerif", Font.PLAIN, 26);
-
- 
-
-        // Create a new panel to hold the menu items
-        
-        
-
- 
 
         while (rs.next()) {
             String food_name = rs.getString("NAME");
@@ -264,28 +252,20 @@ public void displayMenu() throws RemoteException {
             String imagePath = rs.getString("IMAGE");
             int menuID = rs.getInt("ID"); // Assuming "ID" is the column name for menu ID
 
- 
-
             // Create a JLabel for the image
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
             JLabel imageLabel = new JLabel(imageIcon);
             imageLabel.setBounds(xPosition, yPosition, 250, 250);
-
- 
 
             // Create a JLabel for the name
             JLabel nameLabel = new JLabel(food_name);
             nameLabel.setBounds(xPosition, yPosition + 265, 250, 30);
             nameLabel.setFont(nameFont); // Set the font for the name label
 
- 
-
             // Create a JLabel for the price
             JLabel priceLabel = new JLabel("Price: RM " + price);
             priceLabel.setBounds(xPosition, yPosition + 300, 250, 30);
             priceLabel.setFont(priceFont); // Set the font for the price label
-
- 
 
             // Add labels to the menu_panel
             menu_panel1.add(imageLabel);
