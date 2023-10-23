@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Fos;
 
 import Fos.Client.User.Item_Popup;
@@ -25,11 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-
-/**
- *
- * @author User
- */
 public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
         super();
@@ -79,7 +70,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                     return "Username already exists!";
                 }
             } 
-
 
             try (Statement statement = conn.createStatement()) {
                 String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) " +
@@ -267,19 +257,13 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     }
     
     @Override
-    public String UpdateMenu(String id, String name, String price, String category) throws RemoteException {
+    public String UpdateMenu(String id, String name, String price, String category,String imagePath) throws RemoteException {
         Connection conn = null;
         PreparedStatement  pstmt = null;
-
         try {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            String sql = "DELETE FROM MENU WHERE ID = '"+ id +"'";
-
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, name);
-            pstmt.setDouble(2, Double.parseDouble(price));
-            pstmt.setString(3, category);
-
+            String updateQuery = "UPDATE MENU SET NAME = '"+name+"', PRICE = "+Double.parseDouble(price)+", CATEGORY = '"+category+"',IMAGE = '"+imagePath+"' WHERE ID = "+id+" ";
+            pstmt = conn.prepareStatement(updateQuery);
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -294,7 +278,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     
     @Override
     public String SaveMenu(String imagePath, String name, Double price, String category) throws RemoteException {
-
         Connection conn = null;
         PreparedStatement  pstmt = null;
 
@@ -319,61 +302,121 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             return (e.toString());
         }
     }
-    
-//    @Override
-//    public ArrayList<String[]> ViewMenu()throws RemoteException{
-//
-//        try{
-//            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-//            try (Statement t = conn.createStatement()) {
-//                String sql = "SELECT* FROM MENU";
-//                ResultSet rs = t.executeQuery(sql);
-//
-//                ArrayList<String[]> menuDataList = new ArrayList<>();
-//
-//                while (rs.next()) {
-//                    String ID = rs.getString("ID");
-//                    String Name = rs.getString("NAME");
-//                    double Price = rs.getDouble("PRICE");
-//                    String Category = rs.getString("CATEGORY");
-//                    String[] menuData = {ID,Name, String.valueOf(Price), Category};
-//                    menuDataList.add(menuData);
-//                }   
-//                return menuDataList;
-//
-//            }catch(Exception e){
-//                System.out.println(e.toString());
-//            }
-//        }catch(Exception e){
-//            System.out.println(e.toString());
-//        }
-//        return null;
-//
-//    }                            
+                            
     
     @Override
     public ArrayList<String[]> displayMenu() throws RemoteException {
-    try {
-        ArrayList<String[]> menuList = new ArrayList<>();
-        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-        Statement stmt = conn.createStatement();
-        String sql = "SELECT * from MENU";
-        ResultSet rs = stmt.executeQuery(sql);
+        try {
+            ArrayList<String[]> menuList = new ArrayList<>();
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT * from MENU";
+            ResultSet rs = stmt.executeQuery(sql);
 
-        while (rs.next()) {
-            String food_name = rs.getString("NAME");
-            String price = rs.getString("PRICE");
-            String Category = rs.getString("CATEGORY");
-            String imagePath = rs.getString("IMAGE");
-            int menuID = rs.getInt("ID"); // Assuming "ID" is the column name for menu ID
-            String[] menuData = {String.valueOf(menuID),food_name, String.valueOf(price),Category, imagePath};
-            menuList.add(menuData);
+            while (rs.next()) {
+                String food_name = rs.getString("NAME");
+                String price = rs.getString("PRICE");
+                String Category = rs.getString("CATEGORY");
+                String imagePath = rs.getString("IMAGE");
+                int menuID = rs.getInt("ID"); // Assuming "ID" is the column name for menu ID
+                String[] menuData = {String.valueOf(menuID),food_name, String.valueOf(price),Category, imagePath};
+                menuList.add(menuData);
+            }
+        return menuList;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    return menuList;
-    } catch (Exception e) {
-        e.printStackTrace();
+        return null;
     }
-    return null;
-}
    
+    
+    @Override
+    public ArrayList<String[]> ViewOrderId() throws RemoteException {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            try (Statement t = conn.createStatement()) {
+                String sql = "SELECT ID FROM ORDER_HISTORY";
+                ResultSet rs = t.executeQuery(sql);
+
+                ArrayList<String[]> orderIdList = new ArrayList<>();
+
+                while (rs.next()) {
+                    String ID = rs.getString("ID");
+                    String[] orderData = {ID};
+                    orderIdList.add(orderData);
+                }
+
+                return orderIdList;
+
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        return null;
+    }
+        
+    @Override
+    public ArrayList<ArrayList<String>> ViewOrderHistoryItem(String ID) throws RemoteException {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            ArrayList<ArrayList<String>> result = new ArrayList<>();
+
+            String QUERY1 = "SELECT TOTAL_AMOUNT, PAYMENT_METHOD, STATUS FROM ORDER_HISTORY WHERE ID = "+ID+"";
+            PreparedStatement t = conn.prepareStatement(QUERY1);
+            ResultSet orderHistoryResults = t.executeQuery();
+
+            ArrayList<String> orderDetails = new ArrayList<>();
+
+            while (orderHistoryResults.next()) {
+                int amount = orderHistoryResults.getInt("TOTAL_AMOUNT");
+                String payment = orderHistoryResults.getString("PAYMENT_METHOD");
+                String status = orderHistoryResults.getString("STATUS");
+                orderDetails.add(String.valueOf(amount));
+                orderDetails.add(payment);
+                orderDetails.add(status);
+            }
+
+            String sql = "SELECT MENU_ID, QUANTITY FROM ORDER_HISTORY_ITEM WHERE ORDER_ID = "+ID+"";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet orderHistoryItemResults = preparedStatement.executeQuery();
+
+            ArrayList<String> menuData;
+            ArrayList<ArrayList<String>> menuItems = new ArrayList<>();
+
+            while (orderHistoryItemResults.next()) {
+                String menuID = orderHistoryItemResults.getString("MENU_ID");
+                int quantity = orderHistoryItemResults.getInt("QUANTITY");
+
+                String menuQuery = "SELECT NAME, PRICE FROM MENU WHERE ID = ?";
+                PreparedStatement menuPreparedStatement = conn.prepareStatement(menuQuery);
+                menuPreparedStatement.setString(1, menuID);
+                ResultSet menuResults = menuPreparedStatement.executeQuery();
+
+                while (menuResults.next()) {
+                    menuData = new ArrayList<>();
+                    String name = menuResults.getString("NAME");
+                    double price = menuResults.getDouble("PRICE");
+                    menuData.add(name);
+                    menuData.add(String.valueOf(price));
+                    menuData.add(String.valueOf(quantity));
+                    menuItems.add(menuData);
+                }
+            }
+
+            result.add(orderDetails);
+            result.addAll(menuItems);
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+
 }
