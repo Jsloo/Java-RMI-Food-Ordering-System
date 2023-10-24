@@ -48,7 +48,7 @@ public class Login extends javax.swing.JFrame {
 
     }
     
-    public class User implements Serializable {
+    public static class User implements Serializable {
         private static final long serialVersionUID = 1L;
 
         private String username;
@@ -170,7 +170,7 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
         crudentialCheck.setBackground(new java.awt.Color(255, 255, 204));
-        crudentialCheck.setText("Save UserName");
+        crudentialCheck.setText("Remember UserName and Password");
         crudentialCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crudentialCheckActionPerformed(evt);
@@ -197,10 +197,10 @@ public class Login extends javax.swing.JFrame {
             login.setEnabled(false);           
     }
     
-    public void saveCrudentials(String nam, String pass){
+    public static void saveCrudentials(String nam, String pass){
         if (saveDetails){
             User user = new User(nam, pass);
-            System.out.println(nam);
+
             try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("userCredentials.ser")))  {
 
                 outputStream.writeObject(user);     
@@ -231,7 +231,7 @@ public class Login extends javax.swing.JFrame {
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
             
             String result = dbi.Login(nam,pass);
-            System.out.println(result);
+            
             if (null != result)switch (result) {
                 case "userLogin":
                     saveCrudentials(nam,pass);
