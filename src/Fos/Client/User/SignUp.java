@@ -9,6 +9,7 @@ import Fos.FosInterface;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.xml.bind.ValidationException;
 
 /**
  *
@@ -23,9 +24,14 @@ public class SignUp extends javax.swing.JFrame {
     public String phonenumPattern = "^[0-9]*$";
     public SignUp() {
         initComponents();
-        btnregister.setEnabled(false); 
         pack();
         setLocationRelativeTo(null);
+        
+        errorUserName.setVisible(false);
+        errorPassword.setVisible(false);
+        errorAge.setVisible(false);
+        errorEmail.setVisible(false);
+        errorPhoneNumber.setVisible(false);
 
     }
 
@@ -58,6 +64,11 @@ public class SignUp extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        errorPassword = new javax.swing.JLabel();
+        errorUserName = new javax.swing.JLabel();
+        errorAge = new javax.swing.JLabel();
+        errorEmail = new javax.swing.JLabel();
+        errorPhoneNumber = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(920, 500));
@@ -77,14 +88,14 @@ public class SignUp extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 460));
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setMinimumSize(new java.awt.Dimension(420, 424));
         jPanel2.setName(""); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Password");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         txtusername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +157,7 @@ public class SignUp extends javax.swing.JFrame {
                 txtpasswordKeyReleased(evt);
             }
         });
-        jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 320, 30));
+        jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 320, 30));
 
         btnregister.setBackground(new java.awt.Color(0, 102, 102));
         btnregister.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,13 +209,38 @@ public class SignUp extends javax.swing.JFrame {
         jLabel16.setText("Phone Number");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
 
+        errorPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorPassword.setForeground(new java.awt.Color(255, 51, 51));
+        errorPassword.setText("*Password is required");
+        jPanel2.add(errorPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 120, -1));
+
+        errorUserName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorUserName.setForeground(new java.awt.Color(255, 51, 51));
+        errorUserName.setText("*User Name is required");
+        jPanel2.add(errorUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 130, -1));
+
+        errorAge.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorAge.setForeground(new java.awt.Color(255, 51, 51));
+        errorAge.setText("*Age is required");
+        jPanel2.add(errorAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 160, -1));
+
+        errorEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorEmail.setForeground(new java.awt.Color(255, 51, 51));
+        errorEmail.setText("*Email is required");
+        jPanel2.add(errorEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 160, -1));
+
+        errorPhoneNumber.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorPhoneNumber.setForeground(new java.awt.Color(255, 51, 51));
+        errorPhoneNumber.setText("*Phone Number is required");
+        jPanel2.add(errorPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 230, -1));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 560, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_txtpasswordKeyReleased
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
@@ -212,7 +248,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusernameActionPerformed
 
     private void txtusernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_txtusernameKeyReleased
 
     private void txtageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtageActionPerformed
@@ -220,7 +256,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_txtageActionPerformed
 
     private void txtageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtageKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_txtageKeyReleased
 
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
@@ -228,7 +264,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_txtemailActionPerformed
 
     private void txtemailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_txtemailKeyReleased
 
     private void txtphonenumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtphonenumActionPerformed
@@ -236,20 +272,81 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_txtphonenumActionPerformed
 
     private void txtphonenumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtphonenumKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_txtphonenumKeyReleased
 
-    
-    public void validateFields(){
-        String username = txtusername.getText();
-        String password = txtpassword.getText();
+    public void validateFields() throws ValidationException {
+        boolean hasError = false;
         String age = txtage.getText();
         String email = txtemail.getText();
         String phonenum = txtphonenum.getText();
-        if (!username.equals("") && !password.equals("")  && !age.equals("") && email.matches(emailPattern) && phonenum.matches(phonenumPattern) && (String.valueOf(phonenum).length() == 10 | String.valueOf(phonenum).length() == 11))
-            btnregister.setEnabled(true);       
-        else
-            btnregister.setEnabled(false);              
+        
+        //name
+        if (txtusername.getText().isEmpty()) {
+            errorUserName.setVisible(true);  
+            hasError = true;
+        }else{
+            errorUserName.setVisible(false); 
+        }
+        
+        //pass
+        if (txtpassword.getText().isEmpty()) {
+            errorPassword.setVisible(true);
+            hasError = true;
+        }else{
+            errorPassword.setVisible(false); 
+        }
+        
+        //age
+        if (age.isEmpty()) {
+            errorAge.setText("*Age is required");
+            errorAge.setVisible(true);
+            hasError = true;
+        }
+        else{
+            try {
+                Integer.parseInt(age);
+                errorAge.setVisible(false); 
+                hasError = false;
+            } catch (NumberFormatException e) {
+                errorAge.setText("    *Invalid Age");
+                errorAge.setVisible(true);
+                hasError = true;
+            } 
+        } 
+
+        //email
+        if (email.isEmpty()) {
+            errorEmail.setText("*Email is required");
+            errorEmail.setVisible(true);
+            hasError = true;
+        }
+        else if(!(email.matches(emailPattern))){
+            errorEmail.setText("     *Invalid Email");
+            errorEmail.setVisible(true);
+            hasError = true;
+        }
+        else{
+            errorEmail.setVisible(false); 
+        }
+        
+        //phone
+        if (phonenum.isEmpty()) {
+            errorPhoneNumber.setText("*Phone Number is required");
+            errorPhoneNumber.setVisible(true);
+            hasError = true;
+        }else if(!(phonenum.matches(phonenumPattern) && (String.valueOf(phonenum).length() == 10 | String.valueOf(phonenum).length() == 11))){
+            errorPhoneNumber.setText("    *Invalid Phone Number");
+            errorPhoneNumber.setVisible(true);
+            hasError = true;
+        }
+        else{
+            errorPhoneNumber.setVisible(false); 
+        }
+
+        if(hasError){
+            throw new ValidationException("");
+        }
     }
     
     private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
@@ -258,7 +355,6 @@ public class SignUp extends javax.swing.JFrame {
         txtemail.setText("");
         txtphonenum.setText("");
         txtpassword.setText("");
-        btnregister.setEnabled(false);
     }//GEN-LAST:event_btnclearActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
@@ -270,6 +366,7 @@ public class SignUp extends javax.swing.JFrame {
     
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
         try{
+            validateFields();
             String name = txtusername.getText();
             String password = txtpassword.getText();
             Integer age = Integer.parseInt(txtage.getText());
@@ -284,7 +381,8 @@ public class SignUp extends javax.swing.JFrame {
             Login info = new Login();
             info.setVisible(true);
 
-        }catch(Exception ex){
+        } catch (ValidationException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         
@@ -327,6 +425,11 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JButton btnback;
     private javax.swing.JButton btnclear;
     private javax.swing.JButton btnregister;
+    private javax.swing.JLabel errorAge;
+    private javax.swing.JLabel errorEmail;
+    private javax.swing.JLabel errorPassword;
+    private javax.swing.JLabel errorPhoneNumber;
+    private javax.swing.JLabel errorUserName;
     private javax.swing.JComboBox<String> genderbox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

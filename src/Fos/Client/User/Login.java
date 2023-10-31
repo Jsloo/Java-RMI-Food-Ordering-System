@@ -18,6 +18,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.rmi.Naming;
 import javax.swing.JOptionPane;
+import javax.xml.bind.ValidationException;
 
 /**
  *
@@ -34,6 +35,9 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         pack();
         setLocationRelativeTo(null);
+        errorUserName.setVisible(false);
+        errorPassword.setVisible(false);
+//        login.setEnabled(false);
         
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("userCredentials.ser"))) {
             User storedUser = (User) inputStream.readObject();
@@ -42,9 +46,8 @@ public class Login extends javax.swing.JFrame {
             crudentialCheck.setSelected(true);
             saveDetails = true;
         } catch (Exception e) {
-            System.out.println("Stored credentials not found. Proceed with regular login.");
         }
-        validateFields();
+        
 
     }
     
@@ -91,6 +94,8 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         crudentialCheck = new javax.swing.JCheckBox();
+        errorPassword = new javax.swing.JLabel();
+        errorUserName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(920, 500));
@@ -155,7 +160,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Password : ");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 80, 30));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 80, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("UserName: ");
@@ -178,6 +183,16 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel3.add(crudentialCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
 
+        errorPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorPassword.setForeground(new java.awt.Color(255, 51, 51));
+        errorPassword.setText("*Password is required");
+        jPanel3.add(errorPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+
+        errorUserName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        errorUserName.setForeground(new java.awt.Color(255, 51, 51));
+        errorUserName.setText("*User Name is required");
+        jPanel3.add(errorUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 700, 460));
 
         pack();
@@ -187,15 +202,26 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nameActionPerformed
 
-    public void validateFields(){
-        String nam = name.getText();
-        String pass = password.getText();
-        
-        if (!nam.equals("") && !pass.equals(""))
-            login.setEnabled(true);    
-        else
-            login.setEnabled(false);           
+    public void validateFields() throws ValidationException {
+        boolean hasError = false;
+        if (name.getText().isEmpty()) {
+            errorUserName.setVisible(true);  
+            hasError = true;
+        }else{
+            errorUserName.setVisible(false); 
+        }
+        if (password.getText().isEmpty()) {
+            errorPassword.setVisible(true);
+            hasError = true;
+        }else{
+            errorPassword.setVisible(false); 
+        }
+
+        if(hasError){
+            throw new ValidationException("");
+        }
     }
+
     
     public static void saveCrudentials(String nam, String pass){
         if (saveDetails){
@@ -211,21 +237,14 @@ public class Login extends javax.swing.JFrame {
         }else{
             File file = new File("userCredentials.ser");
             if (file.exists()) {
-                if (file.delete()) {
-                    System.out.println("Stored credentials deleted.");
-                } else {
-                    System.out.println("Failed to delete stored credentials.");
-                }
-            } else {
-                System.out.println("Stored credentials file not found.");
+                file.delete();
             }
-        }
-        
-        
+        }       
     }
     
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try{
+            validateFields();
             String nam = name.getText();
             String pass = password.getText();
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
@@ -253,9 +272,11 @@ public class Login extends javax.swing.JFrame {
                 default:
                     break;
             }  
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+            } catch (ValidationException ex) {
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
     }//GEN-LAST:event_loginActionPerformed
 
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpActionPerformed
@@ -265,11 +286,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_SignUpActionPerformed
 
     private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_nameKeyReleased
 
     private void passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyReleased
-        validateFields();
+
     }//GEN-LAST:event_passwordKeyReleased
 
     private void crudentialCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudentialCheckActionPerformed
@@ -318,6 +339,8 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SignUp;
     private javax.swing.JCheckBox crudentialCheck;
+    private javax.swing.JLabel errorPassword;
+    private javax.swing.JLabel errorUserName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
