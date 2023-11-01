@@ -1,6 +1,7 @@
 
 package Fos.Client.Admin;
 
+import Fos.Client.Admin.Report.Report;
 import Fos.Client.User.Login;
 import Fos.FosInterface;
 import java.awt.event.ItemEvent;

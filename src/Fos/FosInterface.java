@@ -19,9 +19,12 @@ public interface FosInterface extends Remote{
     public ArrayList<String[]> displayMenu()throws RemoteException;
     
     //Admin
-    public String[][] Report()throws RemoteException;
+    public ArrayList<String> Report()throws RemoteException;
+    public ArrayList<String[]> AgeReport()throws RemoteException;
+    public ArrayList<String[]> GenderReport()throws RemoteException;
+    public ArrayList<String[]> RevenueReport()throws RemoteException;
+    public ArrayList<String[]> OrderReport()throws RemoteException;
     public String SaveMenu(String imagePath, String name, Double price, String category)throws RemoteException;
-//    public ArrayList<String[]> ViewMenu()throws RemoteException;
     public String DeleteMenu(String name)throws RemoteException;
     public String UpdateMenu(String id, String name, String price, String category,String imagePath) throws RemoteException;
     public ArrayList<String[]> ViewOrderId() throws RemoteException;

@@ -37,7 +37,6 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         errorUserName.setVisible(false);
         errorPassword.setVisible(false);
-//        login.setEnabled(false);
         
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("userCredentials.ser"))) {
             User storedUser = (User) inputStream.readObject();

@@ -16,6 +16,10 @@ public class Register {
         
         //admin
         reg.rebind("Report", new Server());
+        reg.rebind("AgeReport", new Server());
+        reg.rebind("GenderReport", new Server());
+        reg.rebind("RevenueReport", new Server());
+        reg.rebind("OrderReport", new Server());
         reg.rebind("SaveMenu", new Server());
 //        reg.rebind("ViewMenu", new Server());
         reg.rebind("DeleteMenu", new Server());

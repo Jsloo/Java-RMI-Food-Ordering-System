@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fos.Client.Admin;
+package Fos.Client.Admin.Report;
 
+import Fos.Client.Admin.Manage_Menu;
+import Fos.Client.Admin.Manage_Order;
 import Fos.Client.User.Login;
 import Fos.FosInterface;
 import java.rmi.Naming;
+import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -20,63 +25,95 @@ public class Report extends javax.swing.JFrame {
     /**
      * Creates new form Report
      */
-//    private DefaultPieDataset pieDataset;
-//    private JFreeChart pieChart;
-//    private PiePlot piePlot;
-//    private ChartPanel chartPanel;
+
     public Report() {
         initComponents();
         pack();
         setLocationRelativeTo(null);
-        try{
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Report");
-            String[][] result = dbi.Report();
-            System.out.println(Arrays.deepToString(result));
-            
-            for (String[] row : result) {
-                for (String item : row) {
-                    System.out.println(item);
-                }
-            }
-            
-            //age
-            DefaultTableModel model = (DefaultTableModel) ageTable.getModel();
-            String[][] rowsToAdd = {result[1], result[2], result[3]};
+        
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/AgeReport");
+            ArrayList<String[]>  result = dbi.AgeReport();
 
-            for (String[] row : rowsToAdd) {
-                Object[] rowData = new Object[]{row[0], row[1]}; 
+            
+            DefaultTableModel model = (DefaultTableModel) ageTable.getModel();
+
+            int rowCountToDisplay = Math.min(result.size(), 3); // Get the minimum of 3 and the size of the result list
+
+            for (int i = 0; i < rowCountToDisplay; i++) {
+                String[] row = result.get(i);
+                Object[] rowData = new Object[]{row[0], row[1]};
                 model.addRow(rowData);
             }
             
-            //gender
-            DefaultTableModel modelGender = (DefaultTableModel) genderTable.getModel();
-            String[][] genderRows = {result[4], result[5]};
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/GenderReport");
+            ArrayList<String[]>  result = dbi.GenderReport();
 
-            for (String[] row : genderRows) {
-                Object[] rowData1 = new Object[]{row[0], row[1]}; 
-                modelGender.addRow(rowData1);
+            
+            DefaultTableModel model = (DefaultTableModel) genderTable.getModel();
+
+            
+            int rowCountToDisplay = Math.min(result.size(), 3); 
+
+            for (int i = 0; i < rowCountToDisplay; i++) {
+                String[] row = result.get(i);
+                Object[] rowData = new Object[]{row[0], row[1]};
+                model.addRow(rowData);
             }
             
-            //revenue
-            DefaultTableModel modelRevenue = (DefaultTableModel) revenueTable.getModel();
-            String[][] revenueRows = {result[7], result[8], result[9]};
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/RevenueReport");
+            ArrayList<String[]>  result = dbi.RevenueReport();
+            
+            DefaultTableModel model = (DefaultTableModel) revenueTable.getModel();
 
-            for (String[] row : revenueRows) {
-                Object[] rowData2 = new Object[]{row[0], row[1]}; 
-                modelRevenue.addRow(rowData2);
+            int rowCountToDisplay = Math.min(result.size(), 3); 
+
+            for (int i = 0; i < rowCountToDisplay; i++) {
+                String[] row = result.get(i);
+                Object[] rowData = new Object[]{row[0], row[1]};
+                model.addRow(rowData);
             }
             
-            //order
-            DefaultTableModel modelOrder = (DefaultTableModel) orderTable.getModel();
-            String[][] orderRows = {result[11], result[12], result[13]};
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/OrderReport");
+            ArrayList<String[]>  result = dbi.OrderReport();
+            
+            DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
 
-            for (String[] row : orderRows) {
-                Object[] rowData3 = new Object[]{row[0], row[1]}; 
-                modelOrder.addRow(rowData3);
+            int rowCountToDisplay = Math.min(result.size(), 3); 
+
+            for (int i = 0; i < rowCountToDisplay; i++) {
+                String[] row = result.get(i);
+                Object[] rowData = new Object[]{row[0], row[1]};
+                model.addRow(rowData);
             }
-            txtTotalCus.setText(result[0][1]);
-            txtTotalRevenue.setText("RM"+result[6][1]);
-            txtTotalOrder.setText(result[10][1]);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try{
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Report");
+            ArrayList<String> result = dbi.Report();
+
+            txtTotalCus.setText(result.get(0));
+            txtTotalRevenue.setText("RM" + result.get(1));
+            txtTotalOrder.setText(result.get(2));
         }catch(Exception e){
             
         }
@@ -132,7 +169,6 @@ public class Report extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(920, 545));
-        setPreferredSize(new java.awt.Dimension(1190, 571));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
@@ -151,6 +187,11 @@ public class Report extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setText("details");
         jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, 20));
 
         txtTotalRevenue.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
@@ -165,7 +206,6 @@ public class Report extends javax.swing.JFrame {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
-        revenueTable.setBackground(new java.awt.Color(204, 255, 204));
         revenueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -222,7 +262,6 @@ public class Report extends javax.swing.JFrame {
         jLabel11.setText("Top 3 Age Group:");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        ageTable.setBackground(new java.awt.Color(204, 255, 204));
         ageTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -251,7 +290,12 @@ public class Report extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(153, 255, 153));
         jButton6.setText("details");
         jButton6.setBorderPainted(false);
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 70, -1));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 70, 20));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -259,7 +303,6 @@ public class Report extends javax.swing.JFrame {
         jLabel12.setText("Gender:");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
-        genderTable.setBackground(new java.awt.Color(204, 255, 204));
         genderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -303,6 +346,11 @@ public class Report extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(153, 255, 153));
         jButton4.setText("details");
         jButton4.setBorderPainted(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, 20));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -311,7 +359,6 @@ public class Report extends javax.swing.JFrame {
         jLabel9.setText("Top 3 Total Order:");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
-        orderTable.setBackground(new java.awt.Color(204, 255, 204));
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -415,26 +462,18 @@ public class Report extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgePieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgePieActionPerformed
-//        pieDataset = new DefaultPieDataset();
-//        pieDataset.setValue('sw',new Double(9.1));
-//        pieDataset.setValue('sww',new Double(9.1));
-//        System.out.println("11");
-//        pieDataset = new DefaultPieDataset();
-//        pieDataset.setValue("One", new Integer(10));
-//        pieDataset.setValue("Two", new Integer(20));
-//        pieDataset.setValue("Three", new Integer(30));
-//        pieDataset.setValue("Four", new Integer(10));
-//        pieDataset.setValue("Five", new Integer(20));
-//        pieDataset.setValue("Six", new Integer(10));
-//        JFreeChart chart = ChartFactory.createPieChart3D("3D Pie Chart", pieDataset, true, true, false);
-//
-//        piePlot = (PiePlot) chart.getPlot();
-//        chartPanel = new ChartPanel(chart);
-//        jPanel1.removeAll();
-//        jPanel1.add(chartPanel);
-//        chartPanel.validate();
+        JFrame frame = new JFrame("Age Distribution Chart");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        Age ageChart = new Age();
+        ChartPanel chartPanel = new ChartPanel(ageChart.createChart(ageChart.createDataset(), "Age Groups"));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
 
+        frame.getContentPane().add(chartPanel);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }//GEN-LAST:event_btnAgePieActionPerformed
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
@@ -466,6 +505,51 @@ public class Report extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_LouOutActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFrame frame = new JFrame("Gender Chart");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        Gender genderChart = new Gender();
+        ChartPanel chartPanel = new ChartPanel(genderChart.createChart(genderChart.createDataset(), "Gender"));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
+
+        frame.getContentPane().add(chartPanel);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFrame frame = new JFrame("Revenue Chart");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        Income revenueChart = new Income();
+        ChartPanel chartPanel = new ChartPanel(revenueChart.createChart(revenueChart.createDataset(), "Revenue"));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
+
+        frame.getContentPane().add(chartPanel);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JFrame frame = new JFrame("Order Chart");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        Order orderChart = new Order();
+        ChartPanel chartPanel = new ChartPanel(orderChart.createChart(orderChart.createDataset(), "Order"));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
+
+        frame.getContentPane().add(chartPanel);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
