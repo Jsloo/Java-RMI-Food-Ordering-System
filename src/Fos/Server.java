@@ -1,31 +1,21 @@
 
 package Fos;
 
-import Fos.Client.User.Item_Popup;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 
 public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
         super();
     }
-    public Integer UserId;
+    public static Integer UserId;
     //user
     @Override
     public String Login(String nam, String pass)throws RemoteException{
@@ -40,7 +30,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             if(found){
                 String userType = rs.getString("TYPE");
                 UserId = rs.getInt("ID");
-                System.out.println(UserId);
                 if ("user".equals(userType)) {
                     return "userLogin";
                 } 
@@ -448,4 +437,80 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
 
 
+=======
+    return null;
+}
+    
+    @Override
+    public String addToCart(int id,int q)throws RemoteException{
+        try {
+        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+        Statement stmt = conn.createStatement();
+        String sql = "Insert into CART (USER_ID, FOOD_ID, QUANTITY) values ("+UserId+", "+id+", "+q+")";
+        stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            return e.toString();
+        }
+        return "success";
+    }
+    
+    
+    @Override
+    public ArrayList<String[]> showCart() throws RemoteException {
+    try {
+        ArrayList<String[]> cartList = new ArrayList<>();
+        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+        Statement stmt = conn.createStatement();
+        String sql = "SELECT m.IMAGE as Image, m.NAME as Name, m.PRICE as Price, c.QUANTITY as Quantity from cart c inner join MENU m on m.ID = c.FOOD_ID where c.USER_ID = "+UserId+"";
+        ResultSet rs = stmt.executeQuery(sql);
+        
+        while (rs.next()) {
+            String imagePath = rs.getString("Image");
+            String food_name = rs.getString("Name");
+            String price = rs.getString("Price");
+            String quantity = rs.getString("Quantity");
+           
+            String[] cartData = {imagePath, food_name, String.valueOf(price), String.valueOf(quantity)};
+            cartList.add(cartData);
+        }
+        return cartList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+   
+    @Override
+    public ArrayList<String[]> getUsername()throws RemoteException{
+        try {
+            ArrayList<String[]> nameList = new ArrayList<>();
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT USERNAME from ACCOUNT where ID = "+UserId+"";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                String uname = rs.getString("USERNAME");
+                String[] nameData = {uname};
+                nameList.add(nameData);
+            }
+        return nameList;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public String clearCart() throws RemoteException{
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            Statement stmt = conn.createStatement();
+            String sql = "Delete from CART where USER_ID = "+UserId+"";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "success";
+    }
+    
 }

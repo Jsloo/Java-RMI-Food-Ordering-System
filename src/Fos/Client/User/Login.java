@@ -247,7 +247,6 @@ public class Login extends javax.swing.JFrame {
             String nam = name.getText();
             String pass = password.getText();
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Login");
-            
             String result = dbi.Login(nam,pass);
             
             if (null != result)switch (result) {

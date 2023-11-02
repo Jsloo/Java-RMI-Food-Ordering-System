@@ -21,6 +21,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         pack();
         setLocationRelativeTo(null);
+        showUsername();
         showMenu();
     }
 
@@ -36,11 +37,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        cart = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
         menu_panel = new javax.swing.JScrollPane();
         menu_panel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        logOut = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(1000, 300));
@@ -104,10 +105,16 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(jLabel2)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel5.setText("Cart");
+        cart.setFont(new java.awt.Font("Tahoma", 0, 27)); // NOI18N
+        cart.setText("Cart");
+        cart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cartMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,8 +126,8 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(33, 33, 33))
+                .addComponent(cart)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +139,13 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel5)))
+                        .addGap(32, 32, 32)
+                        .addComponent(cart)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel13.setText("Username");
+        nameLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        nameLabel.setText("Username");
 
         menu_panel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,7 +166,12 @@ public class Menu extends javax.swing.JFrame {
 
         menu_panel.setViewportView(menu_panel1);
 
-        jLabel4.setText("Log Out");
+        logOut.setText("Log Out");
+        logOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,24 +184,25 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(27, 27, 27)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(logOut, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel13))
-                .addGap(2, 2, 2)
-                .addComponent(jLabel4)
-                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addGap(4, 4, 4)
+                        .addComponent(logOut)
+                        .addGap(18, 18, 18)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menu_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
@@ -209,6 +222,22 @@ public class Menu extends javax.swing.JFrame {
 //        beverage.setVisible(true);
         
     }//GEN-LAST:event_goBeverageMenu
+
+    private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
+        try {
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/LogOut");
+        dbi.LogOut();
+        setVisible(false);
+        new Login().setVisible(true);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_logOutMouseClicked
+
+    private void cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMouseClicked
+        setVisible(false);
+        new Cart().setVisible(true);
+    }//GEN-LAST:event_cartMouseClicked
 
 
     public static void main(String args[]) {
@@ -234,7 +263,7 @@ public void showMenu(){
     Font priceFont = new Font("SansSerif", Font.PLAIN, 26);
         
     try {
-        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/displayMenu");
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/displayMenu");
         ArrayList<String[]>  result = dbi.displayMenu();
         for (String[] menuData : result) {
             
@@ -292,21 +321,34 @@ public void showMenu(){
         }
 }
 
+public void showUsername(){
+    try {
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/getUsername");
+        ArrayList<String[]>  result = dbi.getUsername();
+        for (String[] menuData : result) {
+            nameLabel.setText(menuData[0]);
+        }
+    }catch(Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
     
 //    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cart;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel logOut;
     private javax.swing.JScrollPane menu_panel;
     private javax.swing.JPanel menu_panel1;
+    private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
 }
