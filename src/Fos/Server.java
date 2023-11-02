@@ -1,38 +1,31 @@
 
 package Fos;
 
-import Fos.Client.User.Item_Popup;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
+import java.util.Base64;
+import static jdk.nashorn.tools.ShellFunctions.input;
 
 public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
         super();
     }
-    public Integer UserId;
+    public static Integer UserId;
     //user
     @Override
     public String Login(String nam, String pass)throws RemoteException{
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
             Statement t = conn.createStatement();
-            String script = "SELECT * from ACCOUNT where USERNAME = '" + nam + "' and PASSWORD = '" + pass + "'";
+            String encryptPass = Encrypt(pass);
+            String script = "SELECT * from ACCOUNT where USERNAME = '" + nam + "' and PASSWORD = '" + encryptPass + "'";
 
             ResultSet rs = t.executeQuery(script);
             boolean found = rs.next(); 
@@ -60,7 +53,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     public String Register(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException{
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
             conn.setAutoCommit(false); 
-
+            String encryptPass = Encrypt(pass);
             
             try (Statement statement = conn.createStatement()) {
                 String checkExist = "SELECT USERNAME FROM ACCOUNT WHERE USERNAME = '" + nam + "'";
@@ -73,7 +66,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
             try (Statement statement = conn.createStatement()) {
                 String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) " +
-                                "VALUES ('" + nam + "', '" + pass + "', 'user', " + age + ", '" + email + "', '" +
+                                "VALUES ('" + nam + "', '" + encryptPass + "', 'user', " + age + ", '" + email + "', '" +
                                 phonenum + "', '" + gender + "')";
                 statement.executeUpdate(script);
 
@@ -92,6 +85,21 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         return "LogOut Success!";
     }
     
+    
+    public String Encrypt(String password){
+        String hashCode = ""; 
+        try { 
+                MessageDigest md = MessageDigest.getInstance("SHA-256"); 
+                md.update( password.getBytes() ); 
+                byte[] hashBytes = md.digest(); 
+
+                hashCode = Base64.getEncoder().encodeToString(hashBytes); 
+
+        } catch (Exception e) { 
+                e.printStackTrace(); 
+        } 
+        return hashCode; 
+    }
     //admin
     
     @Override
