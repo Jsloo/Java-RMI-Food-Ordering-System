@@ -67,8 +67,6 @@ public class SignUp extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Year 3 Sem 1\\Distributed Computer Systems\\Ass\\FosRmi\\src\\icon\\icon1.png")); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 130, 140));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N

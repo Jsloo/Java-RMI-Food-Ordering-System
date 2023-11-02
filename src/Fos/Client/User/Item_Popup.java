@@ -1,12 +1,10 @@
 
 package Fos.Client.User;
 
-import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import Fos.FosInterface;
+import java.rmi.Naming;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Item_Popup extends javax.swing.JFrame {
@@ -20,7 +18,8 @@ public class Item_Popup extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
         cart(menu);
-        System.out.println(menu);
+        id = Integer.parseInt(menu[0]);
+
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -42,6 +41,7 @@ public class Item_Popup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(1250, 500));
+        setPreferredSize(new java.awt.Dimension(580, 750));
 
         item_details.setBackground(new java.awt.Color(255, 255, 255));
         item_details.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -144,13 +144,12 @@ public class Item_Popup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbutton1ActionPerformed
-//        Boolean add = true;
-//        displayPopup(menuID,add);
         try{
-            System.out.println("ID:"+id);
             value = (Integer) spinner_quantity.getValue();
-            System.out.println("Q:"+value);
-            addToCart(id, value);
+            addCart(id, value);
+            setVisible(false);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Add to Cart Successfully!");
         }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -164,7 +163,6 @@ public class Item_Popup extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
                 new Item_Popup(null).setVisible(true);
             }
         });
@@ -172,16 +170,21 @@ public class Item_Popup extends javax.swing.JFrame {
     
     public void cart(String[] menu){
         image.setIcon(new ImageIcon(menu[4]));
-//                image.setText(imagePath);
-            name.setText(menu[1]);
-            price.setText("Price: RM " +menu[2]);
+        name.setText(menu[1]);
+        price.setText("Price: RM " + menu[2]);
     }
     
-    public void addToCart(int id,int q) throws RemoteException{
+    public void addCart(int id, int value){
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/addToCart");
+            String run = dbi.addToCart(id, value);
+            System.out.println(run);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
         
-    
     }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel image;
     private javax.swing.JPanel item_details;
