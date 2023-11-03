@@ -154,7 +154,7 @@ public class Cart extends javax.swing.JFrame {
     private void placeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderActionPerformed
         try {
             setVisible(false);
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/clearCart");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
             dbi.clearCart();
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f,"Order Successfully!");
@@ -172,7 +172,7 @@ public class Cart extends javax.swing.JFrame {
     private void clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAllMouseClicked
         try {
             setVisible(false);
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/clearCart");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
             dbi.clearCart();
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f,"Clear Cart Successfully!");
@@ -202,7 +202,7 @@ public class Cart extends javax.swing.JFrame {
         Font priceFont = new Font("SansSerif", Font.PLAIN, 26);
 
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/showCart");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/showCart");
             ArrayList<String[]>  result = dbi.showCart();
             for (String[] cartData : result) {
 

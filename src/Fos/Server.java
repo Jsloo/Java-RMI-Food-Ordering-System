@@ -453,8 +453,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
         return null;
     }
-
-
     
     @Override
     public String addToCart(int id,int q)throws RemoteException{
