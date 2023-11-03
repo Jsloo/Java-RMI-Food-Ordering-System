@@ -444,7 +444,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-    
+
+
 public void showMenu(){
     int xPosition = 50; // Initial horizontal position
     int yPosition = 50; // Vertical position for labels
@@ -520,7 +521,7 @@ public void showUsername(){
         FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/getUsername");
         ArrayList<String[]>  result = dbi.getUsername();
         for (String[] menuData : result) {
-            nameLabel.setText(menuData[0]);
+            nameLabel.setText(" "+menuData[0]);
         }
     }catch(Exception e) {
         e.printStackTrace();

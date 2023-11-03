@@ -518,10 +518,24 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public String addToCart(int id,int q)throws RemoteException{
         try {
-        Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-        Statement stmt = conn.createStatement();
-        String sql = "Insert into CART (USER_ID, FOOD_ID, QUANTITY) values ("+UserId+", "+id+", "+q+")";
-        stmt.executeUpdate(sql);
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            Statement stmt = conn.createStatement();
+            String sql = "Select * from CART where USER_ID = "+ UserId +" and FOOD_ID = "+ id +"";
+            ResultSet rs = stmt.executeQuery(sql);
+                if (rs.next()) {
+                        Integer cid = rs.getInt("ID");
+                        Integer quantity = rs.getInt("QUANTITY");
+                       int total = quantity + q;
+                       Statement stmt1 = conn.createStatement();
+                       String sql1 = "Update CART Set QUANTITY = "+ total +" where ID = "+ cid +"";
+                       stmt1.executeUpdate(sql1);
+                    }
+            
+            else{
+                Statement stmt2 = conn.createStatement();
+                String sql2 = "Insert into CART (USER_ID, FOOD_ID, QUANTITY) values ("+UserId+", "+id+", "+ q +")";
+                stmt2.executeUpdate(sql2);
+            }
         } catch (Exception e) {
             return e.toString();
         }

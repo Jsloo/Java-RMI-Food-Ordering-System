@@ -291,7 +291,7 @@ public class Profile extends javax.swing.JFrame {
 
         btnregister.setBackground(new java.awt.Color(255, 255, 255));
         btnregister.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnregister.setText("Register");
+        btnregister.setText("Update");
         btnregister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnregisterActionPerformed(evt);
@@ -524,7 +524,7 @@ public void showUsername(){
         FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/getUsername");
         ArrayList<String[]>  result = dbi.getUsername();
         for (String[] menuData : result) {
-            nameLabel.setText(menuData[0]);
+            nameLabel.setText(" "+menuData[0]);
         }
     }catch(Exception e) {
         e.printStackTrace();
