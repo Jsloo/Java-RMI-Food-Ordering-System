@@ -2,7 +2,7 @@
 package Fos.Client.User;
 
 import Fos.FosInterface;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -11,10 +11,9 @@ import javax.swing.JOptionPane;
 
 import java.rmi.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
+import javax.swing.JPanel;
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
@@ -31,121 +30,161 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel9 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        cart = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        cart = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
+        logOut = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         menu_panel = new javax.swing.JScrollPane();
         menu_panel1 = new javax.swing.JPanel();
-        logOut = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setLocation(new java.awt.Point(1000, 300));
+        setMaximumSize(new java.awt.Dimension(1015, 630));
+        setMinimumSize(new java.awt.Dimension(1015, 630));
+        setPreferredSize(new java.awt.Dimension(1015, 630));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 68)); // NOI18N
-        jLabel1.setText("Menu");
-        jLabel1.setToolTipText("");
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setMaximumSize(new java.awt.Dimension(1010, 590));
+        jPanel4.setMinimumSize(new java.awt.Dimension(1010, 590));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1010, 590));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                goFoodMenu(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel3.setText("Food");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel3)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel3)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 204));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setPreferredSize(new java.awt.Dimension(87, 76));
+        jPanel3.setPreferredSize(new java.awt.Dimension(81, 51));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goBeverageMenu(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Beverage");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addContainerGap()
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cart.setFont(new java.awt.Font("Tahoma", 0, 27)); // NOI18N
-        cart.setText("Cart");
-        cart.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 130, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPanel2FocusLost(evt);
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cartMouseClicked(evt);
+                goFoodMenu(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cart)
-                .addContainerGap())
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setText("Food");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(19, 19, 19))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(cart)))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        nameLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 50));
+
+        cart.setBackground(new java.awt.Color(255, 255, 255));
+        cart.setForeground(new java.awt.Color(255, 255, 255));
+        cart.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cartFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cartFocusLost(evt);
+            }
+        });
+        cart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cartgoFoodMenu(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cart.png"))); // NOI18N
+
+        javax.swing.GroupLayout cartLayout = new javax.swing.GroupLayout(cart);
+        cart.setLayout(cartLayout);
+        cartLayout.setHorizontalGroup(
+            cartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(19, 19, 19))
+        );
+        cartLayout.setVerticalGroup(
+            cartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(cart, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 80, 50));
+
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 980, 90));
+
+        nameLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         nameLabel.setText("Username");
+        jPanel4.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+
+        logOut.setText("Log Out");
+        logOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutMouseClicked(evt);
+            }
+        });
+        jPanel4.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("Menu");
+        jLabel1.setToolTipText("");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         menu_panel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,56 +196,28 @@ public class Menu extends javax.swing.JFrame {
         menu_panel1.setLayout(menu_panel1Layout);
         menu_panel1Layout.setHorizontalGroup(
             menu_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         menu_panel1Layout.setVerticalGroup(
             menu_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1500, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         menu_panel.setViewportView(menu_panel1);
 
-        logOut.setText("Log Out");
-        logOut.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logOutMouseClicked(evt);
-            }
-        });
+        jPanel4.add(menu_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 980, 410));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(menu_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(logOut, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(nameLabel)
-                        .addGap(4, 4, 4)
-                        .addComponent(logOut)
-                        .addGap(18, 18, 18)))
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(menu_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 30, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,10 +245,26 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logOutMouseClicked
 
-    private void cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMouseClicked
+    private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
+      
+    }//GEN-LAST:event_jPanel2FocusGained
+
+    private void jPanel2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusLost
+        
+    }//GEN-LAST:event_jPanel2FocusLost
+
+    private void cartFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cartFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cartFocusGained
+
+    private void cartFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cartFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cartFocusLost
+
+    private void cartgoFoodMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartgoFoodMenu
         setVisible(false);
         new Cart().setVisible(true);
-    }//GEN-LAST:event_cartMouseClicked
+    }//GEN-LAST:event_cartgoFoodMenu
 
 
     public static void main(String args[]) {
@@ -259,62 +286,64 @@ public void showMenu(){
     int maxItemsPerRow = 3; // Maximum items per row
     int itemCounter = 0; // Counter to track items in the current row
 
-    Font nameFont = new Font("Tahoma", Font.PLAIN, 30); // Adjust the font size here
-    Font priceFont = new Font("SansSerif", Font.PLAIN, 26);
+    Font nameFont = new Font("Tahoma", Font.BOLD, 30); // Adjust the font size here
+    Font priceFont = new Font("SansSerif", Font.BOLD, 26);
         
     try {
-        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/displayMenu");
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/displayMenu");
         ArrayList<String[]>  result = dbi.displayMenu();
+
         for (String[] menuData : result) {
             
-            // Create a JLabel for the image
+            JPanel greenPanel = new JPanel();
+            greenPanel.setBackground(new java.awt.Color(0,102,102));
+            greenPanel.setLayout(null); // Set layout to null for absolute positioning
+
+            // Create image label
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(menuData[4]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
             JLabel imageLabel = new JLabel(imageIcon);
-            imageLabel.setBounds(xPosition, yPosition, 250, 250);
+            imageLabel.setBounds(0, 0, 250, 250);
+            greenPanel.add(imageLabel); // Add image label to the green panel
 
-            // Create a JLabel for the name
+            // Create name label
             JLabel nameLabel = new JLabel(menuData[1]);
-            nameLabel.setBounds(xPosition, yPosition + 265, 250, 30);
-            nameLabel.setFont(nameFont); // Set the font for the name label
+            nameLabel.setBounds(10, 255, 230, 30);
+            nameLabel.setFont(nameFont);
+            nameLabel.setForeground(Color.WHITE);
+            greenPanel.add(nameLabel); // Add name label to the green panel
 
-            // Create a JLabel for the price
+            // Create price label
             JLabel priceLabel = new JLabel("Price: RM " + menuData[2]);
-            priceLabel.setBounds(xPosition, yPosition + 300, 250, 30);
-            priceLabel.setFont(priceFont); // Set the font for the price label
+            priceLabel.setBounds(10, 290, 230, 30);
+            priceLabel.setForeground(Color.WHITE);
+            priceLabel.setFont(priceFont);
+            greenPanel.add(priceLabel); // Add price label to the green panel
 
-            // Add labels to the menu_panel
-            menu_panel1.add(imageLabel);
-            menu_panel1.add(nameLabel);
-            menu_panel1.add(priceLabel);
-
-            // Add a MouseListener to the image label
+            // Add MouseListener to the image label
             imageLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Handle the click event
                     System.out.println("Clicked on menu with ID: " + menuData[0]);
                     Item_Popup item = new Item_Popup(menuData);
-//                    System.out.println(Arrays.deepToString(menuData));
-
                     item.setVisible(true);
-                    // You can perform actions based on the menuID
                 }
             });
 
-            // Increment the item counter
-            itemCounter++;
+            // Set position and size of the green panel
+            greenPanel.setBounds(xPosition, yPosition, 250, 320);
 
-            // If the maximum items per row is reached, move to the next row
+            // Add the green panel to menu_panel1
+            menu_panel1.add(greenPanel);
+
+            // Increment the item counter and update positions
+            itemCounter++;
             if (itemCounter >= maxItemsPerRow) {
-                itemCounter = 0; // Reset item counter
-                xPosition = 50; // Reset horizontal position
-                yPosition += 350; // Adjust the vertical gap between rows as needed
+                itemCounter = 0;
+                xPosition = 50;
+                yPosition += 350;
             } else {
-                // Adjust horizontal position for the next menu item in the same row
-                xPosition += 300; // Increase as needed to create a gap between menu items in the same row
+                xPosition += 300;
             }
-            menu_panel.setPreferredSize(new Dimension(50, 200));
-            menu_panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         }
     }catch(Exception e) {
             e.printStackTrace();
@@ -338,14 +367,16 @@ public void showUsername(){
 //    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cart;
+    private javax.swing.JPanel cart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel logOut;
     private javax.swing.JScrollPane menu_panel;
     private javax.swing.JPanel menu_panel1;

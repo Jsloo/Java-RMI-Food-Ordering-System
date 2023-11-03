@@ -2,6 +2,7 @@
 package Fos.Client.User;
 
 import Fos.FosInterface;
+import java.awt.Image;
 import java.rmi.Naming;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -30,120 +31,96 @@ public class Item_Popup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        item_details = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jbutton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        spinner_quantity = new javax.swing.JSpinner();
+        back = new javax.swing.JButton();
         image = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         price = new javax.swing.JLabel();
-        spinner_quantity = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jbutton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(1250, 500));
-        setPreferredSize(new java.awt.Dimension(580, 750));
+        setMaximumSize(new java.awt.Dimension(450, 560));
+        setMinimumSize(new java.awt.Dimension(450, 560));
+        setPreferredSize(new java.awt.Dimension(450, 560));
 
-        item_details.setBackground(new java.awt.Color(255, 255, 255));
-        item_details.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(450, 488));
+        jPanel1.setMinimumSize(new java.awt.Dimension(450, 488));
+        jPanel1.setName(""); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(450, 488));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jbutton2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jbutton2.setText("Add to Cart");
+        jbutton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbutton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbutton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Quantity : ");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+
+        spinner_quantity.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        spinner_quantity.setValue(1);
+        jPanel2.add(spinner_quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 60, 40));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 450, 140));
+
+        back.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        image.setMaximumSize(new java.awt.Dimension(250, 250));
+        image.setMinimumSize(new java.awt.Dimension(250, 250));
+        image.setPreferredSize(new java.awt.Dimension(250, 250));
+        jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        name.setFont(new java.awt.Font("Tahoma", 0, 40)); // NOI18N
+        name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         name.setText("jLabel4");
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
-        price.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        price.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         price.setText("jLabel5");
-
-        javax.swing.GroupLayout item_detailsLayout = new javax.swing.GroupLayout(item_details);
-        item_details.setLayout(item_detailsLayout);
-        item_detailsLayout.setHorizontalGroup(
-            item_detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(item_detailsLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(item_detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name)
-                    .addComponent(image)
-                    .addGroup(item_detailsLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(price)))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-        item_detailsLayout.setVerticalGroup(
-            item_detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(item_detailsLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(image)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(name)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(price)
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
-
-        spinner_quantity.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        spinner_quantity.setValue(1);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel1.setText("Back");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                back_page(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel2.setText("Quantity : ");
-
-        jbutton1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jbutton1.setText("Add to Cart");
-        jbutton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbutton1ActionPerformed(evt);
-            }
-        });
+        jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(item_details, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(jLabel2)
-                        .addGap(1, 1, 1)
-                        .addComponent(spinner_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jbutton1)))
-                .addContainerGap(108, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addComponent(item_details, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(spinner_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jbutton1)
-                .addContainerGap(98, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbutton1ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+       setVisible(false);
+    }//GEN-LAST:event_backActionPerformed
+
+    private void jbutton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbutton2ActionPerformed
         try{
             value = (Integer) spinner_quantity.getValue();
             addCart(id, value);
@@ -151,13 +128,9 @@ public class Item_Popup extends javax.swing.JFrame {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f,"Add to Cart Successfully!");
         }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jbutton1ActionPerformed
-
-    private void back_page(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back_page
-        setVisible(false);
-    }//GEN-LAST:event_back_page
+    }//GEN-LAST:event_jbutton2ActionPerformed
 
     public static void main(String args[]) {
 
@@ -169,7 +142,12 @@ public class Item_Popup extends javax.swing.JFrame {
     }
     
     public void cart(String[] menu){
-        image.setIcon(new ImageIcon(menu[4]));
+//        image.setIcon(new ImageIcon(menu[4]));
+        ImageIcon originalIcon = new ImageIcon(menu[4]);
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        image.setIcon(scaledIcon);
         name.setText(menu[1]);
         price.setText("Price: RM " + menu[2]);
     }
@@ -186,11 +164,12 @@ public class Item_Popup extends javax.swing.JFrame {
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JLabel image;
-    private javax.swing.JPanel item_details;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton jbutton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbutton2;
     private javax.swing.JLabel name;
     private javax.swing.JLabel price;
     private javax.swing.JSpinner spinner_quantity;
