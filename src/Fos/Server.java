@@ -80,6 +80,67 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     }  
     
     @Override
+    public ArrayList<String> GetProfile()throws RemoteException{
+        ArrayList<String> data = new ArrayList<>();
+        System.out.println(UserId);
+        try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
+            
+            try (Statement statement = conn.createStatement()) {
+                String checkExist = "SELECT * FROM ACCOUNT WHERE ID = " + UserId + "";
+                ResultSet resultSet = statement.executeQuery(checkExist);
+
+                if (resultSet.next()) {
+                    String Name = resultSet.getString("USERNAME");
+                    String Email = resultSet.getString("EMAIL");
+                    String Gender = resultSet.getString("GENDER");
+                    String Phone = resultSet.getString("PHONE");
+                    Integer Age = resultSet.getInt("AGE");
+                    
+                    data.add(Name);
+                    data.add(Email);
+                    data.add(Gender);
+                    data.add(Phone);
+                    data.add(String.valueOf(Age));
+                }
+            } 
+
+            
+        } catch (Exception e) {
+            
+            data.add(e.toString());
+        }  
+        System.out.println(Arrays.toString(data.toArray()));
+        return data;
+    }  
+    
+    @Override
+    public String UpdateProfile(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException{
+        try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
+            String updateQuery = "UPDATE ACCOUNT SET USERNAME='" + nam + "', AGE=" + age + ", EMAIL='" + email + "', PHONE='" +
+             phonenum + "', GENDER='" + gender + "'";
+            if (pass != null) {
+                updateQuery += ", PASSWORD='" + Encrypt(pass) + "'";
+                System.out.println(pass);
+            System.out.println(Encrypt(pass));
+            }
+            
+            updateQuery += " WHERE ID=" + UserId;
+
+            try (Statement statement = conn.createStatement()) {
+                int rowsAffected = statement.executeUpdate(updateQuery);
+                if (rowsAffected > 0) {
+                    return "Profile updated successfully!";
+                } else {
+                    return "Failed to update profile. Please try again.";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error occurred while updating profile: " + e.getMessage();
+        }
+    }  
+    
+    @Override
     public String LogOut()throws RemoteException{
         UserId = 0;
         return "LogOut Success!";

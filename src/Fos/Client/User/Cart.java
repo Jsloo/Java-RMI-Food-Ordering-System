@@ -31,16 +31,15 @@ public class Cart extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         cart_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         clearAll = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         back = new javax.swing.JLabel();
         placeOrder = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(1015, 630));
-        setMaximumSize(new java.awt.Dimension(1015, 630));
-        setPreferredSize(new java.awt.Dimension(1015, 630));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -67,14 +66,10 @@ public class Cart extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(cart_panel);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 980, 410));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 980, 360));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setText("Order Items");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 11, -1, -1));
 
         clearAll.setFont(new java.awt.Font("Tahoma", 1, 27)); // NOI18N
         clearAll.setText("Clear All");
@@ -84,6 +79,12 @@ public class Cart extends javax.swing.JFrame {
             }
         });
         jPanel1.add(clearAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(849, 20, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_small.png"))); // NOI18N
+        jLabel5.setText(" BB BreakFast");
+        jLabel5.setToolTipText("");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1000, -1));
 
@@ -111,6 +112,10 @@ public class Cart extends javax.swing.JFrame {
         jPanel3.add(placeOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 280, 60));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 1010, 80));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setText("Order Items");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, -1));
 
@@ -222,6 +227,7 @@ public class Cart extends javax.swing.JFrame {
     private javax.swing.JPanel cart_panel;
     private javax.swing.JLabel clearAll;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

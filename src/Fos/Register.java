@@ -18,6 +18,8 @@ public class Register {
         reg.rebind("getUsername", new Server());
 //        reg.rebind("updateCart", new Server());
         reg.rebind("clearCart", new Server());
+        reg.rebind("GetProfile", new Server());
+        reg.rebind("UpdateProfile", new Server());
         
         //admin
         reg.rebind("Report", new Server());

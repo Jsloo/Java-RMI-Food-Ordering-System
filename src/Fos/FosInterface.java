@@ -22,6 +22,8 @@ public interface FosInterface extends Remote{
     public ArrayList<String[]> getUsername()throws RemoteException;
 //    public String updateCart()throws RemoteException;
     public String clearCart()throws RemoteException;
+    public ArrayList<String> GetProfile()throws RemoteException;
+    public String UpdateProfile(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException;
     
     //Admin
     public ArrayList<String> Report()throws RemoteException;

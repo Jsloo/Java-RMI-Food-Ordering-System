@@ -15,11 +15,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 public class Menu extends javax.swing.JFrame {
-
+    
+    public boolean drop = false;
     public Menu() {
         initComponents();
         pack();
         setLocationRelativeTo(null);
+        dropdown.setVisible(false);
         showUsername();
         showMenu();
     }
@@ -31,6 +33,13 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        dropdown = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        EditProfile = new javax.swing.JPanel();
+        nameLabel2 = new javax.swing.JLabel();
+        logOut = new javax.swing.JPanel();
+        logout = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -38,11 +47,10 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cart = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        logOut = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         menu_panel = new javax.swing.JScrollPane();
         menu_panel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -56,6 +64,68 @@ public class Menu extends javax.swing.JFrame {
         jPanel4.setMinimumSize(new java.awt.Dimension(1010, 590));
         jPanel4.setPreferredSize(new java.awt.Dimension(1010, 590));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nameLabel.setBackground(new java.awt.Color(255, 255, 255));
+        nameLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        nameLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
+        nameLabel.setText("Username");
+        nameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nameLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nameLabelMouseExited(evt);
+            }
+        });
+        jPanel4.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, -1, -1));
+
+        dropdown.setBackground(new java.awt.Color(255, 255, 255));
+        dropdown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dropdownMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dropdownMouseExited(evt);
+            }
+        });
+        dropdown.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditProfile.setBackground(new java.awt.Color(255, 255, 255));
+        EditProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditProfileMouseClicked(evt);
+            }
+        });
+        EditProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nameLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        nameLabel2.setText("Edit Profile");
+        EditProfile.add(nameLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jPanel5.add(EditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 170, 50));
+
+        logOut.setBackground(new java.awt.Color(255, 255, 255));
+        logOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutMouseClicked(evt);
+            }
+        });
+        logOut.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        logout.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        logout.setText("Log Out");
+        logOut.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        jPanel5.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 50));
+
+        dropdown.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 120));
+
+        jPanel4.add(dropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 190, 170));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setForeground(new java.awt.Color(255, 255, 204));
@@ -89,7 +159,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 130, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 130, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,7 +197,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 80, 50));
 
         cart.setBackground(new java.awt.Color(255, 255, 255));
         cart.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,24 +237,13 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.add(cart, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 80, 50));
 
-        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 980, 90));
-
-        nameLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        nameLabel.setText("Username");
-        jPanel4.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
-
-        logOut.setText("Log Out");
-        logOut.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logOutMouseClicked(evt);
-            }
-        });
-        jPanel4.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, -1));
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Menu");
         jLabel1.setToolTipText("");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 980, 90));
 
         menu_panel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -207,6 +266,12 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel4.add(menu_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 980, 410));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_small.png"))); // NOI18N
+        jLabel5.setText(" BB BreakFast");
+        jLabel5.setToolTipText("");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,9 +280,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -233,17 +296,6 @@ public class Menu extends javax.swing.JFrame {
 //        beverage.setVisible(true);
         
     }//GEN-LAST:event_goBeverageMenu
-
-    private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
-        try {
-        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/LogOut");
-        dbi.LogOut();
-        setVisible(false);
-        new Login().setVisible(true);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_logOutMouseClicked
 
     private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
       
@@ -265,6 +317,48 @@ public class Menu extends javax.swing.JFrame {
         setVisible(false);
         new Cart().setVisible(true);
     }//GEN-LAST:event_cartgoFoodMenu
+
+    private void nameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseClicked
+        if (drop == false){
+            dropdown.setVisible(true);
+            drop = true;
+        }else{
+            dropdown.setVisible(false);
+            drop = false;
+        }
+    }//GEN-LAST:event_nameLabelMouseClicked
+
+    private void nameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseEntered
+
+    }//GEN-LAST:event_nameLabelMouseEntered
+
+    private void nameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseExited
+        
+    }//GEN-LAST:event_nameLabelMouseExited
+
+    private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/LogOut");
+            dbi.LogOut();
+            setVisible(false);
+            new Login().setVisible(true);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_logOutMouseClicked
+
+    private void dropdownMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropdownMouseEntered
+
+    }//GEN-LAST:event_dropdownMouseEntered
+
+    private void dropdownMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropdownMouseExited
+
+    }//GEN-LAST:event_dropdownMouseExited
+
+    private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked
+        setVisible(false);
+        new Profile().setVisible(true);
+    }//GEN-LAST:event_EditProfileMouseClicked
 
 
     public static void main(String args[]) {
@@ -367,19 +461,25 @@ public void showUsername(){
 //    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel EditProfile;
     private javax.swing.JPanel cart;
+    private javax.swing.JPanel dropdown;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel logOut;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel logOut;
+    private javax.swing.JLabel logout;
     private javax.swing.JScrollPane menu_panel;
     private javax.swing.JPanel menu_panel1;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel nameLabel2;
     // End of variables declaration//GEN-END:variables
 }
