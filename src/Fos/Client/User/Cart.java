@@ -112,6 +112,7 @@ public class Cart extends javax.swing.JFrame {
         });
         jPanel3.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 53));
 
+        placeOrder.setBackground(new java.awt.Color(255, 255, 255));
         placeOrder.setMaximumSize(new java.awt.Dimension(245, 53));
         placeOrder.setMinimumSize(new java.awt.Dimension(245, 53));
         placeOrder.setPreferredSize(new java.awt.Dimension(245, 53));

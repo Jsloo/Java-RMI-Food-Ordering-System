@@ -468,7 +468,7 @@ public void showMenu(){
             // Create image label
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(menuData[4]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
             JLabel imageLabel = new JLabel(imageIcon);
-            imageLabel.setBounds(0, 0, 250, 250);
+            imageLabel.setBounds(5, 5, 240, 240);
             greenPanel.add(imageLabel); // Add image label to the green panel
 
             // Create name label
@@ -486,17 +486,30 @@ public void showMenu(){
             greenPanel.add(priceLabel); // Add price label to the green panel
 
             // Add MouseListener to the image label
-            imageLabel.addMouseListener(new MouseAdapter() {
+            greenPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Clicked on menu with ID: " + menuData[0]);
                     Item_Popup item = new Item_Popup(menuData);
                     item.setVisible(true);
                 }
+                
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    greenPanel.setBackground(new java.awt.Color(0,153,153));
+                    imageLabel.setBounds(10, 10, 230, 230);
+                }
+                
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    greenPanel.setBackground(new java.awt.Color(0,102,102));
+                    
+                    imageLabel.setBounds(5, 5, 240, 240);
+                }
             });
 
             // Set position and size of the green panel
-            greenPanel.setBounds(xPosition, yPosition, 250, 320);
+            greenPanel.setBounds(xPosition, yPosition, 250, 330);
 
             // Add the green panel to menu_panel1
             menu_panel1.add(greenPanel);
