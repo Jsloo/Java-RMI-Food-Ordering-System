@@ -176,7 +176,7 @@ public class Item_Popup extends javax.swing.JFrame {
     
     public void addCart(int id, int value){
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/addToCart");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/addToCart");
             String run = dbi.addToCart(id, value);
             System.out.println(run);
         }catch(Exception e) {

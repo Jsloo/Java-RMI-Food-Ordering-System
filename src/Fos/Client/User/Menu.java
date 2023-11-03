@@ -225,7 +225,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
         try {
-        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/LogOut");
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/LogOut");
         dbi.LogOut();
         setVisible(false);
         new Login().setVisible(true);
@@ -323,7 +323,7 @@ public void showMenu(){
 
 public void showUsername(){
     try {
-        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2002/getUsername");
+        FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/getUsername");
         ArrayList<String[]>  result = dbi.getUsername();
         for (String[] menuData : result) {
             nameLabel.setText(menuData[0]);
