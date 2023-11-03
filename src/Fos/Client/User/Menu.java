@@ -41,9 +41,9 @@ public class Menu extends javax.swing.JFrame {
         logOut = new javax.swing.JPanel();
         logout = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        CatBeverage = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        CatFood = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         cart = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -67,6 +67,7 @@ public class Menu extends javax.swing.JFrame {
 
         nameLabel.setBackground(new java.awt.Color(255, 255, 255));
         nameLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         nameLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
         nameLabel.setText("Username");
         nameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,6 +101,12 @@ public class Menu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditProfileMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditProfileMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditProfileMouseExited(evt);
+            }
         });
         EditProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -113,6 +120,12 @@ public class Menu extends javax.swing.JFrame {
         logOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logOutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logOutMouseExited(evt);
             }
         });
         logOut.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,73 +144,85 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setPreferredSize(new java.awt.Dimension(81, 51));
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        CatBeverage.setBackground(new java.awt.Color(255, 255, 255));
+        CatBeverage.setPreferredSize(new java.awt.Dimension(81, 51));
+        CatBeverage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goBeverageMenu(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CatBeverageMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CatBeverageMouseExited(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Beverage");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout CatBeverageLayout = new javax.swing.GroupLayout(CatBeverage);
+        CatBeverage.setLayout(CatBeverageLayout);
+        CatBeverageLayout.setHorizontalGroup(
+            CatBeverageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CatBeverageLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        CatBeverageLayout.setVerticalGroup(
+            CatBeverageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CatBeverageLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 130, -1));
+        jPanel1.add(CatBeverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 130, -1));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+        CatFood.setBackground(new java.awt.Color(255, 255, 255));
+        CatFood.setForeground(new java.awt.Color(255, 255, 255));
+        CatFood.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel2FocusGained(evt);
+                CatFoodFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jPanel2FocusLost(evt);
+                CatFoodFocusLost(evt);
             }
         });
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        CatFood.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goFoodMenu(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CatFoodMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CatFoodMouseExited(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Food");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout CatFoodLayout = new javax.swing.GroupLayout(CatFood);
+        CatFood.setLayout(CatFoodLayout);
+        CatFoodLayout.setHorizontalGroup(
+            CatFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CatFoodLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(19, 19, 19))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        CatFoodLayout.setVerticalGroup(
+            CatFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CatFoodLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 80, 50));
+        jPanel1.add(CatFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 80, 50));
 
         cart.setBackground(new java.awt.Color(255, 255, 255));
         cart.setForeground(new java.awt.Color(255, 255, 255));
@@ -212,6 +237,12 @@ public class Menu extends javax.swing.JFrame {
         cart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cartgoFoodMenu(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cartMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cartMouseExited(evt);
             }
         });
 
@@ -297,13 +328,13 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_goBeverageMenu
 
-    private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
+    private void CatFoodFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CatFoodFocusGained
       
-    }//GEN-LAST:event_jPanel2FocusGained
+    }//GEN-LAST:event_CatFoodFocusGained
 
-    private void jPanel2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusLost
+    private void CatFoodFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CatFoodFocusLost
         
-    }//GEN-LAST:event_jPanel2FocusLost
+    }//GEN-LAST:event_CatFoodFocusLost
 
     private void cartFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cartFocusGained
         // TODO add your handling code here:
@@ -329,11 +360,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_nameLabelMouseClicked
 
     private void nameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseEntered
-
+        nameLabel.setForeground(new java.awt.Color(102,102,102));
     }//GEN-LAST:event_nameLabelMouseEntered
 
     private void nameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseExited
-        
+        nameLabel.setForeground(new java.awt.Color(0,0,0));
     }//GEN-LAST:event_nameLabelMouseExited
 
     private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
@@ -359,6 +390,46 @@ public class Menu extends javax.swing.JFrame {
         setVisible(false);
         new Profile().setVisible(true);
     }//GEN-LAST:event_EditProfileMouseClicked
+
+    private void logOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseEntered
+        logOut.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_logOutMouseEntered
+
+    private void logOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseExited
+        logOut.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_logOutMouseExited
+
+    private void EditProfileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseEntered
+        EditProfile.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_EditProfileMouseEntered
+
+    private void EditProfileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseExited
+        EditProfile.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_EditProfileMouseExited
+
+    private void CatFoodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatFoodMouseEntered
+        CatFood.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_CatFoodMouseEntered
+
+    private void CatFoodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatFoodMouseExited
+        CatFood.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_CatFoodMouseExited
+
+    private void CatBeverageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatBeverageMouseEntered
+        CatBeverage.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_CatBeverageMouseEntered
+
+    private void CatBeverageMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatBeverageMouseExited
+        CatBeverage.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_CatBeverageMouseExited
+
+    private void cartMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMouseEntered
+        cart.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_cartMouseEntered
+
+    private void cartMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMouseExited
+        cart.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_cartMouseExited
 
 
     public static void main(String args[]) {
@@ -461,6 +532,8 @@ public void showUsername(){
 //    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CatBeverage;
+    private javax.swing.JPanel CatFood;
     private javax.swing.JPanel EditProfile;
     private javax.swing.JPanel cart;
     private javax.swing.JPanel dropdown;
@@ -471,8 +544,6 @@ public void showUsername(){
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel logOut;

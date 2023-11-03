@@ -33,9 +33,11 @@ public class Cart extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         clearAll = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        clearAll1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         back = new javax.swing.JLabel();
-        placeOrder = new javax.swing.JButton();
+        placeOrder = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,13 +80,22 @@ public class Cart extends javax.swing.JFrame {
                 clearAllMouseClicked(evt);
             }
         });
-        jPanel1.add(clearAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(849, 20, -1, -1));
+        jPanel1.add(clearAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_small.png"))); // NOI18N
         jLabel5.setText(" BB BreakFast");
         jLabel5.setToolTipText("");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        clearAll1.setFont(new java.awt.Font("Tahoma", 1, 27)); // NOI18N
+        clearAll1.setText("Clear All");
+        clearAll1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearAll1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(clearAll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, -1, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1000, -1));
 
@@ -101,15 +112,27 @@ public class Cart extends javax.swing.JFrame {
         });
         jPanel3.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 53));
 
-        placeOrder.setBackground(new java.awt.Color(255, 153, 102));
-        placeOrder.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        placeOrder.setText("Place Order");
-        placeOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                placeOrderActionPerformed(evt);
+        placeOrder.setMaximumSize(new java.awt.Dimension(245, 53));
+        placeOrder.setMinimumSize(new java.awt.Dimension(245, 53));
+        placeOrder.setPreferredSize(new java.awt.Dimension(245, 53));
+        placeOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                placeOrderMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                placeOrderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                placeOrderMouseExited(evt);
             }
         });
-        jPanel3.add(placeOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 280, 60));
+        placeOrder.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("Place Order");
+        placeOrder.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+
+        jPanel3.add(placeOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, -1, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 1010, 80));
 
@@ -121,19 +144,6 @@ public class Cart extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void placeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderActionPerformed
-        try {
-            setVisible(false);
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
-            dbi.clearCart();
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f,"Order Successfully!");
-            new Menu().setVisible(true);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_placeOrderActionPerformed
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         setVisible(false);
@@ -152,6 +162,31 @@ public class Cart extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_clearAllMouseClicked
+
+    private void clearAll1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAll1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearAll1MouseClicked
+
+    private void placeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseClicked
+        try {
+            setVisible(false);
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
+            dbi.clearCart();
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Order Successfully!");
+            new Menu().setVisible(true);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_placeOrderMouseClicked
+
+    private void placeOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseEntered
+        placeOrder.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_placeOrderMouseEntered
+
+    private void placeOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseExited
+        placeOrder.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_placeOrderMouseExited
 
 
     public static void main(String args[]) {
@@ -226,12 +261,14 @@ public class Cart extends javax.swing.JFrame {
     private javax.swing.JLabel back;
     private javax.swing.JPanel cart_panel;
     private javax.swing.JLabel clearAll;
+    private javax.swing.JLabel clearAll1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton placeOrder;
+    private javax.swing.JPanel placeOrder;
     // End of variables declaration//GEN-END:variables
 }

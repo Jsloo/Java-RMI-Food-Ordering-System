@@ -190,7 +190,7 @@ public class Profile extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EditProfile.setBackground(new java.awt.Color(255, 255, 204));
+        EditProfile.setBackground(new java.awt.Color(204, 204, 204));
         EditProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nameLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -203,6 +203,12 @@ public class Profile extends javax.swing.JFrame {
         logOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logOutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logOutMouseExited(evt);
             }
         });
         logOut.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -407,6 +413,8 @@ public class Profile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtpasswordKeyReleased
 
+       
+    
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
         try{
             validateFields();
@@ -469,11 +477,11 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_logOutMouseClicked
 
     private void nameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseExited
-
+        nameLabel.setForeground(new java.awt.Color(0,0,0));
     }//GEN-LAST:event_nameLabelMouseExited
 
     private void nameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseEntered
-
+        nameLabel.setForeground(new java.awt.Color(102,102,102));
     }//GEN-LAST:event_nameLabelMouseEntered
 
     private void nameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseClicked
@@ -486,6 +494,14 @@ public class Profile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nameLabelMouseClicked
 
+    private void logOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseEntered
+        logOut.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_logOutMouseEntered
+
+    private void logOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseExited
+        logOut.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_logOutMouseExited
+ 
     
 
     public static void main(String args[]) {
