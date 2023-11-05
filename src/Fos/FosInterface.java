@@ -11,6 +11,7 @@ import java.util.ArrayList;
  *
  * @author User
  */
+
 public interface FosInterface extends Remote{
     //User
     public String Login(String nam, String pass)throws RemoteException;

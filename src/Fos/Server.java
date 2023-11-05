@@ -52,13 +52,11 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public String Register(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException{
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
-            conn.setAutoCommit(false); 
             String encryptPass = Encrypt(pass);
             
             try (Statement statement = conn.createStatement()) {
                 String checkExist = "SELECT USERNAME FROM ACCOUNT WHERE USERNAME = '" + nam + "'";
                 ResultSet resultSet = statement.executeQuery(checkExist);
-
                 if (resultSet.next()) {
                     return "Username already exists!";
                 }
@@ -69,8 +67,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                                 "VALUES ('" + nam + "', '" + encryptPass + "', 'user', " + age + ", '" + email + "', '" +
                                 phonenum + "', '" + gender + "')";
                 statement.executeUpdate(script);
-
-                conn.commit();
                 return "Register Successful!";
             } 
 
@@ -114,6 +110,15 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public String UpdateProfile(String nam, String pass, Integer age, String email, String phonenum, String gender)throws RemoteException{
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
+            try (Statement statement = conn.createStatement()) {
+                String checkExist = "SELECT USERNAME FROM ACCOUNT WHERE USERNAME = '" + nam + "' AND ID != " + UserId;
+                ResultSet resultSet = statement.executeQuery(checkExist);
+
+                if (resultSet.next()) {
+                    return "Username already exists!";
+                }
+            } 
+            
             String updateQuery = "UPDATE ACCOUNT SET USERNAME='" + nam + "', AGE=" + age + ", EMAIL='" + email + "', PHONE='" +
              phonenum + "', GENDER='" + gender + "'";
             if (pass != null) {

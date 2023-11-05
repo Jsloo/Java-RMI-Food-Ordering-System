@@ -377,9 +377,14 @@ public class SignUp extends javax.swing.JFrame {
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Register");
             String result = dbi.Register(name,password,age,email,phonenum,gender);
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
-            setVisible(false);
-            Login info = new Login();
-            info.setVisible(true);
+            
+            if (result.equals("Register Successful!")){
+                setVisible(false);
+                Login info = new Login();
+                info.setVisible(true);
+            }
+                
+            
 
         } catch (ValidationException ex) {
         } catch (Exception ex) {
