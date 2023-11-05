@@ -489,7 +489,6 @@ public void showMenu(){
             greenPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println("Clicked on menu with ID: " + menuData[0]);
                     Item_Popup item = new Item_Popup(menuData);
                     item.setVisible(true);
                 }
@@ -503,7 +502,6 @@ public void showMenu(){
                 @Override
                 public void mouseExited(MouseEvent e) {
                     greenPanel.setBackground(new java.awt.Color(0,102,102));
-                    
                     imageLabel.setBounds(5, 5, 240, 240);
                 }
             });

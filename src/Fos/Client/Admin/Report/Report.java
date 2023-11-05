@@ -184,7 +184,7 @@ public class Report extends javax.swing.JFrame {
         jLabel1.setText("ToTal revenue:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 153));
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("details");
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +246,7 @@ public class Report extends javax.swing.JFrame {
         txtTotalCus.setText("54");
         jPanel3.add(txtTotalCus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        btnAgePie.setBackground(new java.awt.Color(153, 255, 153));
+        btnAgePie.setBackground(new java.awt.Color(255, 255, 255));
         btnAgePie.setText("details");
         btnAgePie.setBorderPainted(false);
         btnAgePie.addActionListener(new java.awt.event.ActionListener() {
@@ -287,7 +287,7 @@ public class Report extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 290, 80));
 
-        jButton6.setBackground(new java.awt.Color(153, 255, 153));
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setText("details");
         jButton6.setBorderPainted(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -343,7 +343,7 @@ public class Report extends javax.swing.JFrame {
         txtTotalOrder.setText("203");
         jPanel4.add(txtTotalOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jButton4.setBackground(new java.awt.Color(153, 255, 153));
+        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setText("details");
         jButton4.setBorderPainted(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -402,6 +402,12 @@ public class Report extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel6MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel6MouseExited(evt);
+            }
         });
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -416,6 +422,12 @@ public class Report extends javax.swing.JFrame {
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel7MouseExited(evt);
             }
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -550,6 +562,22 @@ public class Report extends javax.swing.JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+        jPanel7.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_jPanel7MouseEntered
+
+    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+        jPanel7.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_jPanel7MouseExited
+
+    private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
+       jPanel6.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_jPanel6MouseEntered
+
+    private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
+        jPanel6.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_jPanel6MouseExited
 
     /**
      * @param args the command line arguments

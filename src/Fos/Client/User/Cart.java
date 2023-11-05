@@ -33,7 +33,6 @@ public class Cart extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         clearAll = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        clearAll1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         back = new javax.swing.JLabel();
         placeOrder = new javax.swing.JPanel();
@@ -79,23 +78,20 @@ public class Cart extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearAllMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearAllMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearAllMouseExited(evt);
+            }
         });
-        jPanel1.add(clearAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, -1, -1));
+        jPanel1.add(clearAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_small.png"))); // NOI18N
         jLabel5.setText(" BB BreakFast");
         jLabel5.setToolTipText("");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        clearAll1.setFont(new java.awt.Font("Tahoma", 1, 27)); // NOI18N
-        clearAll1.setText("Clear All");
-        clearAll1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearAll1MouseClicked(evt);
-            }
-        });
-        jPanel1.add(clearAll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, -1, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1000, -1));
 
@@ -108,6 +104,12 @@ public class Cart extends javax.swing.JFrame {
         back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 backMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backMouseExited(evt);
             }
         });
         jPanel3.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 53));
@@ -164,10 +166,6 @@ public class Cart extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clearAllMouseClicked
 
-    private void clearAll1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAll1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearAll1MouseClicked
-
     private void placeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseClicked
         try {
             setVisible(false);
@@ -188,6 +186,22 @@ public class Cart extends javax.swing.JFrame {
     private void placeOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseExited
         placeOrder.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_placeOrderMouseExited
+
+    private void backMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseEntered
+        back.setForeground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_backMouseEntered
+
+    private void backMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseExited
+       back.setForeground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_backMouseExited
+
+    private void clearAllMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAllMouseEntered
+        clearAll.setForeground(new java.awt.Color(102,102,102));
+    }//GEN-LAST:event_clearAllMouseEntered
+
+    private void clearAllMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAllMouseExited
+        clearAll.setForeground(new java.awt.Color(0,0,0));
+    }//GEN-LAST:event_clearAllMouseExited
 
 
     public static void main(String args[]) {
@@ -262,7 +276,6 @@ public class Cart extends javax.swing.JFrame {
     private javax.swing.JLabel back;
     private javax.swing.JPanel cart_panel;
     private javax.swing.JLabel clearAll;
-    private javax.swing.JLabel clearAll1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

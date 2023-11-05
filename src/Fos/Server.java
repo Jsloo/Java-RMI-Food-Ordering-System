@@ -82,7 +82,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public ArrayList<String> GetProfile()throws RemoteException{
         ArrayList<String> data = new ArrayList<>();
-        System.out.println(UserId);
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
             
             try (Statement statement = conn.createStatement()) {
@@ -109,7 +108,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             
             data.add(e.toString());
         }  
-        System.out.println(Arrays.toString(data.toArray()));
         return data;
     }  
     
@@ -120,8 +118,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
              phonenum + "', GENDER='" + gender + "'";
             if (pass != null) {
                 updateQuery += ", PASSWORD='" + Encrypt(pass) + "'";
-                System.out.println(pass);
-            System.out.println(Encrypt(pass));
             }
             
             updateQuery += " WHERE ID=" + UserId;
@@ -438,10 +434,8 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
                 while (rs.next()) {
                     String ID = rs.getString("ID");
-                    
                     String[] orderData = {ID};
                     orderIdList.add(orderData);
-                    System.out.println(ID);
                 }
                 
                 return orderIdList;

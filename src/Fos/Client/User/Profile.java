@@ -378,7 +378,7 @@ public class Profile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtusernameActionPerformed
 
     private void txtusernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyReleased
@@ -386,7 +386,7 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusernameKeyReleased
 
     private void txtageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtageActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtageActionPerformed
 
     private void txtageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtageKeyReleased
@@ -394,7 +394,7 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_txtageKeyReleased
 
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtemailActionPerformed
 
     private void txtemailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyReleased
@@ -402,7 +402,7 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_txtemailKeyReleased
 
     private void txtphonenumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtphonenumActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtphonenumActionPerformed
 
     private void txtphonenumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtphonenumKeyReleased
@@ -432,9 +432,8 @@ public class Profile extends javax.swing.JFrame {
             String result = dbi.UpdateProfile(name,password,age,email,phonenum,gender);
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
-            Login info = new Login();
+            Menu info = new Menu();
             info.setVisible(true);
-
         } catch (ValidationException ex) {
             
         }catch (Exception ex) {
