@@ -72,6 +72,7 @@ public class Item_Popup extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
         spinner_quantity.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        spinner_quantity.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spinner_quantity.setValue(1);
         jPanel2.add(spinner_quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 60, 40));
 
