@@ -44,33 +44,37 @@ public class Manage_Order extends javax.swing.JFrame {
         }
     }
 
-    public void ShowOrderTable(){
-        
-         try {
+    public void ShowOrderTable() {
+        try {
             String ID = combo_box_id.getSelectedItem().toString();
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/ViewOrderHistoryItem");
-            ArrayList<ArrayList<String>> result = dbi.ViewOrderHistoryItem(ID);
+            FosInterface dbi = (FosInterface) Naming.lookup("rmi://localhost:2000/ViewOrderHistoryItem");
+            ArrayList<Object> result = dbi.ViewOrderHistoryItem(ID);
             DefaultTableModel menuTable = (DefaultTableModel) Order_Table.getModel();
             menuTable.setRowCount(0);
 
-            for (int i = 1; i < result.size(); i++) {
-                ArrayList<String> row = result.get(i);
-                Object[] menu = new Object[] { row.get(0), row.get(1), row.get(2) };
-                menuTable.addRow(menu);
+            if (!result.isEmpty() && result.get(0) instanceof Object[]) {
+                Object[] orderDetails = (Object[]) result.get(0);
+
+                Label_Status.setText((String) orderDetails[2]);
+                Label_Payment.setText((String) orderDetails[1]);
+                Label_Amount.setText("RM " + orderDetails[0]);
+
+                for (int i = 1; i < result.size(); i++) {
+                    Object row = result.get(i);
+                    if (row instanceof Object[]) {
+                        Object[] menuRow = (Object[]) row;
+                        Object[] menu = new Object[]{menuRow[0], menuRow[1], menuRow[2]};
+                        menuTable.addRow(menu);
+                    }
+                }
             }
 
             Label_Number_Item.setText(Integer.toString(Order_Table.getRowCount()));
-
-            if (result.get(0).size() > 0) {
-                ArrayList<String> orderDetails = result.get(0);
-                Label_Status.setText(orderDetails.get(2));    // Status
-                Label_Payment.setText(orderDetails.get(1));   // Payment Method
-                Label_Amount.setText("RM "+orderDetails.get(0));    // Total Amount
-            }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

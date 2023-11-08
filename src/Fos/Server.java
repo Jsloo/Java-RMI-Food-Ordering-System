@@ -455,34 +455,33 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
         return null;
     }
-        
+       
     @Override
-    public ArrayList<ArrayList<String>> ViewOrderHistoryItem(String ID) throws RemoteException {
+    public ArrayList<Object> ViewOrderHistoryItem(String ID) throws RemoteException {
         try {
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            ArrayList<ArrayList<String>> result = new ArrayList<>();
+            ArrayList<Object> result = new ArrayList<>();
 
-            String QUERY1 = "SELECT TOTAL_AMOUNT, PAYMENT_METHOD, STATUS FROM ORDER_HISTORY WHERE ID = "+ID+"";
+            String QUERY1 = "SELECT TOTAL_AMOUNT, PAYMENT_METHOD, STATUS FROM ORDER_HISTORY WHERE ID = " + ID;
             PreparedStatement t = conn.prepareStatement(QUERY1);
             ResultSet orderHistoryResults = t.executeQuery();
 
-            ArrayList<String> orderDetails = new ArrayList<>();
+            Object[] orderDetails = new Object[3];
 
             while (orderHistoryResults.next()) {
                 int amount = orderHistoryResults.getInt("TOTAL_AMOUNT");
                 String payment = orderHistoryResults.getString("PAYMENT_METHOD");
                 String status = orderHistoryResults.getString("STATUS");
-                orderDetails.add(String.valueOf(amount));
-                orderDetails.add(payment);
-                orderDetails.add(status);
+                orderDetails[0] = amount;
+                orderDetails[1] = payment;
+                orderDetails[2] = status;
             }
 
-            String sql = "SELECT MENU_ID, QUANTITY FROM ORDER_HISTORY_ITEM WHERE ORDER_ID = "+ID+"";
+            String sql = "SELECT MENU_ID, QUANTITY FROM ORDER_HISTORY_ITEM WHERE ORDER_ID = " + ID;
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet orderHistoryItemResults = preparedStatement.executeQuery();
 
-            ArrayList<String> menuData;
-            ArrayList<ArrayList<String>> menuItems = new ArrayList<>();
+            ArrayList<Object[]> menuItems = new ArrayList<>();
 
             while (orderHistoryItemResults.next()) {
                 String menuID = orderHistoryItemResults.getString("MENU_ID");
@@ -494,12 +493,12 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 ResultSet menuResults = menuPreparedStatement.executeQuery();
 
                 while (menuResults.next()) {
-                    menuData = new ArrayList<>();
                     String name = menuResults.getString("NAME");
                     double price = menuResults.getDouble("PRICE");
-                    menuData.add(name);
-                    menuData.add(String.valueOf(price));
-                    menuData.add(String.valueOf(quantity));
+                    Object[] menuData = new Object[3];
+                    menuData[0] = name;
+                    menuData[1] = price;
+                    menuData[2] = quantity;
                     menuItems.add(menuData);
                 }
             }
@@ -514,6 +513,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
         return null;
     }
+
     
     @Override
     public String addToCart(int id,int q)throws RemoteException{

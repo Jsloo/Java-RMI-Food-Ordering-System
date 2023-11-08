@@ -150,7 +150,7 @@ public class Manage_Menu extends javax.swing.JFrame {
                 btnBrowserActionPerformed(evt);
             }
         });
-        panel1.add(btnBrowser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 70, -1));
+        panel1.add(btnBrowser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 110, -1));
 
         btnSave.setBackground(new java.awt.Color(255, 255, 204));
         btnSave.setText("Save");
@@ -284,6 +284,36 @@ public class Manage_Menu extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    private boolean validation(String name, String price, String category, String imagePath) {
+
+        if (name.isEmpty() || name.length() > 255) {
+            JOptionPane.showMessageDialog(null, "Name is required and must be less than 255 characters", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        try {
+            double parsedPrice = Double.parseDouble(price);
+            if (parsedPrice <= 0) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Price must be a valid positive number", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (category.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Category is required", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (imagePath == null || imagePath.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select an image", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
     private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("PNG JPG AND JPEG","png","jpeg","jpg");
@@ -307,46 +337,49 @@ public class Manage_Menu extends javax.swing.JFrame {
         String price = Textfield_price.getText();
         String imagePath = path;
 
-        if ( condition == false){
-            try {
-                
-                FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/SaveMenu");
-                String result = dbi.SaveMenu(imagePath,name,Double.parseDouble(price),category);
-               if (result.equals("success")){
-                   JOptionPane.showMessageDialog(null, "Menu Add Success", "success", JOptionPane.INFORMATION_MESSAGE);
-                   imgLabel.setIcon(null);
-                   Textfield_name.setText("");
-                   Textfield_price.setText("");
-                   ViewMenuTable();
-               }
-               else{
-                   JOptionPane.showMessageDialog(null, "Menu Add Fail", "error", JOptionPane.INFORMATION_MESSAGE);
-               }
-            } catch (Exception e) {
+        if (validation(name, price, category, imagePath)) {
+            if ( condition == false){
+                try {
 
-               e.printStackTrace();
+                    FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/SaveMenu");
+                    String result = dbi.SaveMenu(imagePath,name,Double.parseDouble(price),category);
+                   if (result.equals("success")){
+                       JOptionPane.showMessageDialog(null, "Menu Add Success", "success", JOptionPane.INFORMATION_MESSAGE);
+                       imgLabel.setIcon(null);
+                       Textfield_name.setText("");
+                       Textfield_price.setText("");
+                       ViewMenuTable();
+                   }
+                   else{
+                       JOptionPane.showMessageDialog(null, "Menu Add Fail", "error", JOptionPane.INFORMATION_MESSAGE);
+                   }
+                } catch (Exception e) {
+
+                   e.printStackTrace();
+                }
+
+            }else{
+                try {
+                    int selectedRow = Menu_Table.getSelectedRow();
+                    String id = Menu_Table.getValueAt(selectedRow, 3).toString();
+                    FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/UpdateMenu");
+                    String result = dbi.UpdateMenu(id,name,price,category,imagePath);
+                    if (result.equals("success")){
+                        JOptionPane.showMessageDialog(null, "Menu Update Success", "success", JOptionPane.INFORMATION_MESSAGE);
+                        imgLabel.setIcon(null);
+                        Textfield_name.setText("");
+                        Textfield_price.setText("");
+                        ViewMenuTable();                
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Menu Update Fail", "error", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }   
             }
-         
-        }else{
-            try {
-                int selectedRow = Menu_Table.getSelectedRow();
-                String id = Menu_Table.getValueAt(selectedRow, 3).toString();
-                FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/UpdateMenu");
-                String result = dbi.UpdateMenu(id,name,price,category,imagePath);
-                if (result.equals("success")){
-                    JOptionPane.showMessageDialog(null, "Menu Update Success", "success", JOptionPane.INFORMATION_MESSAGE);
-                    imgLabel.setIcon(null);
-                    Textfield_name.setText("");
-                    Textfield_price.setText("");
-                    ViewMenuTable();                
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Menu Update Fail", "error", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }   
         }
+        
         
         
 
