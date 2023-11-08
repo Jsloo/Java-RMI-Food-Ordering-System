@@ -36,5 +36,5 @@ public interface FosInterface extends Remote{
     public String DeleteMenu(String name)throws RemoteException;
     public String UpdateMenu(String id, String name, String price, String category,String imagePath) throws RemoteException;
     public ArrayList<String[]> ViewOrderId() throws RemoteException;
-    public ArrayList<ArrayList<String>> ViewOrderHistoryItem(String ID) throws RemoteException ;
+    public ArrayList<Object> ViewOrderHistoryItem(String ID) throws RemoteException ;
 }
