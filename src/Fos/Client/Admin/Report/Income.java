@@ -6,8 +6,13 @@
 package Fos.Client.Admin.Report;
 
 import Fos.FosInterface;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.rmi.Naming;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
@@ -20,22 +25,46 @@ import org.jfree.util.Rotation;
  * @author User
  */
 public class Income {
+    public String day;
+    public Income(String date){
+        day = date;
+    }
+    
     public PieDataset createDataset()
         {   
             DefaultPieDataset result = new DefaultPieDataset();
-            
-            try {
-                FosInterface dbi = (FosInterface) Naming.lookup("rmi://localhost:2000/RevenueReport");
-                ArrayList<String[]> resultData = dbi.RevenueReport();
+            try (Socket socket = new Socket("localhost", 4909);
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-                for (String[] row : resultData) {
+               String date = day;
+               out.writeObject(date);
+               out.flush();
+
+               ArrayList<String[]> resultData = (ArrayList<String[]>) in.readObject();
+
+               for (String[] row : resultData) {
                     String revenueGroup = row[0];
-                    int count = Integer.parseInt(row[1]);
+                    double count = Double.parseDouble(row[1]);
                     result.setValue(revenueGroup , count);
                 }
-            } catch (Exception e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+//            DefaultPieDataset result = new DefaultPieDataset();
+//            System.out.println(day);
+////            try {
+////                FosInterface dbi = (FosInterface) Naming.lookup("rmi://localhost:2000/RevenueReport");
+////                ArrayList<String[]> resultData = dbi.RevenueReport(day);
+////
+////                for (String[] row : resultData) {
+////                    String revenueGroup = row[0];
+////                    double count = Double.parseDouble(row[1]);
+////                    result.setValue(revenueGroup , count);
+////                }
+////            } catch (Exception e) {
+////                e.printStackTrace();
+////            }
              
             return result;
         }

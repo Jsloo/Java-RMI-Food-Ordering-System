@@ -94,11 +94,11 @@ public class Item_Popup extends javax.swing.JFrame {
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        name.setText("jLabel4");
+        name.setText("Name");
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         price.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        price.setText("jLabel5");
+        price.setText("Price");
         jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

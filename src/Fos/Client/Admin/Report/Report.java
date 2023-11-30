@@ -9,48 +9,76 @@ import Fos.Client.Admin.Manage_Menu;
 import Fos.Client.Admin.Manage_Order;
 import Fos.Client.User.Login;
 import Fos.FosInterface;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.rmi.Naming;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartPanel;
 
-/**
- *
- * @author User
- */
 public class Report extends javax.swing.JFrame {
-    /**
-     * Creates new form Report
-     */
 
     public Report() {
         initComponents();
         pack();
         setLocationRelativeTo(null);
+        revenueReport();
         
-        try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/AgeReport");
-            ArrayList<String[]>  result = dbi.AgeReport();
+        AgeReport objAge = new AgeReport();
+        objAge.start();
+        GenderReport objGender = new GenderReport();
+        objGender.start();
+        OrderReport objOrder = new OrderReport();
+        objOrder.start();
+        GeneralReport objGeneral = new GeneralReport();
+        objGeneral.start();
 
-            
-            DefaultTableModel model = (DefaultTableModel) ageTable.getModel();
+    }
 
-            int rowCountToDisplay = Math.min(result.size(), 3); // Get the minimum of 3 and the size of the result list
+    class AgeReport extends Thread{
+        public void age() throws InterruptedException
+        {
+            try {
+                FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/AgeReport");
+                ArrayList<String[]>  result = dbi.AgeReport();
 
-            for (int i = 0; i < rowCountToDisplay; i++) {
-                String[] row = result.get(i);
-                Object[] rowData = new Object[]{row[0], row[1]};
-                model.addRow(rowData);
+                DefaultTableModel model = (DefaultTableModel) ageTable.getModel();
+
+                int rowCountToDisplay = Math.min(result.size(), 3); 
+
+                for (int i = 0; i < rowCountToDisplay; i++) {
+                    String[] row = result.get(i);
+                    Object[] rowData = new Object[]{row[0], row[1]};
+                    model.addRow(rowData);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        
-        try {
+        @Override
+        public void run()
+        {
+            try {
+                age();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AgeReport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    class GenderReport extends Thread{
+        public void gender() throws InterruptedException
+        {
+            try {
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/GenderReport");
             ArrayList<String[]>  result = dbi.GenderReport();
 
@@ -70,31 +98,27 @@ public class Report extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/RevenueReport");
-            ArrayList<String[]>  result = dbi.RevenueReport();
-            
-            DefaultTableModel model = (DefaultTableModel) revenueTable.getModel();
-
-            int rowCountToDisplay = Math.min(result.size(), 3); 
-
-            for (int i = 0; i < rowCountToDisplay; i++) {
-                String[] row = result.get(i);
-                Object[] rowData = new Object[]{row[0], row[1]};
-                model.addRow(rowData);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        
-        try {
+        @Override
+        public void run()
+        {
+            try {
+                gender();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GenderReport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    class OrderReport extends Thread{
+        public void order() throws InterruptedException
+        {
+            try {
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/OrderReport");
             ArrayList<String[]>  result = dbi.OrderReport();
             
             DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-
+            model.setRowCount(0);
             int rowCountToDisplay = Math.min(result.size(), 3); 
 
             for (int i = 0; i < rowCountToDisplay; i++) {
@@ -106,8 +130,22 @@ public class Report extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        try{
+        }
+        @Override
+        public void run()
+        {
+            try {
+                order();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(OrderReport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    class GeneralReport extends Thread{
+        public void general() throws InterruptedException
+        {
+            try{
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Report");
             ArrayList<String> result = dbi.Report();
 
@@ -117,9 +155,17 @@ public class Report extends javax.swing.JFrame {
         }catch(Exception e){
             
         }
-        
+        }
+        @Override
+        public void run()
+        {
+            try {
+                general();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GeneralReport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,6 +184,7 @@ public class Report extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         revenueTable = new javax.swing.JTable();
+        revenueCombo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtTotalCus = new javax.swing.JLabel();
@@ -192,7 +239,7 @@ public class Report extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, 20));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 70, 20));
 
         txtTotalRevenue.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         txtTotalRevenue.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,6 +276,19 @@ public class Report extends javax.swing.JFrame {
         }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 260, 80));
+
+        revenueCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Today", "Week", "Month", "Year" }));
+        revenueCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                revenueComboItemStateChanged(evt);
+            }
+        });
+        revenueCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                revenueComboActionPerformed(evt);
+            }
+        });
+        jPanel2.add(revenueCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, -1));
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(470, 90, 420, 200);
@@ -473,6 +533,33 @@ public class Report extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void revenueReport(){
+        try (Socket socket = new Socket("localhost", 4909);
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+
+            String date = revenueCombo.getSelectedItem().toString();
+            out.writeObject(date);
+            out.flush();
+
+            ArrayList<String[]> result = (ArrayList<String[]>) in.readObject();
+
+            DefaultTableModel model = (DefaultTableModel) revenueTable.getModel();
+            model.setRowCount(0);
+            int rowCountToDisplay = Math.min(result.size(), 3); 
+
+            for (int i = 0; i < rowCountToDisplay; i++) {
+                String[] row = result.get(i);
+                Object[] rowData = new Object[]{row[0], row[1]};
+                model.addRow(rowData);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }       
+    }
+    
+
+    
     private void btnAgePieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgePieActionPerformed
         JFrame frame = new JFrame("Age Distribution Chart");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -537,7 +624,7 @@ public class Report extends javax.swing.JFrame {
         JFrame frame = new JFrame("Revenue Chart");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        Income revenueChart = new Income();
+        Income revenueChart = new Income(revenueCombo.getSelectedItem().toString());
         ChartPanel chartPanel = new ChartPanel(revenueChart.createChart(revenueChart.createDataset(), "Revenue"));
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
 
@@ -578,6 +665,14 @@ public class Report extends javax.swing.JFrame {
     private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
         jPanel6.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_jPanel6MouseExited
+
+    private void revenueComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_revenueComboActionPerformed
+
+    private void revenueComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_revenueComboItemStateChanged
+        revenueReport();
+    }//GEN-LAST:event_revenueComboItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -648,6 +743,7 @@ public class Report extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable orderTable;
+    private javax.swing.JComboBox<String> revenueCombo;
     private javax.swing.JTable revenueTable;
     private javax.swing.JLabel txtTotalCus;
     private javax.swing.JLabel txtTotalOrder;

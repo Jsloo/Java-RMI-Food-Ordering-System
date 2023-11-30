@@ -9,10 +9,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
-import static jdk.nashorn.tools.ShellFunctions.input;
 
 public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
@@ -226,27 +227,50 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     }
     
     @Override
-    public ArrayList<String[]> RevenueReport() throws RemoteException {
+    public ArrayList<String[]> RevenueReport(String date) throws RemoteException {
         ArrayList<String[]> revenueDataList = new ArrayList<>();
-
+        System.out.println(date);
+        Integer day = 0;
+        if (date.equals("Today")){
+            day = 0;
+        }else if(date.equals("Week")){
+            day = 6;
+        }else if(date.equals("Month")){
+            day = 30;
+        }else if(date.equals("Year")){
+            day = 364;
+        }
+        System.out.println(day);
+        
         try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
-            try (Statement t = conn.createStatement()) {
-                String revenueScript = "SELECT m.category, SUM(m.price) as total_revenue " +
-                                      "FROM order_history_item o " +
-                                      "JOIN menu m ON o.Menu_ID = m.id " +
-                                      "GROUP BY m.category " +
-                                      "ORDER BY total_revenue DESC ";
+            LocalDate todayDate = LocalDate.now(); // Start of the current week
+            System.out.println(todayDate);
+            LocalDate startDate = todayDate.minusDays(day); // End of the current week (Sunday)
+            System.out.println(startDate);
+            String revenueScript = "SELECT m.category, SUM(m.price * oi.quantity) as total_revenue " +
+                      "FROM order_history oh " +
+                      "JOIN order_history_item oi ON oh.id = oi.order_id " +
+                      "JOIN menu m ON oi.menu_id = m.id " +
+                       "WHERE oh.date BETWEEN '" + startDate + "' AND '" + todayDate + "' " +
+                      "GROUP BY m.category " +
+                      "ORDER BY total_revenue DESC";
+            
 
-                ResultSet RevenueResult = t.executeQuery(revenueScript);
-
+            try (PreparedStatement statement = conn.prepareStatement(revenueScript)) {
+                ResultSet RevenueResult = statement.executeQuery();
+                System.out.println(RevenueResult.next());
+                System.out.println(RevenueResult.next());
                 while (RevenueResult.next()) {
-                    String gender = RevenueResult.getString("CATEGORY");
-                    int count = RevenueResult.getInt("total_revenue");
-                    String[] data = { gender, String.valueOf(count) };
+                    System.out.println("www");
+                    String category = RevenueResult.getString("CATEGORY");
+                    double totalRevenue = RevenueResult.getDouble("total_revenue");
+                    String[] data = { category, String.valueOf(totalRevenue) };
                     revenueDataList.add(data);
+                    System.out.println(Arrays.deepToString(data));
+                    System.out.println("www");
                 }
             }
-        } catch (Exception e) {
+        }catch (Exception e) {
             String[] errorData = { "Error", e.toString() };
             revenueDataList.add(errorData);
         }
@@ -270,9 +294,9 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 ResultSet OrderResult = t.executeQuery(topOrderItemsScript);
 
                 while (OrderResult.next()) {
-                    String gender = OrderResult.getString("NAME");
+                    String order = OrderResult.getString("NAME");
                     int count = OrderResult.getInt("total_quantity");
-                    String[] data = { gender, String.valueOf(count) };
+                    String[] data = { order, String.valueOf(count) };
                     orderDataList.add(data);
                 }
             }
@@ -307,7 +331,9 @@ public class Server extends UnicastRemoteObject implements FosInterface {
                 ResultSet totalRevenueResult = t.executeQuery(totalRevenueScript);
 
                 if (totalRevenueResult.next()) {
-                    double totalRevenue = totalRevenueResult.getDouble("total_revenue");
+                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+  
+                    String totalRevenue = decimalFormat.format(totalRevenueResult.getDouble("total_revenue"));
 
                     reportDataList.add(String.valueOf(totalRevenue));
                 }
@@ -331,6 +357,8 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
         return reportDataList;
     }
+    
+    
 
     @Override
     public String DeleteMenu(String name) throws RemoteException{
