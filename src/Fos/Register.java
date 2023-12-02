@@ -6,7 +6,7 @@ import java.rmi.registry.LocateRegistry;
 
 public class Register {
     public static void main(String[] args) throws RemoteException{
-        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2000);
+        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2001);
         
         //user
         reg.rebind("Login", new Server());
@@ -15,6 +15,8 @@ public class Register {
         reg.rebind("displayMenu", new Server());
         reg.rebind("addToCart", new Server());
         reg.rebind("showCart", new Server());
+        reg.rebind("showOrderSummary", new Server());
+        reg.rebind("userViewOrderId", new Server());
         reg.rebind("getUsername", new Server());
 //        reg.rebind("updateCart", new Server());
         reg.rebind("clearCart", new Server());
