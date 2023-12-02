@@ -55,8 +55,6 @@ public class Manage_Order extends javax.swing.JFrame {
             if (!result.isEmpty() && result.get(0) instanceof Object[]) {
                 Object[] orderDetails = (Object[]) result.get(0);
 
-                Label_Status.setText((String) orderDetails[2]);
-                Label_Payment.setText((String) orderDetails[1]);
                 Label_Amount.setText("RM " + orderDetails[0]);
 
                 for (int i = 1; i < result.size(); i++) {

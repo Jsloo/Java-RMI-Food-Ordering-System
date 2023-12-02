@@ -489,19 +489,16 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
             ArrayList<Object> result = new ArrayList<>();
 
-            String QUERY1 = "SELECT TOTAL_AMOUNT, PAYMENT_METHOD, STATUS FROM ORDER_HISTORY WHERE ID = " + ID;
+            String QUERY1 = "SELECT TOTAL_AMOUNT FROM ORDER_HISTORY WHERE ID = " + ID;
             PreparedStatement t = conn.prepareStatement(QUERY1);
             ResultSet orderHistoryResults = t.executeQuery();
 
-            Object[] orderDetails = new Object[3];
+            Object[] orderDetails = new Object[1];
 
             while (orderHistoryResults.next()) {
                 int amount = orderHistoryResults.getInt("TOTAL_AMOUNT");
-                String payment = orderHistoryResults.getString("PAYMENT_METHOD");
-                String status = orderHistoryResults.getString("STATUS");
                 orderDetails[0] = amount;
-                orderDetails[1] = payment;
-                orderDetails[2] = status;
+    
             }
 
             String sql = "SELECT MENU_ID, QUANTITY FROM ORDER_HISTORY_ITEM WHERE ORDER_ID = " + ID;
