@@ -629,12 +629,12 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     }
     
     @Override
-    public ArrayList<String[]> showOrderSummary(String ID) throws RemoteException {
+    public ArrayList<String[]> showOrderSummary(Integer ID) throws RemoteException {
         try {
             ArrayList<String[]> orderList = new ArrayList<>();
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
             Statement stmt = conn.createStatement();
-            String sql = "SELECT m.IMAGE , m.NAME , m.PRICE , ohi.QUANTITY, oh.TOTAL_AMOUNT FROM MENU m INNER JOIN ORDER_HISTORY_ITEM ohi ON ohi.MENU_ID = m.ID INNER JOIN ORDER_HISTORY oh ON oh.ID = ohi.ORDER_ID WHERE ohi.ORDER_ID = '" + orderId + "'";
+            String sql = "SELECT m.IMAGE , m.NAME , m.PRICE , ohi.QUANTITY, oh.TOTAL_AMOUNT FROM MENU m INNER JOIN ORDER_HISTORY_ITEM ohi ON ohi.MENU_ID = m.ID INNER JOIN ORDER_HISTORY oh ON oh.ID = ohi.ORDER_ID WHERE ohi.ORDER_ID = '" + ID + "'";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {

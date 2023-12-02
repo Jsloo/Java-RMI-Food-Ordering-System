@@ -4,8 +4,6 @@ package Fos.Client.User;
 import Fos.FosInterface;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -183,8 +181,8 @@ public class ViewOrder extends javax.swing.JFrame {
 
         try {
             String ID = jComboBox1.getSelectedItem().toString();
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/showOrderSummary");
-            ArrayList<String[]>  result = dbi.showOrderSummary(ID);
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/showOrderSummary");
+            ArrayList<String[]>  result = dbi.showOrderSummary(Integer.parseInt(ID));
             for (String[] orderData : result) {
          
                 // Create a JLabel for the image

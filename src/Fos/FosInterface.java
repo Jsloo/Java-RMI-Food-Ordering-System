@@ -25,7 +25,7 @@ public interface FosInterface extends Remote{
     public ArrayList<String[]> displayMenu()throws RemoteException;
     public String addToCart(int id,int q)throws RemoteException;
     public ArrayList<String[]> showCart()throws RemoteException;
-    public ArrayList<String[]> showOrderSummary(String ID)throws RemoteException;
+    public ArrayList<String[]> showOrderSummary(Integer ID)throws RemoteException;
     public ArrayList<String[]> userViewOrderId()throws RemoteException;
     public ArrayList<String[]> getUsername()throws RemoteException;
 //    public String updateCart()throws RemoteException;
