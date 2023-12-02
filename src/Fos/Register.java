@@ -20,6 +20,8 @@ public class Register {
         reg.rebind("displayMenu", new Server());
         reg.rebind("addToCart", new Server());
         reg.rebind("showCart", new Server());
+        reg.rebind("showOrderSummary", new Server());
+        reg.rebind("userViewOrderId", new Server());
         reg.rebind("getUsername", new Server());
 //        reg.rebind("updateCart", new Server());
         reg.rebind("clearCart", new Server());

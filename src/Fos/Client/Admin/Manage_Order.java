@@ -253,6 +253,11 @@ public class Manage_Order extends javax.swing.JFrame {
         jLabel8.setText("Payment Method :");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 20));
 
+        combo_box_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_box_idActionPerformed(evt);
+            }
+        });
         jPanel6.add(combo_box_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 150, 30));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N

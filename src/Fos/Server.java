@@ -19,7 +19,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     public Server()throws RemoteException{
         super();
     }
-    public static Integer UserId;
+    public static Integer UserId = 5;
     //user
     @Override
     public String Login(String nam, String pass)throws RemoteException{
@@ -628,4 +628,63 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         return "success";
     }
     
+    @Override
+    public ArrayList<String[]> showOrderSummary(String ID) throws RemoteException {
+        try {
+            ArrayList<String[]> orderList = new ArrayList<>();
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT m.IMAGE , m.NAME , m.PRICE , ohi.QUANTITY, oh.TOTAL_AMOUNT FROM MENU m INNER JOIN ORDER_HISTORY_ITEM ohi ON ohi.MENU_ID = m.ID INNER JOIN ORDER_HISTORY oh ON oh.ID = ohi.ORDER_ID WHERE ohi.ORDER_ID = '" + orderId + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                String imagePath = rs.getString("IMAGE");
+                String name = rs.getString("NAME");
+                String price = rs.getString("PRICE");
+                String quantity = rs.getString("QUANTITY");
+                String total_amount = rs.getString("TOTAL_AMOUNT");
+
+                String[] orderData = {imagePath, name, String.valueOf(price), String.valueOf(quantity), String.valueOf(total_amount)};
+                orderList.add(orderData);
+            }
+            
+            return orderList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public ArrayList<String[]> userViewOrderId() throws RemoteException {
+        try {
+            System.out.println("ID:" + UserId);
+
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            try (Statement t = conn.createStatement()) {
+                String sql = "SELECT ID FROM ORDER_HISTORY WHERE USER_ID = "+ UserId +"";
+                ResultSet rs = t.executeQuery(sql);
+
+                ArrayList<String[]> orderIdList = new ArrayList<>();
+
+                while (rs.next()) {
+                    String ID = rs.getString("ID");
+                    
+                    String[] orderData = {ID};
+                    orderIdList.add(orderData);
+                    System.out.println(ID);
+                }
+                
+                return orderIdList;
+
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        return null;
+    }
 }
+
