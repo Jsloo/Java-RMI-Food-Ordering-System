@@ -92,13 +92,9 @@ public class Manage_Order extends javax.swing.JFrame {
         Order_Table = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         Label_Number_Item = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         Label_Amount = new javax.swing.JLabel();
-        Label_Payment = new javax.swing.JLabel();
-        Label_Status = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         combo_box_id = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
@@ -209,54 +205,37 @@ public class Manage_Order extends javax.swing.JFrame {
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 430, 400));
 
         jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.setToolTipText("");
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Label_Number_Item.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Label_Number_Item.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         Label_Number_Item.setForeground(new java.awt.Color(255, 255, 255));
-        Label_Number_Item.setText("1");
-        jPanel6.add(Label_Number_Item, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, 20));
+        Label_Number_Item.setToolTipText("");
+        jPanel6.add(Label_Number_Item, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, 20));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Status : ");
-        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 20));
-
-        Label_Amount.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Label_Amount.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         Label_Amount.setForeground(new java.awt.Color(255, 255, 255));
-        Label_Amount.setText("123");
-        jPanel6.add(Label_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, 20));
+        Label_Amount.setToolTipText("");
+        jPanel6.add(Label_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, 20));
 
-        Label_Payment.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        Label_Payment.setForeground(new java.awt.Color(255, 255, 255));
-        Label_Payment.setText("cash");
-        jPanel6.add(Label_Payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, 20));
-
-        Label_Status.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        Label_Status.setForeground(new java.awt.Color(255, 255, 255));
-        Label_Status.setText("Paid");
-        jPanel6.add(Label_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, 20));
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Number of Item :");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 20));
+        jLabel6.setToolTipText("");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, 20));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Total Amount (RM) :");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
+        jLabel7.setToolTipText("");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 20));
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Payment Method :");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 20));
-
-        jPanel6.add(combo_box_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 150, 30));
+        jPanel6.add(combo_box_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 150, 30));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Order ID :");
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 370, 400));
 
@@ -325,8 +304,6 @@ public class Manage_Order extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label_Amount;
     private javax.swing.JLabel Label_Number_Item;
-    private javax.swing.JLabel Label_Payment;
-    private javax.swing.JLabel Label_Status;
     private javax.swing.JButton LouOut;
     private javax.swing.JTable Order_Table;
     private javax.swing.JComboBox<String> combo_box_id;
@@ -335,10 +312,8 @@ public class Manage_Order extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
