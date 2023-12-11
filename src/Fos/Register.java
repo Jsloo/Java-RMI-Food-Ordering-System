@@ -33,7 +33,6 @@ public class Register {
         reg.rebind("Report", new Server());
         reg.rebind("AgeReport", new Server());
         reg.rebind("GenderReport", new Server());
-        reg.rebind("RevenueReport", new Server());
         reg.rebind("OrderReport", new Server());
         
         //Chan Heng Yan
