@@ -358,7 +358,7 @@ public class SignUp extends javax.swing.JFrame {
             String phonenum = txtphonenum.getText();
             String gender = genderbox.getSelectedItem().toString();
 
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/Register");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/Register");
             String result = dbi.Register(name,password,age,email,phonenum,gender);
             JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
             
