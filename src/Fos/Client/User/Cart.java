@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.rmi.Naming;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -155,8 +156,7 @@ public class Cart extends javax.swing.JFrame {
 
     private void clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAllMouseClicked
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
-            dbi.clearCart();
+            clearCart();
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f,"Clear Cart Successfully!");
             setVisible(false);
@@ -169,8 +169,10 @@ public class Cart extends javax.swing.JFrame {
     private void placeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseClicked
         try {
             setVisible(false);
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
-            dbi.clearCart();
+            
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/placeOrder");
+            dbi.placeOrder();
+            clearCart();
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f,"Order Successfully!");
             new Menu().setVisible(true);
@@ -223,7 +225,7 @@ public class Cart extends javax.swing.JFrame {
         Font nameFont = new Font("Tahoma", Font.BOLD, 30); // Adjust the font size here
         Font priceFont = new Font("SansSerif", Font.BOLD, 26);
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/showCart");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/showCart");
             ArrayList<String[]>  result = dbi.showCart();
             for (String[] cartData : result) {
 
@@ -270,6 +272,16 @@ public class Cart extends javax.swing.JFrame {
         }catch(Exception e) {
                 e.printStackTrace();
             }
+    }
+    
+    public void clearCart(){
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/clearCart");
+            dbi.clearCart();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

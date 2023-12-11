@@ -540,6 +540,24 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
     
     @Override
+    public String placeOrder()throws RemoteException{
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            Statement stmt = conn.createStatement();
+            LocalDate todayDate = LocalDate.now();
+            System.out.println(todayDate);
+            String sql = "Insert into ORDER_HISTORY (USER_ID, TOTAL_AMOUNT, DATE) Select "+UserId+",sum(c.QUANTITY * m.PRICE),'" + todayDate + "' from CART c inner join MENU m on m.ID = c.FOOD_ID where c.USER_ID = "+UserId+"";
+            stmt.executeUpdate(sql);
+            
+            String sql2 = "Insert into ORDER_HISTORY_ITEM (ORDER_ID, MENU_ID, QUANTITY) Select oh.ID, c.FOOD_ID, c.QUANTITY from cart c inner join ORDER_HISTORY oh on oh.USER_ID = c.USER_ID where c.USER_ID = "+UserId+"";
+            stmt.executeUpdate(sql2);
+        } catch (Exception e) {
+            return e.toString();
+        }
+        return "Place Order success";
+    }
+    
+    @Override
     public String addToCart(int id,int q)throws RemoteException{
         try {
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");

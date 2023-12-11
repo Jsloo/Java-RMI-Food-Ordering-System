@@ -30,6 +30,7 @@ public interface FosInterface extends Remote{
     public ArrayList<String[]> getUsername()throws RemoteException;
 //    public String updateCart()throws RemoteException;
     public String clearCart()throws RemoteException;
+    public String placeOrder()throws RemoteException;
     
     
     //Admin
