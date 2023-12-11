@@ -37,7 +37,6 @@ public interface FosInterface extends Remote{
     public ArrayList<String> Report()throws RemoteException;
     public ArrayList<String[]> AgeReport()throws RemoteException;
     public ArrayList<String[]> GenderReport()throws RemoteException;
-    public ArrayList<String[]> RevenueReport(String date)throws RemoteException;
     public ArrayList<String[]> OrderReport()throws RemoteException;
     
     //Chan Heng Yan

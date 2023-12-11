@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -145,6 +146,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
     @Override
     public String LogOut()throws RemoteException{
         UserId = 0;
+        backup();
         return "LogOut Success!";
     }
     
@@ -224,58 +226,6 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         }
 
         return genderDataList;
-    }
-    
-    @Override
-    public ArrayList<String[]> RevenueReport(String date) throws RemoteException {
-        ArrayList<String[]> revenueDataList = new ArrayList<>();
-        System.out.println(date);
-        Integer day = 0;
-        if (date.equals("Today")){
-            day = 0;
-        }else if(date.equals("Week")){
-            day = 6;
-        }else if(date.equals("Month")){
-            day = 30;
-        }else if(date.equals("Year")){
-            day = 364;
-        }
-        System.out.println(day);
-        
-        try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos")) {
-            LocalDate todayDate = LocalDate.now(); // Start of the current week
-            System.out.println(todayDate);
-            LocalDate startDate = todayDate.minusDays(day); // End of the current week (Sunday)
-            System.out.println(startDate);
-            String revenueScript = "SELECT m.category, SUM(m.price * oi.quantity) as total_revenue " +
-                      "FROM order_history oh " +
-                      "JOIN order_history_item oi ON oh.id = oi.order_id " +
-                      "JOIN menu m ON oi.menu_id = m.id " +
-                       "WHERE oh.date BETWEEN '" + startDate + "' AND '" + todayDate + "' " +
-                      "GROUP BY m.category " +
-                      "ORDER BY total_revenue DESC";
-            
-
-            try (PreparedStatement statement = conn.prepareStatement(revenueScript)) {
-                ResultSet RevenueResult = statement.executeQuery();
-                System.out.println(RevenueResult.next());
-                System.out.println(RevenueResult.next());
-                while (RevenueResult.next()) {
-                    System.out.println("www");
-                    String category = RevenueResult.getString("CATEGORY");
-                    double totalRevenue = RevenueResult.getDouble("total_revenue");
-                    String[] data = { category, String.valueOf(totalRevenue) };
-                    revenueDataList.add(data);
-                    System.out.println(Arrays.deepToString(data));
-                    System.out.println("www");
-                }
-            }
-        }catch (Exception e) {
-            String[] errorData = { "Error", e.toString() };
-            revenueDataList.add(errorData);
-        }
-
-        return revenueDataList;
     }
     
     @Override
@@ -682,6 +632,25 @@ public class Server extends UnicastRemoteObject implements FosInterface {
         }
 
         return null;
+    }
+    
+    public void backup() {
+        String backupDirectory = "C:\\Users\\User\\Desktop\\Year 3 Sem 1\\Distributed Computer Systems\\Ass\\FosRmi";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/fos;create=false", "fos", "fos");
+             Statement statement = connection.createStatement()) {
+ 
+            connection.setAutoCommit(false);
+
+            statement.execute("CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE('" + backupDirectory + "')");
+
+            connection.commit();
+
+            System.out.println("Backup completed successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
