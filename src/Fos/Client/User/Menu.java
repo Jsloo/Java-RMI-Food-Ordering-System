@@ -44,7 +44,8 @@ public class Menu extends javax.swing.JFrame {
         cart = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        viewOrder = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         menu_panel = new javax.swing.JScrollPane();
         menu_panel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -191,15 +192,29 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton1.setText("View Order");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        viewOrder.setBackground(new java.awt.Color(255, 255, 255));
+        viewOrder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        viewOrder.setMaximumSize(new java.awt.Dimension(245, 53));
+        viewOrder.setMinimumSize(new java.awt.Dimension(245, 53));
+        viewOrder.setPreferredSize(new java.awt.Dimension(245, 53));
+        viewOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewOrderMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                viewOrderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                viewOrderMouseExited(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, 50));
+        viewOrder.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("View Order");
+        viewOrder.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+
+        jPanel1.add(viewOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 170, -1));
 
         jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 980, 90));
 
@@ -323,10 +338,18 @@ public class Menu extends javax.swing.JFrame {
         cart.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_cartMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void viewOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewOrderMouseClicked
         setVisible(false);
         new ViewOrder().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_viewOrderMouseClicked
+
+    private void viewOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewOrderMouseEntered
+        viewOrder.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_viewOrderMouseEntered
+
+    private void viewOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewOrderMouseExited
+        viewOrder.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_viewOrderMouseExited
 
 
     public static void main(String args[]) {
@@ -444,8 +467,8 @@ public void showUsername(){
     private javax.swing.JPanel EditProfile;
     private javax.swing.JPanel cart;
     private javax.swing.JPanel dropdown;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
@@ -458,5 +481,6 @@ public void showUsername(){
     private javax.swing.JPanel menu_panel1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameLabel2;
+    private javax.swing.JPanel viewOrder;
     // End of variables declaration//GEN-END:variables
 }

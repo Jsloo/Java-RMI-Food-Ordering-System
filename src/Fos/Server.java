@@ -66,8 +66,8 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
             try (Statement statement = conn.createStatement()) {
                 String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) " +
-                                "VALUES ('" + nam + "', '" + encryptPass + "', 'user', " + age + ", '" + email + "', '" +
-                                phonenum + "', '" + gender + "')";
+                                "VALUES ('" + nam + "', '" + encryptPass + "', 'user', " + age + ", '" + email + "', " +
+                                phonenum + ", '" + gender + "')";
                 statement.executeUpdate(script);
                 return "Register Successful!";
             } 

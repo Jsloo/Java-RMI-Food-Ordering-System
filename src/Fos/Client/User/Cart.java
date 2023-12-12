@@ -225,7 +225,7 @@ public class Cart extends javax.swing.JFrame {
         Font nameFont = new Font("Tahoma", Font.BOLD, 30); // Adjust the font size here
         Font priceFont = new Font("SansSerif", Font.BOLD, 26);
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/showCart");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/showCart");
             ArrayList<String[]>  result = dbi.showCart();
             for (String[] cartData : result) {
 
