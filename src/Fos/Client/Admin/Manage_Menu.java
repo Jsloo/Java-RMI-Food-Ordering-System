@@ -171,7 +171,7 @@ public class Manage_Menu extends javax.swing.JFrame {
                 btnSaveActionPerformed(evt);
             }
         });
-        panel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 97, 35));
+        panel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 375, 90, 30));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,7 +185,7 @@ public class Manage_Menu extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        panel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 91, 35));
+        panel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 375, 80, 30));
 
         ComboBox_Category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food", "Drink" }));
         panel1.add(ComboBox_Category, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 210, 31));

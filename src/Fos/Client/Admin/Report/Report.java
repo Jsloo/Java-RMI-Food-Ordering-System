@@ -239,7 +239,7 @@ public class Report extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 70, 20));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 90, 20));
 
         txtTotalRevenue.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         txtTotalRevenue.setForeground(new java.awt.Color(255, 255, 255));
@@ -288,7 +288,7 @@ public class Report extends javax.swing.JFrame {
                 revenueComboActionPerformed(evt);
             }
         });
-        jPanel2.add(revenueCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, -1));
+        jPanel2.add(revenueCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 90, -1));
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(470, 90, 420, 200);
@@ -314,7 +314,7 @@ public class Report extends javax.swing.JFrame {
                 btnAgePieActionPerformed(evt);
             }
         });
-        jPanel3.add(btnAgePie, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 70, 20));
+        jPanel3.add(btnAgePie, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 90, 20));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -355,7 +355,7 @@ public class Report extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 70, 20));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 90, 20));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -411,7 +411,7 @@ public class Report extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, 20));
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 90, 20));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N

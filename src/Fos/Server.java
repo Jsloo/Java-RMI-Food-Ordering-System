@@ -446,7 +446,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             Object[] orderDetails = new Object[1];
 
             while (orderHistoryResults.next()) {
-                int amount = orderHistoryResults.getInt("TOTAL_AMOUNT");
+                double amount = orderHistoryResults.getDouble("TOTAL_AMOUNT");
                 orderDetails[0] = amount;
     
             }
