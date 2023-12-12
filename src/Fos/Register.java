@@ -6,7 +6,7 @@ import java.rmi.registry.LocateRegistry;
 public class Register {
 
     public static void main(String[] args) throws RemoteException {
-        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2000);
+        java.rmi.registry.Registry reg = LocateRegistry.createRegistry(2001);
 
         //user
         //Loo Juin Song

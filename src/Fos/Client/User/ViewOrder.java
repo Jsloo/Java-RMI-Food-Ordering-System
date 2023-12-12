@@ -4,6 +4,9 @@ package Fos.Client.User;
 import Fos.FosInterface;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JOptionPane;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -16,18 +19,18 @@ public class ViewOrder extends javax.swing.JFrame {
      */
     public ViewOrder() {
         initComponents();
-        showOrderSummary();
-//        userViewOrderId();
-//        
-//        jComboBox1.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                if (e.getStateChange() == ItemEvent.SELECTED) {
-//                    showOrderSummary();
-//                }
-//            }
-//        }); 
+        userViewOrderId();
+        
+        jComboBox1.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    showOrderSummary();
+                }
+            }
+        });
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,20 +158,33 @@ public class ViewOrder extends javax.swing.JFrame {
         });
     }
     
-//   public void userViewOrderId () {
-//         try {
-//            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/userViewOrderId");
-//            ArrayList<String[]>  result = dbi.userViewOrderId();
-//            
-//            for (String[] row : result) {
-//                jComboBox1.addItem(row[0]);
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e.toString());
-//        }
-//    }
-   
+    public void userViewOrderId () {
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/userViewOrderId");
+            ArrayList<String[]>  result = dbi.userViewOrderId();
+            
+            jComboBox1.removeAllItems(); // Clear existing items
+            for (String[] row : result) {
+                jComboBox1.addItem(row[0]);
+            }
+
+            if (jComboBox1.getItemCount() > 0) {
+                jComboBox1.setSelectedIndex(jComboBox1.getItemCount() - 1); // Select the last item
+                showOrderSummary(); // Show the summary for the selected (most recent) order ID
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public void showOrderSummary() {
+        // Clear existing components from the panel
+        order_panel.removeAll();
+        order_panel.revalidate();
+        order_panel.repaint();
+      
+        String ID = jComboBox1.getSelectedItem().toString();
+
         int xPosition = 50; // Initial horizontal position
         int yPosition = 50; // Vertical position for labels
         int maxItemsPerRow = 1; // Maximum items per row
@@ -180,9 +196,8 @@ public class ViewOrder extends javax.swing.JFrame {
         Font totalFont = new Font("SansSerif", Font.BOLD, 36);
 
         try {
-            String ID = jComboBox1.getSelectedItem().toString();
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/showOrderSummary");
-            ArrayList<String[]>  result = dbi.showOrderSummary(Integer.parseInt(ID));
+            ArrayList<String[]>  result = dbi.showOrderSummary(ID);
             for (String[] orderData : result) {
          
                 // Create a JLabel for the image
