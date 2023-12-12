@@ -230,6 +230,11 @@ public class Manage_Order extends javax.swing.JFrame {
         jLabel7.setToolTipText("");
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 20));
 
+        combo_box_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_box_idActionPerformed(evt);
+            }
+        });
         jPanel6.add(combo_box_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 150, 30));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -288,6 +293,10 @@ public class Manage_Order extends javax.swing.JFrame {
     private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
         jPanel5.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_jPanel5MouseExited
+
+    private void combo_box_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_box_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_box_idActionPerformed
  
 
 
