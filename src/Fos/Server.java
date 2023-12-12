@@ -66,8 +66,8 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
             try (Statement statement = conn.createStatement()) {
                 String script = "INSERT INTO ACCOUNT (USERNAME, PASSWORD, TYPE, AGE, EMAIL, PHONE, GENDER) " +
-                                "VALUES ('" + nam + "', '" + encryptPass + "', 'user', " + age + ", '" + email + "', " +
-                                phonenum + ", '" + gender + "')";
+                                "VALUES ('" + nam + "', '" + encryptPass + "', 'user', " + age + ", '" + email + "',' " +
+                                phonenum + "', '" + gender + "')";
                 statement.executeUpdate(script);
                 return "Register Successful!";
             } 
@@ -499,7 +499,7 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             String sql = "Insert into ORDER_HISTORY (USER_ID, TOTAL_AMOUNT, DATE) Select "+UserId+",sum(c.QUANTITY * m.PRICE),'" + todayDate + "' from CART c inner join MENU m on m.ID = c.FOOD_ID where c.USER_ID = "+UserId+"";
             stmt.executeUpdate(sql);
             
-            String sql2 = "Insert into ORDER_HISTORY_ITEM (ORDER_ID, MENU_ID, QUANTITY) Select oh.ID, c.FOOD_ID, c.QUANTITY from cart c inner join ORDER_HISTORY oh on oh.USER_ID = c.USER_ID where c.USER_ID = "+UserId+"";
+            String sql2 = "Insert into ORDER_HISTORY_ITEM (ORDER_ID, MENU_ID, QUANTITY) Select oh.ID, c.FOOD_ID, c.QUANTITY from cart c inner join ORDER_HISTORY oh on oh.USER_ID = c.USER_ID where c.USER_ID = "+UserId+"and oh.ID = (Select max(ID) from ORDER_HISTORY)";
             stmt.executeUpdate(sql2);
         } catch (Exception e) {
             return e.toString();

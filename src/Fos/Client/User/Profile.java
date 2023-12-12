@@ -115,9 +115,11 @@ public class Profile extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         dropdown = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        EditProfile = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        ViewOrderHistory = new javax.swing.JPanel();
         nameLabel2 = new javax.swing.JLabel();
+        EditProfile = new javax.swing.JPanel();
+        nameLabel3 = new javax.swing.JLabel();
         logOut = new javax.swing.JPanel();
         logout = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -188,16 +190,47 @@ public class Profile extends javax.swing.JFrame {
         });
         dropdown.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EditProfile.setBackground(new java.awt.Color(204, 204, 204));
-        EditProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ViewOrderHistory.setBackground(new java.awt.Color(255, 255, 255));
+        ViewOrderHistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ViewOrderHistoryMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ViewOrderHistoryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ViewOrderHistoryMouseExited(evt);
+            }
+        });
+        ViewOrderHistory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nameLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        nameLabel2.setText("Edit Profile");
-        EditProfile.add(nameLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        nameLabel2.setText("View Order");
+        ViewOrderHistory.add(nameLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jPanel1.add(EditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 170, 50));
+        jPanel6.add(ViewOrderHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 50));
+
+        EditProfile.setBackground(new java.awt.Color(204, 204, 204));
+        EditProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditProfileMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditProfileMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditProfileMouseExited(evt);
+            }
+        });
+        EditProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nameLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        nameLabel3.setText("Edit Profile");
+        EditProfile.add(nameLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jPanel6.add(EditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 170, 50));
 
         logOut.setBackground(new java.awt.Color(255, 255, 255));
         logOut.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,11 +250,11 @@ public class Profile extends javax.swing.JFrame {
         logout.setText("Log Out");
         logOut.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jPanel1.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 50));
+        jPanel6.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 170, 50));
 
-        dropdown.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 120));
+        dropdown.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 170));
 
-        jPanel4.add(dropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 190, 170));
+        jPanel4.add(dropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 190, 220));
 
         jPanel5.setBackground(new java.awt.Color(0, 102, 102));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -459,25 +492,6 @@ public class Profile extends javax.swing.JFrame {
         info.setVisible(true);
     }//GEN-LAST:event_btnbackActionPerformed
 
-    private void dropdownMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropdownMouseExited
-
-    }//GEN-LAST:event_dropdownMouseExited
-
-    private void dropdownMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropdownMouseEntered
-
-    }//GEN-LAST:event_dropdownMouseEntered
-
-    private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
-        try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/LogOut");
-            dbi.LogOut();
-            setVisible(false);
-            new Login().setVisible(true);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_logOutMouseClicked
-
     private void nameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseExited
         nameLabel.setForeground(new java.awt.Color(0,0,0));
     }//GEN-LAST:event_nameLabelMouseExited
@@ -496,6 +510,42 @@ public class Profile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nameLabelMouseClicked
 
+    private void ViewOrderHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewOrderHistoryMouseClicked
+        setVisible(false);
+        new ViewOrder().setVisible(true);
+    }//GEN-LAST:event_ViewOrderHistoryMouseClicked
+
+    private void ViewOrderHistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewOrderHistoryMouseEntered
+        ViewOrderHistory.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_ViewOrderHistoryMouseEntered
+
+    private void ViewOrderHistoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewOrderHistoryMouseExited
+        ViewOrderHistory.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_ViewOrderHistoryMouseExited
+
+    private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked
+
+    }//GEN-LAST:event_EditProfileMouseClicked
+
+    private void EditProfileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseEntered
+
+    }//GEN-LAST:event_EditProfileMouseEntered
+
+    private void EditProfileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseExited
+ 
+    }//GEN-LAST:event_EditProfileMouseExited
+
+    private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
+        try {
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/LogOut");
+            dbi.LogOut();
+            setVisible(false);
+            new Login().setVisible(true);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_logOutMouseClicked
+
     private void logOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseEntered
         logOut.setBackground(new java.awt.Color(204,204,204));
     }//GEN-LAST:event_logOutMouseEntered
@@ -503,6 +553,14 @@ public class Profile extends javax.swing.JFrame {
     private void logOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseExited
         logOut.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_logOutMouseExited
+
+    private void dropdownMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropdownMouseEntered
+
+    }//GEN-LAST:event_dropdownMouseEntered
+
+    private void dropdownMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropdownMouseExited
+
+    }//GEN-LAST:event_dropdownMouseExited
  
     
 
@@ -539,6 +597,7 @@ public void showUsername(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EditProfile;
+    private javax.swing.JPanel ViewOrderHistory;
     private javax.swing.JButton btnback;
     private javax.swing.JButton btnclear;
     private javax.swing.JButton btnregister;
@@ -557,13 +616,14 @@ public void showUsername(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel logOut;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameLabel2;
+    private javax.swing.JLabel nameLabel3;
     private javax.swing.JTextField txtage;
     private javax.swing.JTextField txtemail;
     private javax.swing.JPasswordField txtpassword;

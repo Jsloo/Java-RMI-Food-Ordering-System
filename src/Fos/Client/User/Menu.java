@@ -36,16 +36,16 @@ public class Menu extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         dropdown = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        EditProfile = new javax.swing.JPanel();
+        ViewOrderHistory = new javax.swing.JPanel();
         nameLabel2 = new javax.swing.JLabel();
+        EditProfile = new javax.swing.JPanel();
+        nameLabel3 = new javax.swing.JLabel();
         logOut = new javax.swing.JPanel();
         logout = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         cart = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        viewOrder = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         menu_panel = new javax.swing.JScrollPane();
         menu_panel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -94,6 +94,26 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        ViewOrderHistory.setBackground(new java.awt.Color(255, 255, 255));
+        ViewOrderHistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ViewOrderHistoryMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ViewOrderHistoryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ViewOrderHistoryMouseExited(evt);
+            }
+        });
+        ViewOrderHistory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nameLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        nameLabel2.setText("View Order");
+        ViewOrderHistory.add(nameLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jPanel5.add(ViewOrderHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 50));
+
         EditProfile.setBackground(new java.awt.Color(255, 255, 255));
         EditProfile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -108,9 +128,9 @@ public class Menu extends javax.swing.JFrame {
         });
         EditProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nameLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        nameLabel2.setText("Edit Profile");
-        EditProfile.add(nameLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        nameLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        nameLabel3.setText("Edit Profile");
+        EditProfile.add(nameLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jPanel5.add(EditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 170, 50));
 
@@ -132,11 +152,11 @@ public class Menu extends javax.swing.JFrame {
         logout.setText("Log Out");
         logOut.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jPanel5.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 50));
+        jPanel5.add(logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 170, 50));
 
-        dropdown.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 120));
+        dropdown.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 170));
 
-        jPanel4.add(dropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 190, 170));
+        jPanel4.add(dropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 190, 220));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setForeground(new java.awt.Color(255, 255, 204));
@@ -191,30 +211,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setText("Menu");
         jLabel1.setToolTipText("");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        viewOrder.setBackground(new java.awt.Color(255, 255, 255));
-        viewOrder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        viewOrder.setMaximumSize(new java.awt.Dimension(245, 53));
-        viewOrder.setMinimumSize(new java.awt.Dimension(245, 53));
-        viewOrder.setPreferredSize(new java.awt.Dimension(245, 53));
-        viewOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                viewOrderMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                viewOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                viewOrderMouseExited(evt);
-            }
-        });
-        viewOrder.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("View Order");
-        viewOrder.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
-
-        jPanel1.add(viewOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 170, -1));
 
         jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 980, 90));
 
@@ -309,10 +305,10 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dropdownMouseExited
 
-    private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked
+    private void ViewOrderHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewOrderHistoryMouseClicked
         setVisible(false);
-        new Profile().setVisible(true);
-    }//GEN-LAST:event_EditProfileMouseClicked
+        new ViewOrder().setVisible(true);
+    }//GEN-LAST:event_ViewOrderHistoryMouseClicked
 
     private void logOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseEntered
         logOut.setBackground(new java.awt.Color(204,204,204));
@@ -322,13 +318,13 @@ public class Menu extends javax.swing.JFrame {
         logOut.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_logOutMouseExited
 
-    private void EditProfileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseEntered
-        EditProfile.setBackground(new java.awt.Color(204,204,204));
-    }//GEN-LAST:event_EditProfileMouseEntered
+    private void ViewOrderHistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewOrderHistoryMouseEntered
+        ViewOrderHistory.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_ViewOrderHistoryMouseEntered
 
-    private void EditProfileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseExited
-        EditProfile.setBackground(new java.awt.Color(255,255,255));
-    }//GEN-LAST:event_EditProfileMouseExited
+    private void ViewOrderHistoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewOrderHistoryMouseExited
+        ViewOrderHistory.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_ViewOrderHistoryMouseExited
 
     private void cartMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMouseEntered
         cart.setBackground(new java.awt.Color(204,204,204));
@@ -338,18 +334,18 @@ public class Menu extends javax.swing.JFrame {
         cart.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_cartMouseExited
 
-    private void viewOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewOrderMouseClicked
+    private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked
         setVisible(false);
-        new ViewOrder().setVisible(true);
-    }//GEN-LAST:event_viewOrderMouseClicked
+        new Profile().setVisible(true);
+    }//GEN-LAST:event_EditProfileMouseClicked
 
-    private void viewOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewOrderMouseEntered
-        viewOrder.setBackground(new java.awt.Color(204,204,204));
-    }//GEN-LAST:event_viewOrderMouseEntered
+    private void EditProfileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseEntered
+        EditProfile.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_EditProfileMouseEntered
 
-    private void viewOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewOrderMouseExited
-        viewOrder.setBackground(new java.awt.Color(255,255,255));
-    }//GEN-LAST:event_viewOrderMouseExited
+    private void EditProfileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseExited
+        EditProfile.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_EditProfileMouseExited
 
 
     public static void main(String args[]) {
@@ -465,10 +461,10 @@ public void showUsername(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EditProfile;
+    private javax.swing.JPanel ViewOrderHistory;
     private javax.swing.JPanel cart;
     private javax.swing.JPanel dropdown;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
@@ -481,6 +477,6 @@ public void showUsername(){
     private javax.swing.JPanel menu_panel1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameLabel2;
-    private javax.swing.JPanel viewOrder;
+    private javax.swing.JLabel nameLabel3;
     // End of variables declaration//GEN-END:variables
 }

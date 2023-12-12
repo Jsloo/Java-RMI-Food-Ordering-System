@@ -20,6 +20,8 @@ public class ViewOrder extends javax.swing.JFrame {
     public ViewOrder() {
         initComponents();
         userViewOrderId();
+        pack();
+        setLocationRelativeTo(null);
         
         jComboBox1.addItemListener(new ItemListener() {
             @Override
@@ -40,88 +42,121 @@ public class ViewOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         order_panel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        totalOrder = new javax.swing.JLabel();
+        back = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1015, 630));
+        setMinimumSize(new java.awt.Dimension(1015, 630));
+        setPreferredSize(new java.awt.Dimension(1015, 630));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Order History");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1010, 590));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1010, 590));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1010, 590));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        order_panel.setBackground(new java.awt.Color(255, 255, 255));
         order_panel.setMinimumSize(new java.awt.Dimension(0, 0));
-        order_panel.setPreferredSize(new java.awt.Dimension(800, 1200));
+        order_panel.setPreferredSize(new java.awt.Dimension(800, 2000));
 
         javax.swing.GroupLayout order_panelLayout = new javax.swing.GroupLayout(order_panel);
         order_panel.setLayout(order_panelLayout);
         order_panelLayout.setHorizontalGroup(
             order_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 889, Short.MAX_VALUE)
         );
         order_panelLayout.setVerticalGroup(
             order_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGap(0, 2000, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(order_panel);
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 908, 370));
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 100, 80, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_small.png"))); // NOI18N
+        jLabel5.setText(" BB BreakFast");
+        jLabel5.setToolTipText("");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setText("Order History");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        totalOrder.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        totalOrder.setForeground(new java.awt.Color(255, 255, 255));
+        totalOrder.setText("Order Total");
+        jPanel3.add(totalOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        back.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        back.setForeground(new java.awt.Color(255, 255, 255));
+        back.setText("Back");
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backMouseExited(evt);
+            }
+        });
+        jPanel3.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, 53));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 1010, 80));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 5, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
-        new Menu().setVisible(true);        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+        setVisible(false);
+        new Menu().setVisible(true);
+    }//GEN-LAST:event_backMouseClicked
+
+    private void backMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseEntered
+        back.setForeground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_backMouseEntered
+
+    private void backMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseExited
+        back.setForeground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_backMouseExited
 
     /**
      * @param args the command line arguments
@@ -160,7 +195,7 @@ public class ViewOrder extends javax.swing.JFrame {
     
     public void userViewOrderId () {
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/userViewOrderId");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/userViewOrderId");
             ArrayList<String[]>  result = dbi.userViewOrderId();
             
             jComboBox1.removeAllItems(); // Clear existing items
@@ -196,7 +231,7 @@ public class ViewOrder extends javax.swing.JFrame {
         Font totalFont = new Font("SansSerif", Font.BOLD, 36);
 
         try {
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2001/showOrderSummary");
+            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/showOrderSummary");
             ArrayList<String[]>  result = dbi.showOrderSummary(ID);
             for (String[] orderData : result) {
          
@@ -245,12 +280,14 @@ public class ViewOrder extends javax.swing.JFrame {
             System.out.println("Total Amount: " + totalAmount);
 
             // Display total amount including tax at the bottom of the order summary
-            JLabel totalAmountLabel = new JLabel("Order Total: RM " + totalAmount);
-            totalAmountLabel.setBounds(xPosition, yPosition, 600, 30); // Adjust width as needed
-            totalAmountLabel.setFont(totalFont); // Set the font for the total amount label
-            order_panel.add(totalAmountLabel);
+            totalOrder.setText("Order Total: RM " + totalAmount);
+//            JLabel totalAmountLabel = new JLabel("Order Total: RM " + totalAmount);
+//            totalAmountLabel.setBounds(xPosition, yPosition, 600, 30); // Adjust width as needed
+//            totalAmountLabel.setFont(totalFont); // Set the font for the total amount label
+//            order_panel.add(totalAmountLabel);
             
             System.out.println("Total Amount Label Added");
+            
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,10 +295,14 @@ public class ViewOrder extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel back;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel order_panel;
+    private javax.swing.JLabel totalOrder;
     // End of variables declaration//GEN-END:variables
 }
