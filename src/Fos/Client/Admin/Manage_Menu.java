@@ -6,10 +6,11 @@ import static Fos.Client.Admin.Manage_Menu.path;
 import Fos.Client.User.Login;
 import Fos.FosInterface;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.rmi.Naming;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -341,14 +342,46 @@ public class Manage_Menu extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnBrowserActionPerformed
-
+    class ResetF extends Thread{
+        public void ResetField() throws InterruptedException
+        {
+            imgLabel.setIcon(null);
+            Textfield_name.setText("");
+            Textfield_price.setText("");
+        }
+        @Override
+        public void run()
+        {
+            try {
+                ResetField();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ResetF.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+     class ResetT extends Thread{
+        public void ResetTable() throws InterruptedException
+        {
+            ViewMenuTable();
+        }
+        @Override
+        public void run()
+        {
+            try {
+                ResetTable();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ResetT.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-
+        
         String name = Textfield_name.getText();
         String category = ComboBox_Category.getSelectedItem().toString();
         String price = Textfield_price.getText();
         String imagePath = path;
-
+        System.out.println(imagePath);
         if (validation(name, price, category, imagePath)) {
             if ( condition == false){
                 try {
@@ -357,10 +390,10 @@ public class Manage_Menu extends javax.swing.JFrame {
                     String result = dbi.SaveMenu(imagePath,name,Double.parseDouble(price),category);
                    if (result.equals("success")){
                        JOptionPane.showMessageDialog(null, "Menu Add Success", "success", JOptionPane.INFORMATION_MESSAGE);
-                       imgLabel.setIcon(null);
-                       Textfield_name.setText("");
-                       Textfield_price.setText("");
-                       ViewMenuTable();
+                       ResetF objField = new ResetF();
+                       objField.start();
+                       ResetT objTable = new ResetT();
+                       objTable.start();
                    }
                    else{
                        JOptionPane.showMessageDialog(null, "Menu Add Fail", "error", JOptionPane.INFORMATION_MESSAGE);
@@ -378,10 +411,10 @@ public class Manage_Menu extends javax.swing.JFrame {
                     String result = dbi.UpdateMenu(id,name,price,category,imagePath);
                     if (result.equals("success")){
                         JOptionPane.showMessageDialog(null, "Menu Update Success", "success", JOptionPane.INFORMATION_MESSAGE);
-                        imgLabel.setIcon(null);
-                        Textfield_name.setText("");
-                        Textfield_price.setText("");
-                        ViewMenuTable();                
+                        ResetF objField = new ResetF();
+                        objField.start();
+                        ResetT objTable = new ResetT();
+                        objTable.start();            
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Menu Update Fail", "error", JOptionPane.INFORMATION_MESSAGE);
@@ -391,11 +424,6 @@ public class Manage_Menu extends javax.swing.JFrame {
                 }   
             }
         }
-        
-        
-        
-
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
@@ -408,10 +436,10 @@ public class Manage_Menu extends javax.swing.JFrame {
                 String result = dbi.DeleteMenu(name);
                 if (result.equals("success")){
                     JOptionPane.showMessageDialog(null, "Menu Delete Success", "success", JOptionPane.INFORMATION_MESSAGE);
-                    imgLabel.setIcon(null);
-                    Textfield_name.setText("");
-                    Textfield_price.setText("");
-                    ViewMenuTable();
+                    ResetF objField = new ResetF();
+                    objField.start();
+                    ResetT objTable = new ResetT();
+                    objTable.start();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Menu Delete Fail", "error", JOptionPane.INFORMATION_MESSAGE);
@@ -440,6 +468,7 @@ public class Manage_Menu extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(Menu_Table.getValueAt(selectedRow, 4).toString());
         Image img = icon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         imgLabel.setIcon(new ImageIcon(img));
+        path = Menu_Table.getValueAt(selectedRow, 4).toString();
         condition = true;
         
     }//GEN-LAST:event_Menu_TableMouseClicked

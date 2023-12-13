@@ -3,6 +3,7 @@ package Fos.Client.User;
 
 import Fos.FosInterface;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -363,12 +364,12 @@ public class Menu extends javax.swing.JFrame {
 
 
 public void showMenu(){
-    int xPosition = 50; // Initial horizontal position
-    int yPosition = 50; // Vertical position for labels
-    int maxItemsPerRow = 3; // Maximum items per row
-    int itemCounter = 0; // Counter to track items in the current row
+    int xPosition = 50; 
+    int yPosition = 50; 
+    int maxItemsPerRow = 3;
+    int itemCounter = 0;
 
-    Font nameFont = new Font("Tahoma", Font.BOLD, 30); // Adjust the font size here
+    Font nameFont = new Font("Tahoma", Font.BOLD, 30);
     Font priceFont = new Font("SansSerif", Font.BOLD, 26);
         
     try {
@@ -379,29 +380,29 @@ public void showMenu(){
             
             JPanel greenPanel = new JPanel();
             greenPanel.setBackground(new java.awt.Color(0,102,102));
-            greenPanel.setLayout(null); // Set layout to null for absolute positioning
+            greenPanel.setLayout(null);
 
-            // Create image label
+            
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(menuData[4]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
             JLabel imageLabel = new JLabel(imageIcon);
             imageLabel.setBounds(5, 5, 240, 240);
-            greenPanel.add(imageLabel); // Add image label to the green panel
+            greenPanel.add(imageLabel);
 
-            // Create name label
+            
             JLabel nameLabel = new JLabel(menuData[1]);
             nameLabel.setBounds(10, 255, 230, 30);
             nameLabel.setFont(nameFont);
             nameLabel.setForeground(Color.WHITE);
-            greenPanel.add(nameLabel); // Add name label to the green panel
+            greenPanel.add(nameLabel);
 
-            // Create price label
+            
             JLabel priceLabel = new JLabel("Price: RM " + menuData[2]);
             priceLabel.setBounds(10, 290, 230, 30);
             priceLabel.setForeground(Color.WHITE);
             priceLabel.setFont(priceFont);
-            greenPanel.add(priceLabel); // Add price label to the green panel
+            greenPanel.add(priceLabel);
 
-            // Add MouseListener to the image label
+            
             greenPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -422,13 +423,13 @@ public void showMenu(){
                 }
             });
 
-            // Set position and size of the green panel
+            
             greenPanel.setBounds(xPosition, yPosition, 250, 330);
 
-            // Add the green panel to menu_panel1
+            
             menu_panel1.add(greenPanel);
 
-            // Increment the item counter and update positions
+            
             itemCounter++;
             if (itemCounter >= maxItemsPerRow) {
                 itemCounter = 0;
@@ -437,6 +438,8 @@ public void showMenu(){
             } else {
                 xPosition += 300;
             }
+            
+            
         }
     }catch(Exception e) {
             e.printStackTrace();

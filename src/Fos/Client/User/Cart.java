@@ -156,9 +156,13 @@ public class Cart extends javax.swing.JFrame {
 
     private void clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearAllMouseClicked
         try {
-            clearCart();
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f,"Clear Cart Successfully!");
+            if (valid == 1){
+                clearCart();
+                JOptionPane.showMessageDialog(f,"Clear Cart Successfully!");
+            } else {
+                JOptionPane.showMessageDialog(f,"Cart is Empty !!!");
+            }
             setVisible(false);
             new Menu().setVisible(true);
         }catch(Exception e) {
@@ -168,13 +172,21 @@ public class Cart extends javax.swing.JFrame {
 
     private void placeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_placeOrderMouseClicked
         try {
-            setVisible(false);
-            
-            FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/placeOrder");
-            dbi.placeOrder();
-            clearCart();
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f,"Order Successfully!");
+            if (valid == 1){
+                FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/placeOrder");
+                String result = dbi.placeOrder();
+                if (result.equals("OrderSuccess")){
+                JOptionPane.showMessageDialog(null, "Order Successfully! ", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearCart();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Order Failed! ", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+ 
+            } else {
+                JOptionPane.showMessageDialog(f,"Order Failed! Cart is Empty !!!");
+            }
+            setVisible(false);
             new Menu().setVisible(true);
         }catch(Exception e) {
             e.printStackTrace();
@@ -205,7 +217,7 @@ public class Cart extends javax.swing.JFrame {
         clearAll.setForeground(new java.awt.Color(0,0,0));
     }//GEN-LAST:event_clearAllMouseExited
 
-
+    public static Integer valid;
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -216,58 +228,61 @@ public class Cart extends javax.swing.JFrame {
     }
     
     public void showCart(){
-        int xPosition = 50; // Initial horizontal position
-        int yPosition = 50; // Vertical position for labels
-        int maxItemsPerRow = 1; // Maximum items per row
-        int itemCounter = 0; // Counter to track items in the current row
-
-
-        Font nameFont = new Font("Tahoma", Font.BOLD, 30); // Adjust the font size here
+        int xPosition = 50;
+        int yPosition = 50; 
+        int maxItemsPerRow = 1;
+        int itemCounter = 0; 
+ 
+ 
+        Font nameFont = new Font("Tahoma", Font.BOLD, 30);
         Font priceFont = new Font("SansSerif", Font.BOLD, 26);
         try {
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/showCart");
             ArrayList<String[]>  result = dbi.showCart();
-            for (String[] cartData : result) {
-
-                // Create a JLabel for the image
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(cartData[0]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
-                JLabel imageLabel = new JLabel(imageIcon);
-                imageLabel.setBounds(xPosition, yPosition, 250, 250);
-
-                // Create a JLabel for the name
-                JLabel nameLabel = new JLabel(cartData[1]);
-                nameLabel.setBounds(xPosition + 300, yPosition + 100, 250, 30);
-                nameLabel.setFont(nameFont); // Set the font for the name label
-
-                // Create a JLabel for the price
-                JLabel priceLabel = new JLabel("Price: RM " + cartData[2]);
-                priceLabel.setBounds(xPosition + 300, yPosition + 130, 250, 30);
-                priceLabel.setFont(priceFont); // Set the font for the price label
-                
-                JLabel quantityLabel = new JLabel("Quantity: " + cartData[3]);
-                quantityLabel.setBounds(xPosition + 550, yPosition + 100, 250, 30);
-                quantityLabel.setFont(nameFont); // Set the font for the price label
-
-                // Add labels to the menu_panel
-                cart_panel.add(imageLabel);
-                cart_panel.add(nameLabel);
-                cart_panel.add(priceLabel);
-                cart_panel.add(quantityLabel);
-
-                // Increment the item counter
-                itemCounter++;
-
-                // If the maximum items per row is reached, move to the next row
-                if (itemCounter >= maxItemsPerRow) {
-                    itemCounter = 0; // Reset item counter
-                    xPosition = 50; // Reset horizontal position
-                    yPosition += 300; // Adjust the vertical gap between rows as needed
-                } else {
-                    // Adjust horizontal position for the next menu item in the same row
-                    xPosition += 300; // Increase as needed to create a gap between menu items in the same row
+            if (result.size() != 0){
+                valid = 1;
+                for (String[] cartData : result) {
+ 
+                    
+                    ImageIcon imageIcon = new ImageIcon(new ImageIcon(cartData[0]).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
+                    JLabel imageLabel = new JLabel(imageIcon);
+                    imageLabel.setBounds(xPosition, yPosition, 250, 250);
+ 
+                    
+                    JLabel nameLabel = new JLabel(cartData[1]);
+                    nameLabel.setBounds(xPosition + 300, yPosition + 100, 250, 30);
+                    nameLabel.setFont(nameFont); 
+ 
+                    
+                    JLabel priceLabel = new JLabel("Price: RM " + cartData[2]);
+                    priceLabel.setBounds(xPosition + 300, yPosition + 130, 250, 30);
+                    priceLabel.setFont(priceFont); 
+ 
+                    JLabel quantityLabel = new JLabel("Quantity: " + cartData[3]);
+                    quantityLabel.setBounds(xPosition + 550, yPosition + 100, 250, 30);
+                    quantityLabel.setFont(nameFont); 
+ 
+                    
+                    cart_panel.add(imageLabel);
+                    cart_panel.add(nameLabel);
+                    cart_panel.add(priceLabel);
+                    cart_panel.add(quantityLabel);
+ 
+                    
+                    itemCounter++;
+ 
+                    
+                    if (itemCounter >= maxItemsPerRow) {
+                        itemCounter = 0; 
+                        xPosition = 50;
+                        yPosition += 300; 
+                    } else {
+                        xPosition += 300; 
+                    }
                 }
-//                cart_panel.setPreferredSize(new Dimension(50, 200));
-//                cart_panel.setVerticalScrollBarPolicy(jScrollPane1.VERTICAL_SCROLLBAR_AS_NEEDED);
+            } else {
+                valid = 0;
+                System.out.println('n');
             }
         }catch(Exception e) {
                 e.printStackTrace();

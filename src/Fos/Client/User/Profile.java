@@ -463,12 +463,13 @@ public class Profile extends javax.swing.JFrame {
             
             FosInterface dbi = (FosInterface)Naming.lookup("rmi://localhost:2000/UpdateProfile");
             String result = dbi.UpdateProfile(name,password,age,email,phonenum,gender);
-            JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);
-            
+
             if (result.equals("Profile updated successfully!")){
+                showUsername();
+                JOptionPane.showMessageDialog(null, result, "success", JOptionPane.INFORMATION_MESSAGE);   
                 setVisible(false);
                 Menu info = new Menu();
-                info.setVisible(true);
+                info.setVisible(true);    
             }
         } catch (ValidationException ex) {
             

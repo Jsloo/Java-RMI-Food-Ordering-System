@@ -322,16 +322,18 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
+                System.out.println("The transaction is Successfull");
                 return "success";
             } else {
                 return "fail";
             }
         }catch(Exception e){
+            System.out.println("The transaction is Fail");
             return (e.toString());
         }
     }
     
-    @Override
+    @Override 
     public String UpdateMenu(String id, String name, String price, String category,String imagePath) throws RemoteException {
         Connection conn = null;
         PreparedStatement  pstmt = null;
@@ -342,11 +344,13 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
+                System.out.println("The transaction is Successfull");
                 return "success";
             } else {
                 return "fail";
             }
         }catch(Exception e){
+            System.out.println("The transaction is Fail");
             return (e.toString());
         }
     }
@@ -369,11 +373,13 @@ public class Server extends UnicastRemoteObject implements FosInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
+                System.out.println("The transaction is Successfull");
                 return "success";
             } else {
                 return "fail";
             }
         }catch(Exception e){
+            System.out.println("The transaction is Fail");
             return (e.toString());
         }
     }
@@ -490,21 +496,61 @@ public class Server extends UnicastRemoteObject implements FosInterface {
 
     
     @Override
-    public String placeOrder()throws RemoteException{
+   
+    public String placeOrder() throws RemoteException {
+
+        Connection conn = null;
+        Statement stmt = null;
         try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
-            Statement stmt = conn.createStatement();
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/fos", "fos", "fos");
+            conn.setAutoCommit(false); 
+            stmt = conn.createStatement();
             LocalDate todayDate = LocalDate.now();
             System.out.println(todayDate);
-            String sql = "Insert into ORDER_HISTORY (USER_ID, TOTAL_AMOUNT, DATE) Select "+UserId+",sum(c.QUANTITY * m.PRICE),'" + todayDate + "' from CART c inner join MENU m on m.ID = c.FOOD_ID where c.USER_ID = "+UserId+"";
+ 
+            // First SQL query
+            String sql = "Insert into ORDER_HISTORY (USER_ID, TOTAL_AMOUNT, DATE) " +
+                         "Select " + UserId + ", sum(c.QUANTITY * m.PRICE), '" + todayDate + "' " +
+                         "from CART c inner join MENU m on m.ID = c.FOOD_ID where c.USER_ID = " + UserId;
+
             stmt.executeUpdate(sql);
-            
-            String sql2 = "Insert into ORDER_HISTORY_ITEM (ORDER_ID, MENU_ID, QUANTITY) Select oh.ID, c.FOOD_ID, c.QUANTITY from cart c inner join ORDER_HISTORY oh on oh.USER_ID = c.USER_ID where c.USER_ID = "+UserId+"and oh.ID = (Select max(ID) from ORDER_HISTORY)";
+            // Second SQL query
+            String sql2 = "Insert into ORDER_HISTORY_ITEM (ORDER_ID, MENU_ID, QUANTITY) " +
+                          "Select oh.ID, c.FOOD_ID, c.QUANTITY " +
+                          "from cart c inner join ORDER_HISTORY oh on oh.USER_ID = c.USER_ID " +
+                          "where c.USER_ID = " + UserId + " and oh.ID = (Select max(ID) from ORDER_HISTORY)";
             stmt.executeUpdate(sql2);
+
+            conn.commit(); // Commit transaction only if both queries succeed
+            return "OrderSuccess";
         } catch (Exception e) {
-            return e.toString();
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Rollback transaction in case of error
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    return "OrderFailed";
+                }
+            }
+            e.printStackTrace();
+            return "OrderFailed";
+        } finally {
+            // Close resources
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return "Place Order success";
     }
     
     @Override
